@@ -162,7 +162,17 @@
                                 Administration
                             </li>                           
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"><i class="fas fa-fw fa-info-circle"></i>Informations générales </a>                            
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-info-circle"></i>Informations générales</a>
+                                <div id="submenu-2" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Capteurs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Air</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -728,7 +738,7 @@
     
     <script src="css\vendor\jquery\jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
-    <script src="css\vendor\bootstrap\js\bootstrap.bundle.js"></script>
+    <!--script src="css\vendor\bootstrap\js\bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <!-- main js -->
