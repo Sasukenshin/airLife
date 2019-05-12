@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="css\vendor\fonts\material-design-iconic-font\css\materialdesignicons.min.css">
     <link rel="stylesheet" href="css\vendor\charts\c3charts\c3.css">
     <link rel="stylesheet" href="css\vendor\fonts\flag-icon-css\flag-icon.min.css">
+    <?php 
+    die("HTML");
+    ?>
     <!-- ============================================================== -->
     <!-- main wrapper -->
     <!-- ============================================================== -->
@@ -216,9 +219,9 @@
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Total Revenue</h5>
+                                        <h5>Dioxyde de carbonne(CO2)</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">$12099</h1>
+                                            <h1 class="mb-1">Danger</h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                             <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
@@ -230,12 +233,12 @@
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Affiliate Revenue</h5>
+                                        <h5 class="text-muted">Monoxyde de carbonne(CO)</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">$12099</h1>
+                                            <h1 class="mb-1">Normal</h1>
                                         </div>
-                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                            <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
+                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
+                                            <span>-1.15%</span>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue2"></div>
@@ -244,13 +247,16 @@
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Refunds</h5>
+                                        <h5 class="text-muted">Oxyde d'azote (NOX)</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">0.00</h1>
+                                            <h1 class="mb-1">Normal</h1>
                                         </div>
-                                        <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
+                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
+                                            <span>-3.21%</span>
+                                        </div>
+                                        <!--div class="metric-label d-inline-block float-right text-primary font-weight-bold">
                                             <span>N/A</span>
-                                        </div>
+                                        </div-->
                                     </div>
                                     <div id="sparkline-revenue3"></div>
                                 </div>
@@ -258,12 +264,12 @@
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Avg. Revenue Per User</h5>
+                                        <h5 class="text-muted">Radon (Rn)</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">$28000</h1>
+                                            <h1 class="mb-1">Normal</h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-2.00%</span>
+                                            <span>-3.00%</span>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue4"></div>
@@ -279,7 +285,7 @@
                             <!-- ============================================================== -->
                             <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Recent Orders</h5>
+                                    <h5 class="card-header">Récentes données</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table class="table">
