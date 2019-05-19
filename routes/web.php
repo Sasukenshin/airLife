@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('accueil');
 });
 
+Route::get('/info-capteurs', function () {
+    return view('info-capteurs');
+});
+
+Route::get('/info-air', function () {
+    return view('info-air');
+});
+
 Route::post('/login', 'ConnexionController@signIn');
 
 Route::get('/getLogout', 'ConnexionController@signOut');
