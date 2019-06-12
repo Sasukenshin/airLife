@@ -40,9 +40,7 @@ class ConnexionController extends Controller {
        $unUtilisateur = new Users();
         $unUtilisateur->logout();
         return redirect('/');
-    }
-
-    
+    }    
    
 
 }

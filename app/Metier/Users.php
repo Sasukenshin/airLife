@@ -25,8 +25,6 @@ class Users extends Model {
                 ->select()
                 ->where('LOGIN', '=', $login)                
                 ->first();
-                print_r($admin);
-                die("Model User");
         if ($admin) {
             if ($admin->PASSWORD == $pwd) {
                 Session::put('id', $admin->IDUSER);

@@ -14,9 +14,11 @@ class HomeController extends Controller {
 
     public function home() {
         $model = new HomeModel();
-        $datas = $model->getData();
-        die("Controller");
-        return view('accueil', ['datas' => $datas]);
+        $datas = $model->getDatas();
+        $sensors = $model->getSensors();
+        $datastype = $model->getDatasType();
+        $datastypesensor = $model->getDatasTypeSensor();
+        return view('accueil', ['datas' => $datas, 'sensors' => $sensors, 'datastype' => $datastype, 'datastypesensor' => $datastypesensor]);
     }
 
     
