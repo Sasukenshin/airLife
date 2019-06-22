@@ -1943,7 +1943,13 @@ Container / Wrapper
 .dashboard-wrapper {
     position: relative;
     left: 0;
-    margin-left: 175px;
+    margin-left: 264px;
+    min-height: 870px !important;
+}
+
+.dashboard-wrapper2 {
+    position: relative;
+    left: 0;
     min-height: 870px !important;
 }
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    <div class="dashboard-wrapper">
+    <div class="dashboard-wrapper2">
             <div class="container-fluid">
                 <div class="main-content container-fluid p-0">
                     <div class="email-head">
