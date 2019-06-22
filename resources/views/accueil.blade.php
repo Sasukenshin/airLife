@@ -211,7 +211,6 @@
                     <!-- end pageheader  -->
                     <!-- ============================================================== -->
                     <div class="ecommerce-widget">
-
                         <div class="row">
                             <?php 
                                 //die(print_r($datastype));
