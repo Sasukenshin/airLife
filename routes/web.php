@@ -35,7 +35,6 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-
 Route::post('/login', 'ConnexionController@signIn');
 
 Route::get('/getLogout', 'ConnexionController@signOut');
