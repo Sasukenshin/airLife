@@ -23,6 +23,15 @@ Route::get('/info-air', function () {
     return view('info-air');
 });
 
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+
 Route::post('/login', 'ConnexionController@signIn');
 
 Route::get('/getLogout', 'ConnexionController@signOut');
