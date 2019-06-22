@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="css\vendor\fonts\material-design-iconic-font\css\materialdesignicons.min.css">
     <link rel="stylesheet" href="css\vendor\charts\c3charts\c3.css">
     <link rel="stylesheet" href="css\vendor\fonts\flag-icon-css\flag-icon.min.css">
+    
+    <link rel="stylesheet" href="css\vendor\select2\css\select2.css">
+    <link rel="stylesheet" href="css\vendor\summernote\css\summernote-bs4.css">
 </head>
 
 
@@ -213,9 +216,9 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript: void(0);">A propos</a>
+                                <a href="about">À propos</a>
                                 <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact</a>
+                                <a href="contact">Contact</a>
                             </div>
                         </div>
                     </div>
