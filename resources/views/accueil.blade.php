@@ -1,6 +1,30 @@
     @extends('layouts.master')
     @section('content')
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: [0, 10, 5, 2, 20, 30, 45]
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+            });
+        });  
+    </script>
     <link rel="stylesheet" href="css\style.css">
     <link rel="stylesheet" href="css\vendor\bootstrap\css\bootstrap.min.css">
     <link rel="stylesheet" href="css\vendor\fonts\circular-std\style.css" >
@@ -212,13 +236,13 @@
                     <!-- ============================================================== -->
                     <div class="ecommerce-widget">
                         <div class="row">
-                            <?php 
+                            <?php
                                 //die(print_r($datastype));
-                                if( count($datastype) % 4 == 0) {
+                                if (count($datastype) % 4 == 0) {
                                     $div= "<div class='col-xl-3 col-md-6'>";
-                                } else if( count($sensors) % 3 == 0) {
+                                } elseif (count($sensors) % 3 == 0) {
                                     $div= "<div class='col-xl-4 col-md-6'>";
-                                } else if( count($sensors) % 2 == 0) {
+                                } elseif (count($sensors) % 2 == 0) {
                                     $div= "<div class= col-md-6'>";
                                 }
                                 $div.="<div class='card'>";
@@ -232,24 +256,25 @@
                                     echo "<div class='metric-value d-inline-block'>";
                                     echo "<h5 class='text-muted'>";
                                     
-                                    foreach ($datastypesensor as $key =>$datatypesensor) {
+                                    foreach ($datastypesensor as $key2 =>$datatypesensor) {
                                         if ($datatype->LIBELLE == $datatypesensor->LIBELLE) {
                                             $allSensors .= $datatypesensor->NAMESENSOR;
                                             $allSensors .= " / ";
                                             //echo  $allSensors;
                                         }
                                     }
-                                    echo substr($allSensors,0,-3);
+                                    echo substr($allSensors, 0, -3);
                                     echo "</h5>";
                                     echo "</div>";
                                     echo "<div class='metric-label d-inline-block float-right text-success font-weight-bold'>";
                                     echo "<span><i class='fa fa-fw fa-arrow-up'></i></span><span>5.86%</span>";
                                     echo "</div>";
                                     echo "</div>";
-                                    echo "<div id='sparkline-revenue'></div>";
+                                    echo "<canvas id=\"".$key."\"> </canvas>";
                                     echo "</div>";
                                     echo "</div>";
                                 }
+                                
                             ?>
                             <!--div class="col-xl-3 col-md-6">
                                 <div class="card">
@@ -327,21 +352,21 @@
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <?php foreach ($datas[0] as $key => $value) {
-                                                            echo " <th class='border-0'>".$key."</th>";
-                                                        }
+                                echo " <th class='border-0'>".$key."</th>";
+                            }
                                                         ?>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($datas as $key => $data) {
-                                                        echo "<tr>";
-                                                        foreach ($data as $key => $value) {
-                                                            echo "<td>";
-                                                            echo $value;
-                                                            echo "</td>";
+                                                            echo "<tr>";
+                                                            foreach ($data as $key => $value) {
+                                                                echo "<td>";
+                                                                echo $value;
+                                                                echo "</td>";
+                                                            }
+                                                            echo "</tr>";
                                                         }
-                                                        echo "</tr>";
-                                                    }
                                                     ?>
                                                     <tr>
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">View Details</a></td>
