@@ -8,7 +8,7 @@
             <div class="container-fluid dashboard-content">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         
-                        <h3 class="text-center">À Propos</h3><br/>
+                        <h3 class="text-center">À Propos</h3>
                         
                         <div class="row">
                             <img src="img\equipe.jpg"/>

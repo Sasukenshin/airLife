@@ -1,41 +1,19 @@
 <?php
 
 namespace App\metier;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable ;
+use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 use DB;
 
-class Users extends Model {
-
-    protected $table = 'users';
-    protected $primaryKey = 'IDUSER';
+class Users extends Model implements Authenticatable
+{
+    use BasicAuthenticatable;
+    
     public $timestamps = false;
-    protected $fillable = [
-        'IDUSERS',
-        'FIRSTNAMEUSER',
-        'NAMEUSER',
-        'LOGIN',
-        'PASSWORD',
-   
-        ];
-
-       public function login($login, $pwd) {
-        $connected = false;
-        $admin = DB::table('users')
-                ->select()
-                ->where('LOGIN', '=', $login)                
-                ->first();
-        if ($admin) {
-            if ($admin->PASSWORD == $pwd) {
-                Session::put('id', $admin->IDUSER);
-                $connected = true;
-            }
-        }
-        return $connected;
-    }
-
-    //Dialogue avec la bdd pour déconnecter un utilisateur
-    public function logout() {
-        Session::put('id', 0);
-    }
+    
+    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email'];   
+    
 }

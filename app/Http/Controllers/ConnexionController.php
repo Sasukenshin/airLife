@@ -1,46 +1,35 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
+use App\metier\Users;
 
-use App\Metier\Users;
-
-
-
-class ConnexionController extends Controller {
-
-  
-
-    
-
-    public function signIn() {
-       
-     
-        $login = Request::input('login');
-        $pwd = Request::input('pwd');
-        $unUtilisateur = new Users();
-       
-        $connected = $unUtilisateur->login($login, $pwd);
-        
-        if($connected)
-        {
-         return redirect('/');
-            
-        } else {
-            $erreur = "Login ou mot de passe inconnu !";
-            return view('formLogin', compact('erreur'));
-        }
+class ConnexionController extends Controller 
+{
+    public function formulaire() 
+    {
+        return view('connexion');
     }
 
-    /* Créer l'appel de déconnexion d'un utilisateur 
-     * et renvoie sur la page d'accueil.
-     */
-       
-    public function signOut() {
-       $unUtilisateur = new Users();
-        $unUtilisateur->logout();
-        return redirect('/');
+    public function traitement() 
+    {
+        request()->validate([
+            'login' => ['required'],
+            'mdp' => ['required']
+        ]);
+        
+        $resultat = auth()->attempt([
+            'login' => request('login'),
+            'password' => request('mdp')
+        ]);
+        
+        if($resultat){
+            return redirect('/test');
+        }
+        
+        return back()->withInput()->withErrors([
+            'login' => 'Vos identifiants sont incorrects.',
+        ]);
     }    
-   
-
 }

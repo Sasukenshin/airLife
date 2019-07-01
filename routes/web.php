@@ -10,12 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    $data = Route::any('/', 'HomeController@home');
-    die("Route");
-    return view('accueil', ['data' => $data]);
-});*/
 
 Route::get('/', 'HomeController@home');
 
@@ -35,18 +29,16 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/logintmp', function () {
-    return view('login');
-});
+Route::get('/inscription', 'InscriptionController@formulaire');
 
-Route::get('/inscription', function () {
-    return view('inscription');
-});
+Route::post('/inscription', 'InscriptionController@traitement');
 
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
 
-Route::post('/login', 'ConnexionController@signIn');
+Route::get('/connexion', 'ConnexionController@formulaire');
 
-Route::get('/getLogout', 'ConnexionController@signOut');
+Route::post('/connexion', 'ConnexionController@traitement');
+
+Route::get('/test', 'testController@accueil');
