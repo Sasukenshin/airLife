@@ -9,11 +9,18 @@ use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 use DB;
 
 class Users extends Model implements Authenticatable
-{
+{   
+    protected $primaryKey = 'iduser';
+    
     use BasicAuthenticatable;
     
     public $timestamps = false;
     
-    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email'];   
+    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email'];
+    
+    public function getRememberTokenName() 
+    {
+        return '';
+    }
     
 }

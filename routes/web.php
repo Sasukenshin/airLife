@@ -11,6 +11,8 @@
 |
 */
 
+Route::auth();
+
 Route::get('/', 'HomeController@home');
 
 Route::get('/info-capteurs', function () {
@@ -42,3 +44,5 @@ Route::get('/connexion', 'ConnexionController@formulaire');
 Route::post('/connexion', 'ConnexionController@traitement');
 
 Route::get('/test', 'testController@accueil');
+
+Route::get('/deconnexion', 'testController@deconnexion');

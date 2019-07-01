@@ -9,9 +9,6 @@ class testController extends Controller
 {
     public function accueil()
     {
-        var_dump(auth()->check());
-        var_dump(auth()->guest());
-        
         if(auth()->guest()) 
         {
             return redirect('/connexion');
@@ -19,4 +16,11 @@ class testController extends Controller
         
         return view('test');
     }
+    
+    public function deconnexion()
+    {
+        auth()->logout();
+        return(redirect('/'));
+    }
 }
+

@@ -7,6 +7,8 @@ use App\metier\Users;
 
 class ConnexionController extends Controller 
 {
+    protected $primaryKey = 'IDUSER';
+    
     public function formulaire() 
     {
         return view('connexion');
@@ -25,7 +27,7 @@ class ConnexionController extends Controller
         ]);
         
         if($resultat){
-            return redirect('/test');
+            return redirect('/');
         }
         
         return back()->withInput()->withErrors([

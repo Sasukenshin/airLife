@@ -136,11 +136,11 @@
                       
                             <!-- ============================================================== -->
 
-                                          <!-- Données récentes  -->
+                                          <!-- DonnÃ©es rÃ©centes  -->
                             <!-- ============================================================== -->
                             <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Données récentes </h5>
+                                    <h5 class="card-header">DonnÃ©es rÃ©centes </h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table class="table">
