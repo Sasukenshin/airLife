@@ -22,6 +22,7 @@ class HomeModel extends Model {
        $datas = DB::table('datas')
             ->select('datas.IDDATA',	'datas.IDSENSOR',	'datas.IDDATATYPE',	'datas.DATETIMEDATA',	'datas.DATASENSOR',	'datatype.LIBELLE')
             ->leftJoin('datatype', 'datas.IDDATATYPE', '=', 'datatype.IDDATATYPE')
+            ->orderBy('datas.DATETIMEDATA','desc')
             ->get();
         return $datas;
     }
@@ -48,11 +49,11 @@ class HomeModel extends Model {
      }
      public function getDatasType() {
         $datas = DB::table('to_capture')
-        ->select('datatype.LIBELLE')
+        ->select('datatype.IDDATATYPE','datatype.LIBELLE')
         ->leftJoin('datatype', 'to_capture.IDDATATYPE', '=', 'datatype.IDDATATYPE')
         ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'to_capture.IDSENSOR')
         ->where('sensor.IDUSER', '=', 1) 
-        ->groupBy('datatype.LIBELLE')
+        ->groupBy('datatype.IDDATATYPE','datatype.LIBELLE')
         ->get(); 
        // Quand on aura mis en place l'authentification
        // ->where('IDUSER', '=', Session::get('id')) ;   

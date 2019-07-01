@@ -4,25 +4,47 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         $( document ).ready(function() {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: 'line',
+            datastypes = <?php echo json_encode($datastype) ;?>;
+            datas = <?php echo json_encode($datas) ;?>;
+            console.log(datas);
+            for (var item in datastypes) {
+                var libelle = datastypes[item]['LIBELLE']
+                for (let i = 0; i < libelle.length; i++) {
+                    if(libelle[i] == " ") {
+                        libelle[i]="";
+                    }
 
-                // The data for our dataset
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    datasets: [{
-                        label: 'My First dataset',
-                        backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        data: [0, 10, 5, 2, 20, 30, 45]
-                    }]
-                },
+                }
+                console.log(libelle.replace(/ /g,""));
+                var label_graph = [];
+                var data_graph = [];
+                for  (var data in datas) {
+                    if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
+                        label_graph.push(datas[data]['DATETIMEDATA']);
+                        data_graph.push(datas[data]['DATASENSOR']);
+                    }
+                }
+                var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
 
-                // Configuration options go here
-                options: {}
-            });
+                    // The data for our dataset
+                    data: {
+                        labels: label_graph,
+                        datasets: [{
+                            label: datastypes[item]['LIBELLE'],
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: data_graph
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+            }
+           
         });  
     </script>
     <link rel="stylesheet" href="css\style.css">
@@ -269,7 +291,7 @@
                                     echo "<span><i class='fa fa-fw fa-arrow-up'></i></span><span>5.86%</span>";
                                     echo "</div>";
                                     echo "</div>";
-                                    echo "<canvas id=\"".$key."\"> </canvas>";
+                                    echo "<canvas id=\"".str_replace(" ","",$datatype->LIBELLE)."\"> </canvas>";
                                     echo "</div>";
                                     echo "</div>";
                                 }
