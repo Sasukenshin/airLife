@@ -10,12 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    $data = Route::any('/', 'HomeController@home');
-    die("Route");
-    return view('accueil', ['data' => $data]);
-});*/
 
 Route::get('/', 'HomeController@home');
 
