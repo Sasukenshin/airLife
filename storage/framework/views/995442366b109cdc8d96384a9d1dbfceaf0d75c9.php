@@ -203,7 +203,7 @@
     
     <div class="dashboard-wrapper">
 
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
         
          <!-- ============================================================== -->
             <!-- footer -->

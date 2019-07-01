@@ -1,0 +1,1 @@
+[2019-03-06 14:39:39] local.ERROR: SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'admin'@'@localhost' (mot de passe: OUI) (SQL: select * from `users` where `LOGIN` = admin limit 1)  

@@ -1,5 +1,4 @@
-@extends('layouts.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 
         <!-- ============================================================== -->
@@ -9,15 +8,14 @@
             <div class="container-fluid dashboard-content">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         
-                        <h3 class="text-center">Informations générales sur l'air</h3>
+                        <h3 class="text-center">À Propos</h3><br/>
                         
-                        <p>Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire
-                           olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque
-                           excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam.</p>
-
-                        <p>Et est admodum mirum videre plebem innumeram mentibus ardore quodam infuso cum dimicationum curulium eventu pendentem. 
-                           haec similiaque memorabile nihil vel serium agi Romae permittunt. ergo redeundum ad textum.</p>
-
+                        <div class="row">
+                            <img src="img\equipe.jpg"/>
+                        </div>
+                        
+                        <br/>
+                        
                         <p>Haec igitur prima lex amicitiae sanciatur, ut ab amicis honesta petamus, amicorum causa honesta faciamus, ne exspectemus quidem,
                            dum rogemur; studium semper adsit, cunctatio absit; consilium vero dare audeamus libere. Plurimum in amicitia amicorum bene suadentium
                            valeat auctoritas, eaque et adhibeatur ad monendum non modo aperte sed etiam acriter, si res postulabit, et adhibitae pareatur.</p>
@@ -49,5 +47,7 @@
            
     
 
-@stop
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

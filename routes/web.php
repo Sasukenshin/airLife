@@ -35,6 +35,18 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/logintmp', function () {
+    return view('login');
+});
+
+Route::get('/inscription', function () {
+    return view('inscription');
+});
+
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+});
+
 Route::post('/login', 'ConnexionController@signIn');
 
 Route::get('/getLogout', 'ConnexionController@signOut');
