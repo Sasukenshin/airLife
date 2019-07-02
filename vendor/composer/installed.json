@@ -1017,6 +1017,7 @@
         "autoload": {
             "psr-0": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "Laracasts\\Flash": "src/"
             },
             "files": [
@@ -1026,6 +1027,10 @@
                 "UpdateHelper\\": "src/"
             }
 >>>>>>> Script pour graph
+=======
+                "UpdateHelper\\": "src/"
+            }
+>>>>>>> 030af940eec764f69cb1ce537d0f1bc6ef89becf
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1034,18 +1039,24 @@
         "authors": [
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "name": "Jeffrey Way",
                 "email": "jeffrey@laracasts.com"
             }
         ],
         "description": "Easy flash notifications"
 =======
+=======
+>>>>>>> 030af940eec764f69cb1ce537d0f1bc6ef89becf
                 "name": "Kyle",
                 "email": "kylekatarnls@gmail.com"
             }
         ],
         "description": "Update helper"
+<<<<<<< HEAD
 >>>>>>> Script pour graph
+=======
+>>>>>>> 030af940eec764f69cb1ce537d0f1bc6ef89becf
     },
     {
         "name": "laravel/framework",
