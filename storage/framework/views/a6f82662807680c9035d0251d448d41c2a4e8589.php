@@ -10,7 +10,7 @@
                 <form>
                     <p>Nous allons vous envoyer un e-mail pour que vous puissiez modifier votre mot de passe</p>
                     <div class="form-group">
-                        <input class="form-control form-control-lg" type="email" name="email" required="" placeholder="Your Email" autocomplete="off">
+                        <input class="form-control form-control-lg" type="email" name="email" required="" placeholder="Votre adresse électronique" autocomplete="off">
                     </div>
                     <div class="form-group pt-1"><a class="btn btn-block btn-primary btn-xl" href="../index.html">Changer de mot de passe</a></div>
                 </form>

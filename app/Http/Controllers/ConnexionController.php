@@ -26,7 +26,8 @@ class ConnexionController extends Controller
         
         $resultat = auth()->attempt([
             'login' => request('login'),
-            'password' => request('mdp')
+            'password' => request('mdp'),
+            'confirmation_token' => null
         ]);
         
         if($resultat){
