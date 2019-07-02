@@ -15,17 +15,11 @@ Route::auth();
 
 Route::get('/', 'HomeController@home');
 
-Route::get('/info-capteurs', function () {
-    return view('info-capteurs');
-});
+Route::get('/info-capteurs', 'InformationController@info_capteurs');
 
-Route::get('/info-air', function () {
-    return view('info-air');
-});
+Route::get('/info-air', 'InformationController@info_air');
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::get('/about', 'AboutController@about');
 
 Route::get('/inscription', 'InscriptionController@formulaire');
 
@@ -40,3 +34,5 @@ Route::get('/connexion', 'ConnexionController@formulaire');
 Route::post('/connexion', 'ConnexionController@traitement');
 
 Route::get('/deconnexion', 'connexionController@deconnexion');
+
+Route::get('/confirm/{id}/{token}', 'InscriptionController@confirm');

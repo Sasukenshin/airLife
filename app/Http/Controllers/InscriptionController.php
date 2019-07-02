@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\metier\Users;
 use Illuminate\Support\Facades\Hash;
+use \App\Notifications\RegisteredUser;
+use Illuminate\Support\Facades\Auth;
 
 class InscriptionController extends Controller
 {
@@ -37,8 +39,26 @@ class InscriptionController extends Controller
             'firstname' => request('firstname'),
             'lastname' => request('lastname'),
             'email' => request('email'),
+            'confirmation_token' => str_replace('/', '', bcrypt(str_random(16)))
         ]);
+        
+        $utilisateur->notify(new RegisteredUser());
    
         return redirect('/connexion');
+    }
+    
+    public function confirm($id, $token)
+    {
+        $user = Users::where('iduser', $id)->first();
+
+        if($user) 
+        {
+            $user->update(['confirmation_token' => null]);
+            auth()->guard()->login($user);
+            return redirect('/');
+        } else 
+        {
+            return redirect('/connexion')->with('error', 'Ce lien ne semble plus valide');
+        }
     }
 }
