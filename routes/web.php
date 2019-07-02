@@ -33,7 +33,6 @@ Route::get('/connexion', 'ConnexionController@formulaire');
 
 Route::post('/connexion', 'ConnexionController@traitement');
 
-<<<<<<< HEAD
 Route::get('/deconnexion', 'ConnexionController@deconnexion');
 
 Route::get('/confirm/{id}/{token}', 'InscriptionController@confirm');
@@ -41,6 +40,3 @@ Route::get('/confirm/{id}/{token}', 'InscriptionController@confirm');
 Route::get('/ajout_capteur', 'AjoutCapteurController@formAjoutCapteur');
 
 Route::post('/enregistrerCapteur', 'AjoutCapteurController@enregistrerCapteur');
-=======
-Route::get('/deconnexion', 'connexionController@deconnexion');
->>>>>>> update

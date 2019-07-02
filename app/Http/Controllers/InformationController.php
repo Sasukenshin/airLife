@@ -15,11 +15,18 @@ class InformationController extends Controller
         {
             return redirect('/connexion');
         }
+<<<<<<< HEAD
 
         $user_firstname = Auth::user()->firstname;
         $user_lastname = Auth::user()->lastname;
         $user_email= Auth::user()->email;
        
+=======
+        
+        $user_firstname = Auth::user()->firstname;
+        $user_lastname = Auth::user()->lastname;
+        
+>>>>>>> Mail de confirmation lors de l'inscription
         return view('info-air' , ['user_firstname' => $user_firstname, 'user_lastname' => $user_lastname]);
     }
     
