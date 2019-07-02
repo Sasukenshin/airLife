@@ -11,7 +11,6 @@ class ConnexionController extends Controller
     
     public function formulaire() 
     {
-        die("formulaire");
         if (!auth()->guest()) {
             return redirect('/');
         }
@@ -20,7 +19,6 @@ class ConnexionController extends Controller
 
     public function traitement() 
     {
-        die("traitement");
         request()->validate([
             'login' => ['required'],
             'mdp' => ['required']
@@ -42,7 +40,6 @@ class ConnexionController extends Controller
     
     public function deconnexion()
     {
-        die("deconnexion");
         auth()->logout();
         return(redirect('/'));
     }    
