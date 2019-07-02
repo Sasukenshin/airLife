@@ -8,7 +8,7 @@
     <div class="splash-container">
         <div id="connexion-contain"
         <div class="card ">
-            <div class="card-header text-center"><a href="/ProjetSCU/public/"><img class="logo-img" src="img\logo.png" width="80px" height="80px" alt="logo"></a><span class="splash-description">S'il vous plait, veuillez saisir vos informations</span></div>
+            <div class="card-header text-center"><a href="/ProjetSCU/public/"><img class="logo-img" src="img\logo.png" width="80px" height="80px" alt="logo"></a><span class="splash-description">S'il vous plait, veuillez saisir vos informations de connexion</span></div>
             <div class="card-body">
                 <form action="connexion" method="post">
                     {{ csrf_field() }}

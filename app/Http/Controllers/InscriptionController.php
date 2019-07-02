@@ -11,6 +11,10 @@ class InscriptionController extends Controller
 {
     public function formulaire()
     {
+        if(!auth()->guest()) 
+        {
+            return redirect('/');
+        }
         return view('inscription');
     }
     

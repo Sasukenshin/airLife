@@ -1,12 +1,16 @@
 <!doctype html>
 <html>
 <head>
-    <title>Layout</title>
+    <title>Air Life</title>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="css\style.css">
     <link rel="stylesheet" href="css\vendor\bootstrap\css\bootstrap.min.css">
     <link rel="stylesheet" href="css\vendor\fonts\circular-std\style.css" >
@@ -16,10 +20,10 @@
     <link rel="stylesheet" href="css\vendor\charts\morris-bundle\morris.css">
     <link rel="stylesheet" href="css\vendor\fonts\material-design-iconic-font\css\materialdesignicons.min.css">
     <link rel="stylesheet" href="css\vendor\charts\c3charts\c3.css">
-    <link rel="stylesheet" href="css\vendor\fonts\flag-icon-css\flag-icon.min.css">
-    
+    <link rel="stylesheet" href="css\vendor\fonts\flag-icon-css\flag-icon.min.css">    
     <link rel="stylesheet" href="css\vendor\select2\css\select2.css">
     <link rel="stylesheet" href="css\vendor\summernote\css\summernote-bs4.css">
+   
 </head>
 
 
@@ -54,7 +58,7 @@
                                         <div class="list-group">
                                             <a href="#" class="list-group-item list-group-item-action active">
                                                 <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
                                                     <div class="notification-list-user-block"><span class="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
                                                         <div class="notification-date">2 min ago</div>
                                                     </div>
@@ -62,7 +66,7 @@
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-3.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
                                                     <div class="notification-list-user-block"><span class="notification-list-user-name">John Abraham </span>is now following you
                                                         <div class="notification-date">2 days ago</div>
                                                     </div>
@@ -70,7 +74,7 @@
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-4.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
                                                     <div class="notification-list-user-block"><span class="notification-list-user-name">Monaan Pechi</span> is watching your main repository
                                                         <div class="notification-date">2 min ago</div>
                                                     </div>
@@ -78,7 +82,7 @@
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-5.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
                                                     <div class="notification-list-user-block"><span class="notification-list-user-name">Jessica Caruso</span>accepted your invitation to join the team.
                                                         <div class="notification-date">2 min ago</div>
                                                     </div>
@@ -98,42 +102,47 @@
                                 <li class="connection-list">
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="assets/images/github.png" alt="" > <span>Github</span></a>
+                                            <a href="#" class="connection-item"><img src="img\github-logo.png" alt="" > <span>Github</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="assets/images/dribbble.png" alt="" > <span>Dribbble</span></a>
+                                            <a href="#" class="connection-item"><img src="img\facebook-logo.jpg" alt="" > <span>Facebook</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="assets/images/dropbox.png" alt="" > <span>Dropbox</span></a>
+                                            <a href="#" class="connection-item"><img src="img\dropbox-logo.png" alt="" > <span>Dropbox</span></a>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="assets/images/bitbucket.png" alt=""> <span>Bitbucket</span></a>
+                                            <a href="#" class="connection-item"><img src="img\twitter-logo.png" alt=""> <span>Twitter</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="assets/images/mail_chimp.png" alt="" ><span>Mail chimp</span></a>
+                                            <a href="#" class="connection-item"><img src="img\instagram-logo.png" alt="" ><span>Instagram</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="assets/images/slack.png" alt="" > <span>Slack</span></a>
+                                            <a href="#" class="connection-item"><img src="img\slack-logo.png" alt="" > <span>Slack</span></a>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="conntection-footer"><a href="#">Plus</a></div>
-                                </li>
+                                
                             </ul>
                         </li>
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">John Doe </h5>
-                                    <span class="status"></span><span class="ml-2">Disponible</span>
+                                    @if (auth()->check())
+                                        <h5 class="mb-0 text-white nav-user-name">{{ $user_firstname }} {{ $user_lastname }} </h5>
+                                    @else
+                                        <h5 class="mb-0 text-white nav-user-name">Air Life</h5>
+                                    @endif
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Compte</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Paramètres</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
+                                @if (auth()->check())
+                                    <a class="dropdown-item" href="deconnexion"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
+                                @else
+                                    <a class="dropdown-item" href="connexion"><i class="fas fa-power-off mr-2"></i>Connexion</a>
+                                    <a class="dropdown-item" href="inscription"><i class="fas fa-sign-in-alt mr-2"></i>Inscription</a>
+                                    <a class="dropdown-item" href="forgot-password"><i class="fas fa-unlock mr-2"></i>Mot de passe oublié</a>
+                                @endif
                             </div>
                         </li>
                     </ul>
@@ -218,7 +227,7 @@
                             <div class="text-md-right footer-links d-none d-sm-block">
                                 <a href="about">À propos</a>
                                 <a href="javascript: void(0);">Support</a>
-                                <a href="contact">Contact</a>
+                                <a href="javascript: void(0);">Contact</a>
                             </div>
                         </div>
                     </div>
@@ -232,11 +241,8 @@
   
 </div>
 </body>
-
- <script src="css\vendor\jquery\jquery-3.3.1.min.js"></script>
-    <!-- bootstap bundle js -->
-    <!--script src="css\vendor\bootstrap\js\bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
+    
+    <script src="css\vendor\jquery\jquery-3.3.1.min.js"></script>
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="js\main-js.js"></script>
@@ -252,6 +258,9 @@
     <script src="css\vendor\charts\c3charts\d3-5.4.0.min.js"></script>
     <script src="css\vendor\charts\c3charts\C3chartjs.js"></script>
     <script src="js\dashboard-ecommerce.js"></script>
+    <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
+    <script src="css\vendor\select2\js\select2.min.js"></script>
+    <script src="css\vendor\summernote\js\summernote-bs4.js"></script>
     
 </html>
 

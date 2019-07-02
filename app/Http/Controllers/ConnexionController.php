@@ -11,6 +11,10 @@ class ConnexionController extends Controller
     
     public function formulaire() 
     {
+        if(!auth()->guest()) 
+        {
+            return redirect('/');
+        }
         return view('connexion');
     }
 
@@ -33,5 +37,11 @@ class ConnexionController extends Controller
         return back()->withInput()->withErrors([
             'login' => 'Vos identifiants sont incorrects.',
         ]);
+    }
+    
+    public function deconnexion()
+    {
+        auth()->logout();
+        return(redirect('/'));
     }    
 }

@@ -27,10 +27,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/contact', function () {
-    return view('contact');
-});
-
 Route::get('/inscription', 'InscriptionController@formulaire');
 
 Route::post('/inscription', 'InscriptionController@traitement');
@@ -45,4 +41,4 @@ Route::post('/connexion', 'ConnexionController@traitement');
 
 Route::get('/test', 'testController@accueil');
 
-Route::get('/deconnexion', 'testController@deconnexion');
+Route::get('/deconnexion', 'connexionController@deconnexion');
