@@ -258,12 +258,12 @@
                     <div class="ecommerce-widget">
                         <div class="row">
                             <?php
-                                //die(print_r($datastype));
+                                //die();
                                 if (count($datastype) % 4 == 0) {
                                     $div= "<div class='col-xl-3 col-md-6'>";
-                                } elseif (count($sensors) % 3 == 0) {
-                                    $div= "<div class='col-xl-4 col-md-6'>";
-                                } elseif (count($sensors) % 2 == 0) {
+                                } elseif (count($datastype) % 3 == 0) {
+                                    $div= "<div class='col-xl-4 col-md-4'>";
+                                } elseif (count($datastype) % 2 == 0) {
                                     $div= "<div class= col-md-6'>";
                                 }
                                 $div.="<div class='card'>";
@@ -276,11 +276,16 @@
                                     echo "<h3 class='mb-1'>".$datatype->LIBELLE."</h3>";
                                     echo "<div class='metric-value d-inline-block'>";
                                     echo "<h5 class='text-muted'>";
-                                    
+                                    $i = 0;
                                     foreach ($datastypesensor as $key2 =>$datatypesensor) {
                                         if ($datatype->LIBELLE == $datatypesensor->LIBELLE) {
                                             $allSensors .= $datatypesensor->NAMESENSOR;
-                                            $allSensors .= " / ";
+                                            if($i % 2 == 0){
+                                                $allSensors .= " / ";
+                                            } else {
+                                                $allSensors .= "</br>";
+                                            }
+                                            $i = $i+1;
                                             //echo  $allSensors;
                                         }
                                     }
@@ -364,7 +369,7 @@
 
                                           <!-- Données récentes  -->
                             <!-- ============================================================== -->
-                            <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+                            <div class="col-12">
                                 <div class="card">
                                     <h5 class="card-header">Données récentes </h5>
                                     <div class="card-body p-0">
@@ -400,6 +405,7 @@
                             </div>
                             <!-- ============================================================== -->
                             <!-- end recent orders  -->
+<<<<<<< HEAD
 
     
                             <!-- ============================================================== -->
@@ -744,12 +750,36 @@
                             <!-- ============================================================== -->
                             <!-- end sales traffice country source  -->
                             <!-- ============================================================== -->
+=======
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                             Copyright © 2019. Tous droits réservés.
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">A propos</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact</a>
+                            </div>
+>>>>>>> Ajustement CSS
                         </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
            
         
+=======
+            <!-- ============================================================== -->
+            <!-- end footer -->
+            <!-- ============================================================== -->
+        </div>
+>>>>>>> Ajustement CSS
         <!-- ============================================================== -->
         <!-- end wrapper  -->
         <!-- ============================================================== -->    
