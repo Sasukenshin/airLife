@@ -7,6 +7,7 @@
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             console.log(datas);
+<<<<<<< HEAD
             if(typeof datas !== 'undefined' && datas.length > 0) {
                 for (var item in datastypes) {
                     var libelle = datastypes[item]['LIBELLE']
@@ -47,6 +48,44 @@
                         options: {}
                     });
                 }
+=======
+            for (var item in datastypes) {
+                var libelle = datastypes[item]['LIBELLE']
+                for (let i = 0; i < libelle.length; i++) {
+                    if(libelle[i] == " ") {
+                        libelle[i]="";
+                    }
+
+                }
+                console.log(libelle.replace(/ /g,""));
+                var label_graph = [];
+                var data_graph = [];
+                for  (var data in datas) {
+                    if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
+                        label_graph.push(datas[data]['DATETIMEDATA']);
+                        data_graph.push(datas[data]['DATASENSOR']);
+                    }
+                }
+                var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
+
+                    // The data for our dataset
+                    data: {
+                        labels: label_graph,
+                        datasets: [{
+                            label: datastypes[item]['LIBELLE'],
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: data_graph
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+>>>>>>> debug de dev apres assemblage
             }
            
         });  
@@ -86,16 +125,23 @@
                         <div class="row">
                             <?php
                                 //die();
+<<<<<<< HEAD
                                 $div="";
+=======
+>>>>>>> debug de dev apres assemblage
                                 if (count($datastype) % 4 == 0) {
                                     $div= "<div class='col-xl-3 col-md-6'>";
                                 } elseif (count($datastype) % 3 == 0) {
                                     $div= "<div class='col-xl-4 col-md-4'>";
                                 } elseif (count($datastype) % 2 == 0) {
+<<<<<<< HEAD
                                     $div= "<div class='col-md-6'>";
                                 } else
                                 {
                                     $div= "<div class='col-12'>";
+=======
+                                    $div= "<div class= col-md-6'>";
+>>>>>>> debug de dev apres assemblage
                                 }
                                 $div.="<div class='card'>";
                                 $div.="<div class='card-body'>";
@@ -208,9 +254,13 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
+<<<<<<< HEAD
                                                         <?php 
                                                         if(isset($datas[0])){
                                                         foreach ($datas[0] as $key => $value) {
+=======
+                                                        <?php foreach ($datas[0] as $key => $value) {
+>>>>>>> debug de dev apres assemblage
                                 echo " <th class='border-0'>".$key."</th>";
                             }
                                                         ?>
@@ -226,7 +276,11 @@
                                                             }
                                                             echo "</tr>";
                                                         }
+<<<<<<< HEAD
                                                         }?>
+=======
+                                                    ?>
+>>>>>>> debug de dev apres assemblage
                                                     <tr>
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
@@ -239,10 +293,14 @@
                             <!-- ============================================================== -->
                             <!-- end recent orders  -->
 
+<<<<<<< HEAD
                         </div>
                     </div>
                 </div>
             </div>
+=======
+        </div>
+>>>>>>> debug de dev apres assemblage
         <!-- ============================================================== -->
         <!-- end wrapper  -->
         <!-- ============================================================== -->    
