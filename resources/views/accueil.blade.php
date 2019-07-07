@@ -84,6 +84,7 @@
                     <!-- ============================================================== -->
                     <div class="ecommerce-widget">
                         <div class="row">
+<<<<<<< HEAD
                         @foreach ($datastype as $key => $datatype)
                             @if (count($datastype) % 4 == 0)
                             <div class='col-xl-3 col-md-6'>
@@ -124,6 +125,97 @@
                                             @endphp
                                             {{  $allSensors }}
                                             </h5>
+=======
+                            <?php
+                                //die();
+                                $div="";
+                                if (count($datastype) % 4 == 0) {
+                                    $div= "<div class='col-xl-3 col-md-6'>";
+                                } elseif (count($datastype) % 3 == 0) {
+                                    $div= "<div class='col-xl-4 col-md-4'>";
+                                } elseif (count($datastype) % 2 == 0) {
+                                    $div= "<div class='col-md-6'>";
+                                } else
+                                {
+                                    $div= "<div class='col-12'>";
+                                }
+                                $div.="<div class='card'>";
+                                $div.="<div class='card-body'>";
+                                
+                                foreach ($datastype as $key => $datatype) {
+                                    $allSensors ="";
+                                    //die(print_r($datastype));
+                                    echo $div;
+                                    echo "<h3 class='mb-1'>".$datatype->LIBELLE."</h3>";
+                                    echo "<div class='metric-value d-inline-block'>";
+                                    echo "<h5 class='text-muted'>";
+                                    $i = 0;
+                                    foreach ($datastypesensor as $key2 =>$datatypesensor) {
+                                        if ($datatype->LIBELLE == $datatypesensor->LIBELLE) {
+                                            $allSensors .= $datatypesensor->NAMESENSOR;
+                                            if($i % 2 == 0){
+                                                $allSensors .= " / ";
+                                            } else {
+                                                $allSensors .= "</br>";
+                                            }
+                                            $i = $i+1;
+                                            //echo  $allSensors;
+                                        }
+                                    }
+                                    echo substr($allSensors, 0, -3);
+                                    echo "</h5>";
+                                    echo "</div>";
+                                    echo "<div class='metric-label d-inline-block float-right text-success font-weight-bold'>";
+                                    echo "<span><i class='fa fa-fw fa-arrow-up'></i></span><span>5.86%</span>";
+                                    echo "</div>";
+                                    echo "</div>";
+                                    echo "<canvas id=\"".str_replace(" ","",$datatype->LIBELLE)."\"> </canvas>";
+                                    echo "</div>";
+                                    echo "</div>";
+                                }
+                                
+                            ?>
+                            <!--div class="col-xl-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5>Dioxyde de carbonne(CO2)</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1">Danger</h1>
+                                        </div>
+                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                            <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Monoxyde de carbonne(CO)</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1">Normal</h1>
+                                        </div>
+                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
+                                            <span>-1.15%</span>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue2"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Oxyde d'azote (NOX)</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1">Normal</h1>
+                                        </div>
+                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
+                                            <span>-3.21%</span>
+                                        </div>
+                                        <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
+                                            <span>N/A</span>
+>>>>>>> Ajout capteur
                                         </div>
                                     @isset($datas[0])
                                         @php
@@ -188,6 +280,7 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
+<<<<<<< HEAD
                                                     @isset($datas[0])
                                                         @foreach ($datas[0] as $key => $value)
                                                         <th class='border-0'> {{ $key }}</th>
@@ -205,6 +298,28 @@
                                                         @endforeach                                 
                                                     @endisset
                                                     <tr>
+=======
+                                                        <?php 
+                                                        if(isset($datas[0])){
+                                                        foreach ($datas[0] as $key => $value) {
+                                echo " <th class='border-0'>".$key."</th>";
+                            }
+                                                        ?>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($datas as $key => $data) {
+                                                            echo "<tr>";
+                                                            foreach ($data as $key => $value) {
+                                                                echo "<td>";
+                                                                echo $value;
+                                                                echo "</td>";
+                                                            }
+                                                            echo "</tr>";
+                                                        }
+                                                        }?>
+                                                    <tr>
+>>>>>>> Ajout capteur
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
                                                 </tbody>

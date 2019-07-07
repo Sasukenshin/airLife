@@ -478,9 +478,13 @@ class ComposerStaticInit204368090732974f4dcb01fb68822f9c
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AboutController' => __DIR__ . '/../..' . '/app/Http/Controllers/AboutController.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'App\\Http\\Controllers\\AjoutCapteurController' => __DIR__ . '/../..' . '/app/Http/Controllers/AjoutCapteurController.php',
 =======
 >>>>>>> Mail de confirmation lors de l'inscription
+=======
+        'App\\Http\\Controllers\\AjoutCapteurController' => __DIR__ . '/../..' . '/app/Http/Controllers/AjoutCapteurController.php',
+>>>>>>> Ajout capteur
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',

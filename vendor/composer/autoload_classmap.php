@@ -10,9 +10,13 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AboutController' => $baseDir . '/app/Http/Controllers/AboutController.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
     'App\\Http\\Controllers\\AjoutCapteurController' => $baseDir . '/app/Http/Controllers/AjoutCapteurController.php',
 =======
 >>>>>>> Mail de confirmation lors de l'inscription
+=======
+    'App\\Http\\Controllers\\AjoutCapteurController' => $baseDir . '/app/Http/Controllers/AjoutCapteurController.php',
+>>>>>>> Ajout capteur
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',

@@ -8,6 +8,9 @@
             datas = <?php echo json_encode($datas) ;?>;
             console.log(datas);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Ajout capteur
             if(typeof datas !== 'undefined' && datas.length > 0) {
                 for (var item in datastypes) {
                     var libelle = datastypes[item]['LIBELLE']
@@ -15,6 +18,7 @@
                         if(libelle[i] == " ") {
                             libelle[i]="";  
                         }
+<<<<<<< HEAD
 
                     }
                     console.log(libelle.replace(/ /g,""));
@@ -55,37 +59,48 @@
                     if(libelle[i] == " ") {
                         libelle[i]="";
                     }
+=======
+>>>>>>> Ajout capteur
 
-                }
-                console.log(libelle.replace(/ /g,""));
-                var label_graph = [];
-                var data_graph = [];
-                for  (var data in datas) {
-                    if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
-                        label_graph.push(datas[data]['DATETIMEDATA']);
-                        data_graph.push(datas[data]['DATASENSOR']);
                     }
-                }
-                var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
-                var chart = new Chart(ctx, {
-                    // The type of chart we want to create
-                    type: 'line',
+                    console.log(libelle.replace(/ /g,""));
+                    var label_graph = [];
+                    var data_graph = [];
 
-                    // The data for our dataset
-                    data: {
-                        labels: label_graph,
-                        datasets: [{
-                            label: datastypes[item]['LIBELLE'],
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: data_graph
-                        }]
-                    },
+                        for  (var data in datas) {
+                            if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
+                                label_graph.push(datas[data]['DATETIMEDATA']);
+                                data_graph.push(datas[data]['DATASENSOR']);
+                            }
+                        }
 
+                    var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+
+<<<<<<< HEAD
                     // Configuration options go here
                     options: {}
                 });
 >>>>>>> debug de dev apres assemblage
+=======
+                        // The data for our dataset
+                        data: {
+                            labels: label_graph,
+                            datasets: [{
+                                label: datastypes[item]['LIBELLE'],
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: data_graph
+                            }]
+                        },
+
+                        // Configuration options go here
+                        options: {}
+                    });
+                }
+>>>>>>> Ajout capteur
             }
            
         });  
@@ -126,22 +141,32 @@
                             <?php
                                 //die();
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 $div="";
 =======
 >>>>>>> debug de dev apres assemblage
+=======
+                                $div="";
+>>>>>>> Ajout capteur
                                 if (count($datastype) % 4 == 0) {
                                     $div= "<div class='col-xl-3 col-md-6'>";
                                 } elseif (count($datastype) % 3 == 0) {
                                     $div= "<div class='col-xl-4 col-md-4'>";
                                 } elseif (count($datastype) % 2 == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Ajout capteur
                                     $div= "<div class='col-md-6'>";
                                 } else
                                 {
                                     $div= "<div class='col-12'>";
+<<<<<<< HEAD
 =======
                                     $div= "<div class= col-md-6'>";
 >>>>>>> debug de dev apres assemblage
+=======
+>>>>>>> Ajout capteur
                                 }
                                 $div.="<div class='card'>";
                                 $div.="<div class='card-body'>";
@@ -255,12 +280,18 @@
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                         <?php 
                                                         if(isset($datas[0])){
                                                         foreach ($datas[0] as $key => $value) {
 =======
                                                         <?php foreach ($datas[0] as $key => $value) {
 >>>>>>> debug de dev apres assemblage
+=======
+                                                        <?php 
+                                                        if(isset($datas[0])){
+                                                        foreach ($datas[0] as $key => $value) {
+>>>>>>> Ajout capteur
                                 echo " <th class='border-0'>".$key."</th>";
                             }
                                                         ?>
@@ -277,10 +308,14 @@
                                                             echo "</tr>";
                                                         }
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                         }?>
 =======
                                                     ?>
 >>>>>>> debug de dev apres assemblage
+=======
+                                                        }?>
+>>>>>>> Ajout capteur
                                                     <tr>
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
@@ -294,13 +329,19 @@
                             <!-- end recent orders  -->
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Ajout capteur
                         </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
 =======
         </div>
 >>>>>>> debug de dev apres assemblage
+=======
+>>>>>>> Ajout capteur
         <!-- ============================================================== -->
         <!-- end wrapper  -->
         <!-- ============================================================== -->    
