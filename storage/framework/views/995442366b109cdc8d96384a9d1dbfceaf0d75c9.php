@@ -59,32 +59,32 @@
                                             <a href="#" class="list-group-item list-group-item-action active">
                                                 <div class="notification-info">
                                                     <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
-                                                        <div class="notification-date">2 min ago</div>
+                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 1</span>a détecté un nouveau gaz.
+                                                        <div class="notification-date">Il y a 2 min</div>
                                                     </div>
                                                 </div>
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
                                                     <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">John Abraham </span>is now following you
-                                                        <div class="notification-date">2 days ago</div>
+                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 2</span>est arrêté.
+                                                        <div class="notification-date">Il y a 2 jours</div>
                                                     </div>
                                                 </div>
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
                                                     <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Monaan Pechi</span> is watching your main repository
-                                                        <div class="notification-date">2 min ago</div>
+                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 1</span>a détecté un danger.
+                                                        <div class="notification-date">Il y a 15 min</div>
                                                     </div>
                                                 </div>
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
                                                     <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Jessica Caruso</span>accepted your invitation to join the team.
-                                                        <div class="notification-date">2 min ago</div>
+                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 2</span>a redémarré.
+                                                        <div class="notification-date">Il y a 12 min</div>
                                                     </div>
                                                 </div>
                                             </a>
@@ -172,7 +172,7 @@
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Statistiques</a>
+                                            <a class="nav-link" href="/ProjetSCU/public/">Statistiques</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Visualisation en direct</a>

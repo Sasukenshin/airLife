@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\metier\Users;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class ConnexionController extends Controller 
 {
-    protected $primaryKey = 'IDUSER';
+    protected $primaryKey = 'iduser';
     
     public function formulaire() 
     {
@@ -30,7 +33,16 @@ class ConnexionController extends Controller
             'confirmation_token' => null
         ]);
         
-        if($resultat){
+        if($resultat)
+        {
+            $user_email = Auth::user()->email;
+             
+            $connection = new Users();
+            $connection->setSession($user_email);
+             
+            /* $user = new Users();
+            $userId = $user->*/
+            Session::put('email', Auth::user()->email);
             return redirect('/');
         }
         

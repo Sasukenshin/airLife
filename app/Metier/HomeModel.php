@@ -22,6 +22,8 @@ class HomeModel extends Model {
        $datas = DB::table('datas')
             ->select('datas.IDDATA',	'datas.IDSENSOR',	'datas.IDDATATYPE',	'datas.DATETIMEDATA',	'datas.DATASENSOR',	'datatype.LIBELLE')
             ->leftJoin('datatype', 'datas.IDDATATYPE', '=', 'datatype.IDDATATYPE')
+            ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'datas.IDSENSOR')
+            ->where('IDUSER', '=', Session::get('id')) 
             ->orderBy('datas.DATETIMEDATA','desc')
             ->get();
         return $datas;
@@ -29,10 +31,9 @@ class HomeModel extends Model {
     public function getSensors() {
         $datas = DB::table('sensor')
         ->select()
-        ->where('IDUSER', '=', 1) 
+        ->where('IDUSER', '=', Session::get('id')) 
         ->get(); 
-       // Quand on aura mis en place l'authentification
-       // ->where('IDUSER', '=', Session::get('id')) ;   
+ 
          return $datas;
      }
      public function getDatasTypeSensor() {
@@ -40,11 +41,10 @@ class HomeModel extends Model {
         ->select('datatype.LIBELLE','sensor.NAMESENSOR')
         ->leftJoin('datatype', 'to_capture.IDDATATYPE', '=', 'datatype.IDDATATYPE')
         ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'to_capture.IDSENSOR')
-        ->where('sensor.IDUSER', '=', 1) 
+        ->where('IDUSER', '=', Session::get('id')) 
         ->groupBy('datatype.LIBELLE','sensor.NAMESENSOR')
         ->get(); 
-       // Quand on aura mis en place l'authentification
-       // ->where('IDUSER', '=', Session::get('id')) ;   
+ 
          return $datas;        
      }
      public function getDatasType() {
@@ -52,11 +52,9 @@ class HomeModel extends Model {
         ->select('datatype.IDDATATYPE','datatype.LIBELLE')
         ->leftJoin('datatype', 'to_capture.IDDATATYPE', '=', 'datatype.IDDATATYPE')
         ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'to_capture.IDSENSOR')
-        ->where('sensor.IDUSER', '=', 1) 
+        ->where('IDUSER', '=', Session::get('id'))
         ->groupBy('datatype.IDDATATYPE','datatype.LIBELLE')
         ->get(); 
-       // Quand on aura mis en place l'authentification
-       // ->where('IDUSER', '=', Session::get('id')) ;   
          return $datas;        
      }
 }
