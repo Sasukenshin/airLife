@@ -1,7 +1,5 @@
 @extends('layouts.master')
 @section('content')
-
-<<<<<<< HEAD
 <body>
     <div class="splash-container">
         <div id="connexion-contain"
@@ -36,14 +34,11 @@
 
 </body>
  
-=======
-</br>
-@if (isset($error))
     <div class="alert alert-danger">
         {{ $error }}
     </div>
-@endif
-@if (isset($succes))
+    @endif
+    @if (isset($succes))
     <div class="alert alert-success">
         {{ $succes }}
     </div>
@@ -53,6 +48,5 @@
     <input name="id_sensor" type="text" placeholder="Identifiant" autocomplete="off" required="" >
     <button type="submit">Enregistrer</button>
 </form>
->>>>>>> Ajout capteur
 
 @stop
