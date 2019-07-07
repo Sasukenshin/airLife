@@ -17,21 +17,22 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter</button>
                 </form>
-            </div>         
-        </div>
-    </div>
-        
-    @if (isset($error))
-    <div class="alert alert-danger">
-        {{ $error }}
-    </div>
-    @endif
-    @if (isset($succes))
-    <div class="alert alert-success">
-        {{ $succes }}
-    </div>
-    @endif
-    
+            </div>  
+            <div align="center" style="width: 300px; margin:auto">
+            @if (isset($error))
+            <div class="alert alert-danger">
+                {{ $error }}
+            </div>
+            @endif
+            @if (isset($succes))
+                <div class="alert alert-success">
+                    {{ $succes }}
+                </div>
+            @endif
+            </div>
+        </div>                
+    </div>     
+
 </body>
  
 
