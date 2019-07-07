@@ -5,6 +5,7 @@ use Request;
 use App\Metier\HomeModel;
 use App\metier\Users;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller 
 {
@@ -27,7 +28,7 @@ class HomeController extends Controller
         $datas = $model->getDatas();
         $sensors = $model->getSensors();
         $datastype = $model->getDatasType();
-        $datastypesensor = $model->getDatasTypeSensor();
+        $datastypesensor = $model->getDatasTypeSensor();   
         return view('accueil', ['datas' => $datas, 'sensors' => $sensors, 'datastype' => $datastype, 'datastypesensor' => $datastypesensor, 'user_firstname' => $user_firstname, 'user_lastname' => $user_lastname]);
     }
 }

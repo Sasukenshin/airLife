@@ -25,4 +25,17 @@ class Users extends Model implements Authenticatable
         return '';
     }
     
+    public function setSession($user_email)
+    {
+        $iduser = DB::table('users')
+          ->Select()                    
+          ->where('email', '=', $user_email)
+          ->first();
+        
+        if($iduser)
+        {
+            Session::put('id', $iduser->iduser);
+        }
+        return $iduser;
+    }
 }

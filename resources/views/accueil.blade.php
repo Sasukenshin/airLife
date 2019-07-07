@@ -7,42 +7,46 @@
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             console.log(datas);
-            for (var item in datastypes) {
-                var libelle = datastypes[item]['LIBELLE']
-                for (let i = 0; i < libelle.length; i++) {
-                    if(libelle[i] == " ") {
-                        libelle[i]="";
+            if(typeof datas !== 'undefined' && datas.length > 0) {
+                for (var item in datastypes) {
+                    var libelle = datastypes[item]['LIBELLE']
+                    for (let i = 0; i < libelle.length; i++) {
+                        if(libelle[i] == " ") {
+                            libelle[i]="";  
+                        }
+
                     }
+                    console.log(libelle.replace(/ /g,""));
+                    var label_graph = [];
+                    var data_graph = [];
 
+                        for  (var data in datas) {
+                            if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
+                                label_graph.push(datas[data]['DATETIMEDATA']);
+                                data_graph.push(datas[data]['DATASENSOR']);
+                            }
+                        }
+
+                    var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            labels: label_graph,
+                            datasets: [{
+                                label: datastypes[item]['LIBELLE'],
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: data_graph
+                            }]
+                        },
+
+                        // Configuration options go here
+                        options: {}
+                    });
                 }
-                console.log(libelle.replace(/ /g,""));
-                var label_graph = [];
-                var data_graph = [];
-                for  (var data in datas) {
-                    if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
-                        label_graph.push(datas[data]['DATETIMEDATA']);
-                        data_graph.push(datas[data]['DATASENSOR']);
-                    }
-                }
-                var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
-                var chart = new Chart(ctx, {
-                    // The type of chart we want to create
-                    type: 'line',
-
-                    // The data for our dataset
-                    data: {
-                        labels: label_graph,
-                        datasets: [{
-                            label: datastypes[item]['LIBELLE'],
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: data_graph
-                        }]
-                    },
-
-                    // Configuration options go here
-                    options: {}
-                });
             }
            
         });  
@@ -57,7 +61,7 @@
                     <!-- pageheader  -->
                     <!-- ============================================================== -->
                     <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
                             <div class="page-header">
                                 <h2 class="pageheader-title">Tableau de bord général</h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
@@ -71,6 +75,9 @@
                                 </div>
                             </div>
                         </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                <a href="ajout_capteur"><button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter un capteur</button></a>
+                            </div>
                     </div>
                     <!-- ============================================================== -->
                     <!-- end pageheader  -->
@@ -79,12 +86,16 @@
                         <div class="row">
                             <?php
                                 //die();
+                                $div="";
                                 if (count($datastype) % 4 == 0) {
                                     $div= "<div class='col-xl-3 col-md-6'>";
                                 } elseif (count($datastype) % 3 == 0) {
                                     $div= "<div class='col-xl-4 col-md-4'>";
                                 } elseif (count($datastype) % 2 == 0) {
-                                    $div= "<div class= col-md-6'>";
+                                    $div= "<div class='col-md-6'>";
+                                } else
+                                {
+                                    $div= "<div class='col-12'>";
                                 }
                                 $div.="<div class='card'>";
                                 $div.="<div class='card-body'>";
@@ -197,7 +208,9 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                        <?php foreach ($datas[0] as $key => $value) {
+                                                        <?php 
+                                                        if(isset($datas[0])){
+                                                        foreach ($datas[0] as $key => $value) {
                                 echo " <th class='border-0'>".$key."</th>";
                             }
                                                         ?>
@@ -213,9 +226,9 @@
                                                             }
                                                             echo "</tr>";
                                                         }
-                                                    ?>
+                                                        }?>
                                                     <tr>
-                                                        <td colspan="9"><a href="#" class="btn btn-outline-light float-right">View Details</a></td>
+                                                        <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -226,7 +239,10 @@
                             <!-- ============================================================== -->
                             <!-- end recent orders  -->
 
-        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <!-- ============================================================== -->
         <!-- end wrapper  -->
         <!-- ============================================================== -->    
