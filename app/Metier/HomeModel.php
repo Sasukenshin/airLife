@@ -3,6 +3,7 @@
 namespace App\metier;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class HomeModel extends Model {
@@ -23,7 +24,7 @@ class HomeModel extends Model {
             ->select('datas.IDDATA',	'datas.IDSENSOR',	'datas.IDDATATYPE',	'datas.DATETIMEDATA',	'datas.DATASENSOR',	'datatype.LIBELLE')
             ->leftJoin('datatype', 'datas.IDDATATYPE', '=', 'datatype.IDDATATYPE')
             ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'datas.IDSENSOR')
-            ->where('IDUSER', '=', Session::get('id')) 
+            ->where('IDUSER', '=', Auth::user()->iduser) 
             ->orderBy('datas.DATETIMEDATA','desc')
             ->get();
         return $datas;
@@ -31,7 +32,7 @@ class HomeModel extends Model {
     public function getSensors() {
         $datas = DB::table('sensor')
         ->select()
-        ->where('IDUSER', '=', Session::get('id')) 
+        ->where('IDUSER', '=', Auth::user()->iduser) 
         ->get(); 
  
          return $datas;
@@ -41,7 +42,7 @@ class HomeModel extends Model {
         ->select('datatype.LIBELLE','sensor.NAMESENSOR')
         ->leftJoin('datatype', 'to_capture.IDDATATYPE', '=', 'datatype.IDDATATYPE')
         ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'to_capture.IDSENSOR')
-        ->where('IDUSER', '=', Session::get('id')) 
+        ->where('IDUSER', '=', Auth::user()->iduser) 
         ->groupBy('datatype.LIBELLE','sensor.NAMESENSOR')
         ->get(); 
  
@@ -52,7 +53,7 @@ class HomeModel extends Model {
         ->select('datatype.IDDATATYPE','datatype.LIBELLE')
         ->leftJoin('datatype', 'to_capture.IDDATATYPE', '=', 'datatype.IDDATATYPE')
         ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'to_capture.IDSENSOR')
-        ->where('IDUSER', '=', Session::get('id'))
+        ->where('IDUSER', '=', Auth::user()->iduser)
         ->groupBy('datatype.IDDATATYPE','datatype.LIBELLE')
         ->get(); 
          return $datas;        

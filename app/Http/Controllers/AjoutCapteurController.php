@@ -6,6 +6,7 @@ use Request;
 use App\Http\Controllers\Controller;
 use App\metier\Save_Sensor;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class AjoutCapteurController extends Controller
@@ -32,7 +33,7 @@ class AjoutCapteurController extends Controller
         
         $user_firstname = Auth::user()->firstname;
         $user_lastname = Auth::user()->lastname;
-        
+                
         request()->validate([
             'id_sensor' => ['required'],
         ]);
@@ -50,7 +51,7 @@ class AjoutCapteurController extends Controller
                 $error = 'Ce capteur existe mais le délai de 5 minutes est dépassé ';
                 return view('formAjoutCapteur',['error' => $error,'user_firstname' => $user_firstname, 'user_lastname' => $user_lastname]);
             } else {
-                $succes = $Save_Sensor->ajout_capteur($id_sensor,Session::get('id'),$date_ajout_sensor->name_sensor);
+                $succes = $Save_Sensor->ajout_capteur($id_sensor,Auth::user()->iduser,$date_ajout_sensor->name_sensor);
                 return view('formAjoutCapteur',['succes' => $succes,'user_firstname' => $user_firstname, 'user_lastname' => $user_lastname]);
             }
         }else {
