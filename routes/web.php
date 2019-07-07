@@ -33,6 +33,10 @@ Route::get('/connexion', 'ConnexionController@formulaire');
 
 Route::post('/connexion', 'ConnexionController@traitement');
 
-Route::get('/deconnexion', 'connexionController@deconnexion');
+Route::get('/deconnexion', 'ConnexionController@deconnexion');
 
 Route::get('/confirm/{id}/{token}', 'InscriptionController@confirm');
+
+Route::get('/ajout_capteur', 'AjoutCapteurController@formAjoutCapteur');
+
+Route::post('/enregistrerCapteur', 'AjoutCapteurController@enregistrerCapteur');
