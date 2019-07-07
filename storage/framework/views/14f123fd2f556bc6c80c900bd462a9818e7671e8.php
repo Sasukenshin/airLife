@@ -12,9 +12,7 @@
                         <div class="row" style="margin-bottom:20px">     
                             <div class="col-9">
                                 <p align="justify">
-                                    Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire
-                                    olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque
-                                    excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam. 
+                                    Le capteur MQ7 est un capteur permettant de détecter la présence de monoxyde de carbone CO de 20 à 2000 ppm. Haute sensibilité et temps de réponse rapide. La sensibilité est réglable par potentiomètre.
                                 </p>
                             </div>
                             <div class="col-3">
