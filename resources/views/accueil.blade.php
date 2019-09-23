@@ -106,7 +106,7 @@
                                             @foreach ($datastypesensor as $key2 => $datatypesensor)
                                                 @if ($datatype->LIBELLE == $datatypesensor->LIBELLE)
                                                     @php
-                                                        $allSensors .= $key2;
+                                                        $allSensors .= $datatypesensor->NAMESENSOR;
                                                     @endphp
                                                     @if ($i % 2 == 0)
                                                         @php
@@ -120,13 +120,49 @@
                                                 @endif
                                             @endforeach
                                             @php
-                                                substr($allSensors, 0, -3);
+                                                $allSensors = substr($allSensors, 0, -3);
                                             @endphp
                                             {{  $allSensors }}
                                             </h5>
                                         </div>
+                                    @isset($datas[0])
+                                        @php
+                                            $temp = new StdClass;
+                                            $moy = 0;
+                                            $i=0;
+                                            $j=0;
+                                            $evolution=0;
+                                        @endphp
+                                        @foreach($datas as $key => $value)
+                                            @if($value->IDDATATYPE == $datatype->IDDATATYPE)
+                                                @php
+                                                    $temp->$i =$value;
+                                                    $i=$i+1;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                        @foreach($temp as $key => $value)
+                                            @if($j < $i-1)
+                                                @php
+                                                    $moy = $moy + $value->DATASENSOR;
+                                                    $j=$j+1;
+                                                @endphp
+                                            @else
+                                                @php 
+                                                    $moy= $moy/($i-1);
+                                                    $evolution = (100* $value->DATASENSOR/$moy)-100;
+                                                    $evolution = round($evolution,2);
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                    @endisset
+                                    @if($evolution >= 0)
                                     <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>5.86%</span>
+                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}</span>
+                                    @else
+                                    <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
+                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}</span>
+                                    @endif
                                 </div>
                             </div>
                             @php

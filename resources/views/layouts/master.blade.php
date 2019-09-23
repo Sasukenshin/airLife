@@ -177,6 +177,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Visualisation en direct</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Capteurs</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
