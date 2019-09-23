@@ -11,5 +11,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+<<<<<<< HEAD
 composer.lock
 nbproject/private/
+=======
+/nbproject/private/
+>>>>>>> 09c3b2728f5835ce38ea1dc124ea674f7025c9b7
