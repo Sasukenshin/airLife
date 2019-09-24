@@ -9,14 +9,7 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AboutController' => $baseDir . '/app/Http/Controllers/AboutController.php',
-<<<<<<< HEAD
-<<<<<<< HEAD
     'App\\Http\\Controllers\\AjoutCapteurController' => $baseDir . '/app/Http/Controllers/AjoutCapteurController.php',
-=======
->>>>>>> Mail de confirmation lors de l'inscription
-=======
-    'App\\Http\\Controllers\\AjoutCapteurController' => $baseDir . '/app/Http/Controllers/AjoutCapteurController.php',
->>>>>>> Ajout capteur
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -2486,13 +2479,9 @@ return array(
     'PhpParser\\JsonDecoder' => $vendorDir . '/nikic/php-parser/lib/PhpParser/JsonDecoder.php',
     'PhpParser\\Lexer' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Lexer.php',
     'PhpParser\\Lexer\\Emulative' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Lexer/Emulative.php',
-<<<<<<< HEAD
     'PhpParser\\Lexer\\TokenEmulator\\CoaleseEqualTokenEmulator' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/CoaleseEqualTokenEmulator.php',
     'PhpParser\\Lexer\\TokenEmulator\\FnTokenEmulator' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/FnTokenEmulator.php',
     'PhpParser\\Lexer\\TokenEmulator\\NumericLiteralSeparatorEmulator' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/NumericLiteralSeparatorEmulator.php',
-    'PhpParser\\Lexer\\TokenEmulator\\TokenEmulatorInterface' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/TokenEmulatorInterface.php',
-=======
->>>>>>> Mail de confirmation lors de l'inscription
     'PhpParser\\NameContext' => $vendorDir . '/nikic/php-parser/lib/PhpParser/NameContext.php',
     'PhpParser\\Node' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Node.php',
     'PhpParser\\NodeAbstract' => $vendorDir . '/nikic/php-parser/lib/PhpParser/NodeAbstract.php',
