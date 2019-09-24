@@ -39,8 +39,4 @@ Route::get('/confirm/{id}/{token}', 'InscriptionController@confirm');
 
 Route::get('/ajout_capteur', 'AjoutCapteurController@formAjoutCapteur');
 
-<<<<<<< HEAD
 Route::post('/enregistrerCapteur', 'AjoutCapteurController@enregistrerCapteur');
-=======
-Route::post('/enregistrerCapteur', 'AjoutCapteurController@enregistrerCapteur');
->>>>>>> Ajout capteur
