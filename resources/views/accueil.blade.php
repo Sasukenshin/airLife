@@ -2,8 +2,13 @@
     @section('content')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+
     <script>
         $( document ).ready(function() {
+
+
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             console.log(datas);
@@ -84,7 +89,7 @@
                     <!-- ============================================================== -->
                     <div class="ecommerce-widget">
                         <div class="row">
-<<<<<<< HEAD
+                            <button>Notifiez moi!</button>
                         @foreach ($datastype as $key => $datatype)
                             @if (count($datastype) % 4 == 0)
                             <div class='col-xl-3 col-md-6'>
@@ -125,7 +130,7 @@
                                             @endphp
                                             {{  $allSensors }}
                                             </h5>
-=======
+
                             <?php
                                 //die();
                                 $div="";
@@ -240,10 +245,16 @@
                                                     $j=$j+1;
                                                 @endphp
                                             @else
-                                                @php 
-                                                    $moy= $moy/($i-1);
+                                                @php
+                                                    if($i>1){
+                                                        $moy= $moy/($i-1);
+                                                    } else {
+                                                        $moy=$value->DATASENSOR;
+                                                    }
+
                                                     $evolution = (100* $value->DATASENSOR/$moy)-100;
                                                     $evolution = round($evolution,2);
+
                                                 @endphp
                                             @endif
                                         @endforeach
