@@ -4,9 +4,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         $( document ).ready(function() {
+            pageNumber=0;
+            nbrDataTab=3;
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
-            console.log(datas);
             if(typeof datas !== 'undefined' && datas.length > 0) {
                 for (var item in datastypes) {
                     var libelle = datastypes[item]['LIBELLE']
@@ -16,7 +17,6 @@
                         }
 
                     }
-                    console.log(libelle.replace(/ /g,""));
                     var label_graph = [];
                     var data_graph = [];
 
@@ -48,7 +48,37 @@
                     });
                 }
             }
-           
+            $( "#suivantPagination" ).click(function() {
+                if ((pageNumber+1)*3 < datas.length) {
+                    $("#allData").empty();
+                    pageNumber = pageNumber+1;
+                    toAppend ="";
+                    for(i=0; i<3 ; i++){
+                        toAppend = toAppend.concat("<tr>");
+                        for(var value in datas[nbrDataTab*pageNumber+i]) {
+                            if (nbrDataTab*pageNumber+i <= datas.length) {
+                                toAppend = toAppend.concat("<td>");
+                                toAppend = toAppend.concat(datas[nbrDataTab*pageNumber+i][value])
+                                toAppend = toAppend.concat("</td>");
+                            }
+                        }
+                        toAppend = toAppend.concat("</tr>");
+                    }
+                    toAppend = toAppend.concat(`<td></td>
+                                                <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
+                                                <td></td>
+                                                <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
+                                                <td></td>
+                                                <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
+                                                `)
+                    $( "#allData").append(toAppend);
+
+                } else {
+
+                }
+                
+                
+            });
         });  
     </script>
     
@@ -155,7 +185,6 @@
                                                 @endphp
                                             @endif
                                         @endforeach
-                                    @endisset
                                     @if($evolution >= 0)
                                     <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
                                     <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}</span>
@@ -163,7 +192,8 @@
                                     <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
                                     <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}</span>
                                     @endif
-                                </div>
+                                    </div>
+                                    @endisset
                             </div>
                             @php
                                 $canvasId = str_replace(" ","",$datatype->LIBELLE)
@@ -185,29 +215,38 @@
                                     <h5 class="card-header">Données récentes </h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table">
+                                            <table id="donnee_recente" class="table">
+                                                @isset($datas[0])
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                    @isset($datas[0])
                                                         @foreach ($datas[0] as $key => $value)
                                                         <th class='border-0'> {{ $key }}</th>
                                                         @endforeach
                                                     </tr>
                                                 </thead>
-                                                        @foreach ($datas as $key2 => $data)
+                                                <tbody id="allData">
+                                                        @for ($i = 0; $i < 3; $i++)
                                                     <tr>
-                                                            @foreach ($data as $key3 => $value2)
+                                                            @isset($datas[$i])
+                                                                @foreach ($datas[$i] as $key3 => $value2)
                                                         <td>
-                                                            {{ $value2 }}
+                                                                    {{ $value2 }}
                                                         </td>
-                                                            @endforeach
+                                                                @endforeach
+                                                            @endisset
                                                     </tr>
-                                                        @endforeach                                 
-                                                    @endisset
+                                                        @endfor                                
+                                                    
                                                     <tr>
-                                                        <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
+                                                        <td></td>
+                                                        <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
+                                                        <td></td>
+                                                        <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
+                                                        <td></td>
+                                                        <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
                                                 </tbody>
+                                                @endisset
                                             </table>
                                         </div>
                                     </div>
