@@ -9,7 +9,7 @@
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             if(typeof datas !== 'undefined' && datas.length > 0) {
-                for (var item in datastypes) {
+                for (var item in datastypes) {  
                     var libelle = datastypes[item]['LIBELLE']
                     for (let i = 0; i < libelle.length; i++) {
                         if(libelle[i] == " ") {
@@ -22,8 +22,8 @@
 
                         for  (var data in datas) {
                             if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
-                                label_graph.push(datas[data]['DATETIMEDATA']);
-                                data_graph.push(datas[data]['DATASENSOR']);
+                                label_graph.push(datas[data]['DATE']);
+                                data_graph.push(datas[data]['VALEUR']);
                             }
                         }
 
@@ -174,23 +174,27 @@
                                         @foreach($temp as $key => $value)
                                             @if($j < $i-1)
                                                 @php
-                                                    $moy = $moy + $value->DATASENSOR;
+                                                    $moy = $moy + $value->VALEUR;
                                                     $j=$j+1;
                                                 @endphp
                                             @else
                                                 @php 
-                                                    $moy= $moy/($i-1);
-                                                    $evolution = (100* $value->DATASENSOR/$moy)-100;
+                                                    if ($i>1) {
+                                                        $moy= $moy/($i-1);
+                                                    } else {
+                                                        $moy = $value->VALEUR;
+                                                    }
+                                                    $evolution = (100* $value->VALEUR/$moy)-100;
                                                     $evolution = round($evolution,2);
                                                 @endphp
                                             @endif
                                         @endforeach
                                     @if($evolution >= 0)
                                     <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}</span>
+                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}%</span>
                                     @else
                                     <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}</span>
+                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}%</span>
                                     @endif
                                     </div>
                                     @endisset
@@ -220,7 +224,12 @@
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         @foreach ($datas[0] as $key => $value)
+                                                            @if($k>0)
                                                         <th class='border-0'> {{ $key }}</th>
+                                                            @endif
+                                                            @php
+                                                                $k=$k+1;
+                                                            @endphp
                                                         @endforeach
                                                     </tr>
                                                 </thead>
