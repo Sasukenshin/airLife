@@ -22,8 +22,8 @@
 
                         for  (var data in datas) {
                             if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
-                                label_graph.push(datas[data]['DATETIMEDATA']);
-                                data_graph.push(datas[data]['DATASENSOR']);
+                                label_graph.push(datas[data]['DATE']);
+                                data_graph.push(datas[data]['VALEUR']);
                             }
                         }
 
@@ -174,23 +174,27 @@
                                         @foreach($temp as $key => $value)
                                             @if($j < $i-1)
                                                 @php
-                                                    $moy = $moy + $value->DATASENSOR;
+                                                    $moy = $moy + $value->VALEUR;
                                                     $j=$j+1;
                                                 @endphp
                                             @else
                                                 @php 
-                                                    $moy= $moy/($i-1);
-                                                    $evolution = (100* $value->DATASENSOR/$moy)-100;
+                                                    if ($i>1) {
+                                                        $moy= $moy/($i-1);
+                                                    } else {
+                                                        $moy = $value->VALEUR;
+                                                    }
+                                                    $evolution = (100* $value->VALEUR/$moy)-100;
                                                     $evolution = round($evolution,2);
                                                 @endphp
                                             @endif
                                         @endforeach
                                     @if($evolution >= 0)
                                     <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}</span>
+                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}%</span>
                                     @else
                                     <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}</span>
+                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}%</span>
                                     @endif
                                     </div>
                                     @endisset
@@ -219,21 +223,35 @@
                                                 @isset($datas[0])
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
+                                                    @isset($datas[0])
+                                                        @php
+                                                            $k=0;
+                                                        @endphp
                                                         @foreach ($datas[0] as $key => $value)
+                                                            @if($k>0)
                                                         <th class='border-0'> {{ $key }}</th>
+                                                            @endif
+                                                            @php
+                                                                $k=$k+1;
+                                                            @endphp
                                                         @endforeach
                                                     </tr>
                                                 </thead>
-                                                <tbody id="allData">
-                                                        @for ($i = 0; $i < 3; $i++)
+                                                        @foreach ($datas as $key2 => $data)
+                                                        @php
+                                                            $k=0;
+                                                        @endphp
                                                     <tr>
-                                                            @isset($datas[$i])
-                                                                @foreach ($datas[$i] as $key3 => $value2)
+                                                            @foreach ($data as $key3 => $value2)
+                                                            @if($k>0)
                                                         <td>
                                                                     {{ $value2 }}
                                                         </td>
-                                                                @endforeach
-                                                            @endisset
+                                                            @endif
+                                                            @php
+                                                                $k=$k+1;
+                                                            @endphp
+                                                            @endforeach
                                                     </tr>
                                                         @endfor                                
                                                     

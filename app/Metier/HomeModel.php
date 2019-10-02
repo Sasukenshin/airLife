@@ -21,7 +21,7 @@ class HomeModel extends Model {
 
     public function getDatas() {
        $datas = DB::table('datas')
-            ->select('datas.IDDATA',	'datas.IDSENSOR',	'datas.IDDATATYPE',	'datas.DATETIMEDATA',	'datas.DATASENSOR',	'datatype.LIBELLE')
+            ->select('datatype.IDDATATYPE', 'datas.DATETIMEDATA as DATE', 'datatype.LIBELLE as GAZ', 'datas.DATASENSOR as VALEUR', 'sensor.NAMESENSOR as CAPTEUR')
             ->leftJoin('datatype', 'datas.IDDATATYPE', '=', 'datatype.IDDATATYPE')
             ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'datas.IDSENSOR')
             ->where('IDUSER', '=', Auth::user()->iduser) 
