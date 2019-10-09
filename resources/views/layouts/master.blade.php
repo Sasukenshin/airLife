@@ -172,13 +172,13 @@
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/ProjetSCU/public/">Statistiques</a>
+                                            <a class="nav-link" href="/">Statistiques</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Visualisation en direct</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Capteurs</a>
+                                            <a class="nav-link" href="capteur">Capteurs</a>
                                         </li>
                                     </ul>
                                 </div>

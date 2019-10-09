@@ -29,6 +29,8 @@ Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
 
+Route::get('/capteur', 'CapteurController@info_capteur');
+
 Route::get('/connexion', 'ConnexionController@formulaire');
 
 Route::post('/connexion', 'ConnexionController@traitement');

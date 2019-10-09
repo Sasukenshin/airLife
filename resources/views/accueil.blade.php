@@ -142,7 +142,7 @@
                     <!-- pageheader  -->
                     <!-- ============================================================== -->
                     <div class="row">
-                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
                                 <h2 class="pageheader-title">Tableau de bord général</h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
@@ -156,9 +156,6 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-                                <a href="ajout_capteur"><button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter un capteur</button></a>
-                            </div>
                     </div>
                     <!-- ============================================================== -->
                     <!-- end pageheader  -->
