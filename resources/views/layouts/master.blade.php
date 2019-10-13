@@ -2,15 +2,15 @@
 <html>
 <head>
     <title>Air Life</title>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    
+
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"  crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" href="css\style.css">
     <link rel="stylesheet" href="css\vendor\bootstrap\css\bootstrap.min.css">
     <link rel="stylesheet" href="css\vendor\fonts\circular-std\style.css" >
@@ -20,10 +20,35 @@
     <link rel="stylesheet" href="css\vendor\charts\morris-bundle\morris.css">
     <link rel="stylesheet" href="css\vendor\fonts\material-design-iconic-font\css\materialdesignicons.min.css">
     <link rel="stylesheet" href="css\vendor\charts\c3charts\c3.css">
-    <link rel="stylesheet" href="css\vendor\fonts\flag-icon-css\flag-icon.min.css">    
+    <link rel="stylesheet" href="css\vendor\fonts\flag-icon-css\flag-icon.min.css">
     <link rel="stylesheet" href="css\vendor\select2\css\select2.css">
     <link rel="stylesheet" href="css\vendor\summernote\css\summernote-bs4.css">
-   
+
+
+
+{{--    notifications --}}
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "b0b15de8-0982-4a93-afc8-ad4c7c0e109f",
+                notifyButton: {
+                    enable: true,
+                },
+                allowLocalhostAsSecureOrigin: true,
+            });
+            OneSignal.sendTag("user_id","4444", function(tagsSent)
+            {
+                // Callback called when tags have finished sending
+                console.log("Tags have finished sending!");
+            });
+        });
+    </script>
+
+
+
+
 </head>
 
 
@@ -123,7 +148,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                
+
                             </ul>
                         </li>
                         <li class="nav-item dropdown nav-user">
@@ -131,12 +156,14 @@
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     @if (auth()->check())
-                                        <h5 class="mb-0 text-white nav-user-name">{{ $user_firstname }} {{ $user_lastname }} </h5>
+                                        <h5 class="mb-0 text-white nav-user-name">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }} </h5>
+
                                     @else
                                         <h5 class="mb-0 text-white nav-user-name">Air Life</h5>
                                     @endif
                                 </div>
                                 @if (auth()->check())
+                                    <a class="dropdown-item" href="profil"><i class="fas fa-user mr-2"></i>Profil </a>
                                     <a class="dropdown-item" href="deconnexion"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
                                 @else
                                     <a class="dropdown-item" href="connexion"><i class="fas fa-power-off mr-2"></i>Connexion</a>
@@ -183,10 +210,10 @@
                                     </ul>
                                 </div>
                             </li>
-                          
+
                             <li class="nav-divider">
                                 Administration
-                            </li>                           
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-info-circle"></i>Informations générales</a>
                                 <div id="submenu-2" class="collapse submenu" style="">
@@ -208,15 +235,15 @@
         <!-- ============================================================== -->
         <!-- end left sidebar -->
         <!-- ============================================================== -->
-        
+
     </div>
 
 <div>
-    
+
     <div class="dashboard-wrapper">
 
         @yield('content')
-        
+
          <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -230,7 +257,7 @@
                             <div class="text-md-right footer-links d-none d-sm-block">
                                 <a href="about">À propos</a>
                                 <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact</a>
+                                <a href="contact">Contact</a>
                             </div>
                         </div>
                     </div>
@@ -239,12 +266,12 @@
             <!-- ============================================================== -->
             <!-- end footer -->
             <!-- ============================================================== -->
-        
+
     </div>
-  
+
 </div>
 </body>
-    
+
     <script src="css\vendor\jquery\jquery-3.3.1.min.js"></script>
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <!-- main js -->
@@ -264,7 +291,7 @@
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <script src="css\vendor\select2\js\select2.min.js"></script>
     <script src="css\vendor\summernote\js\summernote-bs4.js"></script>
-    
+
 </html>
 
 

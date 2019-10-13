@@ -17,7 +17,7 @@
                     var libelle = datastypes[item]['LIBELLE']
                     for (let i = 0; i < libelle.length; i++) {
                         if(libelle[i] == " ") {
-                            libelle[i]="";  
+                            libelle[i]="";
                         }
 
                     }
@@ -53,10 +53,10 @@
                     });
                 }
             }
-           
-        });  
+
+        });
     </script>
-    
+
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
@@ -89,14 +89,14 @@
                     <!-- ============================================================== -->
                     <div class="ecommerce-widget">
                         <div class="row">
-                            <button>Notifiez moi!</button>
+
                         @foreach ($datastype as $key => $datatype)
                             @if (count($datastype) % 4 == 0)
                             <div class='col-xl-3 col-md-6'>
                             @elseif (count($datastype) % 3 == 0)
                             <div class='col-xl-4 col-md-4'>
                             @elseif (count($datastype) % 2 == 0)
-                            <div class='col-md-6'>  
+                            <div class='col-md-6'>
                             @else
                             <div class='col-12'>
                             @endif
@@ -146,7 +146,7 @@
                                 }
                                 $div.="<div class='card'>";
                                 $div.="<div class='card-body'>";
-                                
+
                                 foreach ($datastype as $key => $datatype) {
                                     $allSensors ="";
                                     //die(print_r($datastype));
@@ -178,7 +178,7 @@
                                     echo "</div>";
                                     echo "</div>";
                                 }
-                                
+
                             ?>
                             <!--div class="col-xl-3 col-md-6">
                                 <div class="card">
@@ -278,7 +278,7 @@
                         </div>
                         <div class="row">
                             <!-- ============================================================== -->
-                      
+
                             <!-- ============================================================== -->
 
                                           <!-- Données récentes  -->
@@ -306,11 +306,11 @@
                                                         </td>
                                                             @endforeach
                                                     </tr>
-                                                        @endforeach                                 
+                                                        @endforeach
                                                     @endisset
                                                     <tr>
 =======
-                                                        <?php 
+                                                        <?php
                                                         if(isset($datas[0])){
                                                         foreach ($datas[0] as $key => $value) {
                                 echo " <th class='border-0'>".$key."</th>";
@@ -348,6 +348,6 @@
             </div>
         <!-- ============================================================== -->
         <!-- end wrapper  -->
-        <!-- ============================================================== -->    
-    
+        <!-- ============================================================== -->
+
 @stop

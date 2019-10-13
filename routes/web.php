@@ -35,6 +35,8 @@ Route::post('/connexion', 'ConnexionController@traitement');
 
 Route::get('/deconnexion', 'ConnexionController@deconnexion');
 
+
+
 Route::get('/confirm/{id}/{token}', 'InscriptionController@confirm');
 
 Route::get('/ajout_capteur', 'AjoutCapteurController@formAjoutCapteur');
@@ -43,4 +45,18 @@ Route::get('/ajout_capteur', 'AjoutCapteurController@formAjoutCapteur');
 Route::post('/enregistrerCapteur', 'AjoutCapteurController@enregistrerCapteur');
 
 
+//Get
+Route::get('/profil', 'InscriptionController@getProfil');
+
+//Post
+Route::post('/postmodificationProfil', 'InscriptionController@postModifierProfil');
+Route::post('/modifierProfil', 'InscriptionController@modifierProfil');
+
+
+//Getcontact
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::post('/contactMail','EmailController@sendMailContact');
 
