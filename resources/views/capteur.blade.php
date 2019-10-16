@@ -3,7 +3,24 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         $( document ).ready(function() {
+            $( ".delete_icone" ).click(function() {
+                event.preventDefault();
+                idCapteur = $(this).attr("id")
+                $.ajax({
+                    url:"{!! URL::to('delete_capteur') !!}",
+                    type: 'POST',
+                    data: {idCapteur: idCapteur, _token: '{{csrf_token()}}' },
 
+                    success: function (data, statut) {
+                        if (data == 1) {
+                            $("#"+idCapteur).parent().parent().remove()
+                        } else {
+                            alert("Erreur lors de la suppression")
+                        }
+                    }
+
+                })
+            });
         });  
     </script>
     
@@ -44,20 +61,24 @@
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table id="donnee_recente" class="table">
-                                                @isset($capteurs[0])
+                                                @isset($capteurs)
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                        <th class='border-0' colspan="2"> Capteurs </th>
+                                                        <th class='border-0'> Capteurs </th>
+                                                        <th class='border-0' colspan='2'> Gaz </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="allData">
-                                                    @foreach ($capteurs as $capteur)
+                                                    @foreach ($capteurs as $capteur => $value)
                                                     <tr>
                                                         <td>
-                                                        {{ $capteur->CAPTEUR }}
+                                                        {{ $capteur }}
                                                         </td>
                                                         <td>
-                                                        <i class="fas fa-2x fa-minus-circle"></i>
+                                                        {{ $value->GAZ }}
+                                                        </td>
+                                                        <td>
+                                                        <a href="" class="fas fa-2x fa-minus-circle delete_icone" id='{{ $value->IDSENSOR }}'></a>
                                                         </td>
                                                     </tr>  
                                                     @endforeach                          

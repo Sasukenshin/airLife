@@ -5,7 +5,7 @@
     <script>
         $( document ).ready(function() {
             pageNumber=0;
-            nbrDataTab=5;
+            nbrDataTab=2;
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             if(typeof datas !== 'undefined' && datas.length > 0) {
@@ -166,7 +166,7 @@
                             @if (count($datastype) % 4 == 0)
                             <div class='col-xl-3 col-md-6'>
                             @elseif (count($datastype) % 3 == 0)
-                            <div class='col-xl-4 col-md-4'>
+                            <div class='col-xl-4'>
                             @elseif (count($datastype) % 2 == 0)
                             <div class='col-md-6'>  
                             @else
@@ -256,7 +256,7 @@
                     @endforeach
                     @php
                         $k=0;
-                        $nbrDataTab=5;
+                        $nbrDataTab=2;
                     @endphp
                         </div>
                         <div class="row">
@@ -308,7 +308,7 @@
                                                     
                                                     <tr>
                                                         <td></td>
-                                                        @if($nbrDataTab>$k)
+                                                        @if($nbrDataTab<$k)
                                                         <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
                                                         @else
                                                         <td></td>

@@ -21,7 +21,23 @@ class CapteurController extends Controller
         $user_lastname = Auth::user()->lastname;
         $user_email= Auth::user()->email;
         $model = new CapteurModel();
-        $capteurs = $model->getAllCapteurUser();
+        $capteurs_brut = $model->getAllCapteurUser();
+        foreach ($capteurs_brut as  $valeur) {
+            if (isset($capteurs[$valeur->CAPTEUR])) {
+                $capteurs[$valeur->CAPTEUR]->GAZ .= ", ";
+                $capteurs[$valeur->CAPTEUR]->GAZ .= $valeur->GAZ;
+
+            } else {
+                $capteurs[$valeur->CAPTEUR] = (object) array('GAZ' => $valeur->GAZ, 'IDSENSOR' => $valeur->IDSENSOR);
+            }
+        }
         return view('capteur' , ['user_firstname' => $user_firstname, 'user_lastname' => $user_lastname, 'capteurs' => $capteurs]);
+    }
+    
+    public function delete_capteur(Request $request)
+    {
+        $model = new CapteurModel();
+        $retour = $model->deleteCapteurUser($request['idCapteur']);
+        return response()->json($retour);
     }
 }
