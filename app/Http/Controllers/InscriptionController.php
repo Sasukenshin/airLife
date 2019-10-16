@@ -102,6 +102,7 @@ class InscriptionController extends Controller
         $firstname = Request::input('firstname');
         $lastname = Request::input('lastname');
         $unClient->modificationProfil(Auth::user()->iduser, $adresse, $password, $mail, $firstname,$lastname);
+
         return redirect('/profil');
     }
 }

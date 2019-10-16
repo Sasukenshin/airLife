@@ -92,7 +92,7 @@
 
                         @foreach ($datastype as $key => $datatype)
                             @if (count($datastype) % 4 == 0)
-                            <div class='col-xl-3 col-md-6'>
+                            <div class='col-xl-3 col-md-6 '>
                             @elseif (count($datastype) % 3 == 0)
                             <div class='col-xl-4 col-md-4'>
                             @elseif (count($datastype) % 2 == 0)
