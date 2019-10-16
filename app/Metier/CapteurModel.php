@@ -19,13 +19,43 @@ class CapteurModel extends Model {
         ];
 
 
-    public function getAllCapteurUser() {
-       $datas = DB::table('sensor')
-            ->select('sensor.NAMESENSOR as CAPTEUR')
+    public function getAllCapteurUser()
+    {
+        $datas = DB::table('sensor')
+            ->select('sensor.IDSENSOR', 'sensor.NAMESENSOR as CAPTEUR', 'datatype.LIBELLE as GAZ')
             ->leftJoin('users', 'sensor.IDUSER', '=', 'users.iduser')
-            ->where('users.IDUSER', '=', Auth::user()->iduser) 
+            ->leftJoin('to_capture', 'sensor.IDSENSOR', '=', 'to_capture.IDSENSOR')
+            ->leftJoin('datatype', 'datatype.IDDATATYPE', '=', 'to_capture.IDDATATYPE')
+            ->where('users.IDUSER', '=', Auth::user()->iduser)  
+            ->orderBy('sensor.NAMESENSOR')
             ->get();
         return $datas;
+    }
+    
+    public function deleteCapteurUser($id) 
+    {
+        DB::beginTransaction();
+ 
+        try{
+            // Step 1 : Create User
+            DB::table('sensor')
+                ->where('IDSENSOR', '=', $id)  
+                ->delete();
+            DB::table('to_capture')
+                ->where('IDSENSOR', '=', $id)  
+                ->delete();
+            DB::table('datas')
+                ->where('IDSENSOR', '=', $id)  
+                ->delete();
+ 
+            DB::commit();
+ 
+            return 1;
+ 
+        }catch(\Exception $e){
+            DB::rollback();
+            return 0;
+        }
     }
 
 }
