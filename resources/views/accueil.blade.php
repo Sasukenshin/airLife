@@ -237,13 +237,13 @@
                                                 @endphp
                                             @endif
                                         @endforeach
-                                    @if($evolution >= 0)
+                                        @if($evolution >= 0)
                                     <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
                                     <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}%</span>
-                                    @else
+                                        @else
                                     <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
                                     <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}%</span>
-                                    @endif
+                                        @endif
                                     </div>
                                     @endisset
                             </div>
@@ -275,7 +275,6 @@
                                                 @isset($datas[0])
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                    @isset($datas[0])
                                                         @php
                                                             $k=0;
                                                         @endphp
