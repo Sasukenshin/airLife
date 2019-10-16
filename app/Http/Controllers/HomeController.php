@@ -73,7 +73,7 @@ class HomeController extends Controller
             }
             elseif ($interval->m<1)
             {
-                $uneNotification->datenotif = "Il y a " . $interval->j . " jour(s)";
+                $uneNotification->datenotif = "Il y a " . $interval->d . " jour(s)";
             }
 
         }
