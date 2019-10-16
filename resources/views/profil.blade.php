@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-xs-12 col-sm-12 col-md-12  toppad" >
+            <div class="col-xs-12 col-sm-12 col-md-12" >
 
                 {!! Form::open(['url' => '/postmodificationProfil']) !!}
                 <div class="container">

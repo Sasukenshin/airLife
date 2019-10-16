@@ -29,7 +29,41 @@
 {{--    notifications --}}
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
+
+
+
+       function getNotifications()
+       {
+           $.ajax({
+               url:"{!! URL::to('getNotificationsUser') !!}",
+               type: 'POST',
+               data: {_token: '{{csrf_token()}}'},
+
+               success: function (data, statut) {
+                   var i= 0;
+                   $.each(data, function () {
+
+
+                       $( ".notification-list" ).append( "<a href=\"#\" class=\"list-group-item list-group-item-action active\">" +
+                           "                                                <div class=\"notification-info\">" +
+                           "                                                  <div class=\"notification-list-user-img\"><img src=\"img/user.png\"  class=\"user-avatar-md rounded-circle\"></div>" +
+                           "                                                  <div class=\"notification-list-user-block\">"+data[i].textnotification+
+                           "                                                        <div class=\"notification-date\">"+data[i].datenotif +"</div>" +
+                           "                                                   </div>" +
+                           "                                               </div>" +
+                           "                                            </a>" );
+                       i++;
+                   });
+
+
+               }
+
+           })
+       }
+
+
         var OneSignal = window.OneSignal || [];
+
         OneSignal.push(function() {
             OneSignal.init({
                 appId: "b0b15de8-0982-4a93-afc8-ad4c7c0e109f",
@@ -38,12 +72,30 @@
                 },
                 allowLocalhostAsSecureOrigin: true,
             });
-            OneSignal.sendTag("user_id","4444", function(tagsSent)
-            {
+            OneSignal.sendTag("user_id", "4444", function (tagsSent) {
                 // Callback called when tags have finished sending
                 console.log("Tags have finished sending!");
             });
+            OneSignal.getUserId(function (id) {
+
+
+                $.ajax({
+                    url:"{!! URL::to('addIdOneSignal') !!}",
+                    type: 'POST',
+                    data: { id_onesignal : id, _token: '{{csrf_token()}}' },
+
+                    success: function (data, statut) {
+                        alert(data);
+                    }
+
+                })
+
+
+
+            });
         });
+
+
     </script>
 
 
@@ -63,7 +115,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="/ProjetSCU/public/"><img src="img\logo.png" height="50" width="50" alt="">  Air Life</a>
+                <a class="navbar-brand" href="{{route('accueil')}}"><img src="img\logo.png" height="50" width="50" alt="">  Air Life</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -75,7 +127,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown notification">
-                            <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
+                            <a class="nav-link nav-icons" href="#" onclick="getNotifications();" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                             <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                                 <li>
                                     <div class="notification-title"> Notification</div>
@@ -257,7 +309,7 @@
                             <div class="text-md-right footer-links d-none d-sm-block">
                                 <a href="about">À propos</a>
                                 <a href="javascript: void(0);">Support</a>
-                                <a href="contact">Contact</a>
+                                <a href="{{route('contact')}}">Contact</a>
                             </div>
                         </div>
                     </div>

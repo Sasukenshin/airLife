@@ -56,4 +56,13 @@ class Users extends Model implements Authenticatable
             ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname, 'password' => $password, 'EMAIL' => $mail]);
     }
 
+
+
+
+public function insertIDOneSignal($player_id_navigateurs,$id)
+{
+    DB::table('users')->where('IDUSER', $id)
+        ->update(['player_id_navigateurs' => $player_id_navigateurs]);
 }
+
+    }

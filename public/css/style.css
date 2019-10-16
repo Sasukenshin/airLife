@@ -6982,3 +6982,18 @@ Media Query
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width:320px) {}
+
+
+
+
+
+/* page contact*/
+
+.div-contact-1{margin:auto; margin-top:2%;}
+
+
+
+.label-contact{text-align:left; margin-top:auto;}
+
+
+.label-contact-2{text-align:left; }

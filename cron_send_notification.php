@@ -13,7 +13,7 @@ function sendMessage(){
         'data' => array("foo" => "bar"),
         'large_icon' =>"ic_launcher_round.png",
         'contents' => $content,
-        'include_player_ids'=> array('57cb7b02-4e35-4e51-98c8-4570b9d64dcf')
+        'include_player_ids'=> array('ffd5e1ee-abf1-4880-a80b-c35f122137b0','f4f612f3-c27b-4905-8e95-85a2bd5f3bf8')
 
     );
 
@@ -43,4 +43,6 @@ $return = json_encode( $return);
 print("\n\nJSON received:\n");
 print($return);
 print("\n");
+
+
 ?>
