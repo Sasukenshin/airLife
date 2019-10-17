@@ -9,11 +9,7 @@
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             if(typeof datas !== 'undefined' && datas.length > 0) {
-<<<<<<< HEAD
-                for (var item in datastypes) {
-=======
                 for (var item in datastypes) {  
->>>>>>> 0d72fcc1c207de55cba0045248bd606cbf149936
                     var libelle = datastypes[item]['LIBELLE']
                     for (let i = 0; i < libelle.length; i++) {
                         if(libelle[i] == " ") {
@@ -241,15 +237,6 @@
                                                 @endphp
                                             @endif
                                         @endforeach
-<<<<<<< HEAD
-                                        @if($evolution >= 0)
-                                    <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}%</span>
-                                        @else
-                                    <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}%</span>
-                                        @endif
-=======
                                     @if($evolution >= 0)
                                     <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
                                     <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}%</span>
@@ -257,7 +244,6 @@
                                     <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
                                     <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}%</span>
                                     @endif
->>>>>>> 0d72fcc1c207de55cba0045248bd606cbf149936
                                     </div>
                                     @endisset
                             </div>
@@ -289,12 +275,6 @@
                                                 @isset($datas[0])
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-<<<<<<< HEAD
-                                                        @php
-                                                            $k=0;
-                                                        @endphp
-=======
->>>>>>> 0d72fcc1c207de55cba0045248bd606cbf149936
                                                         @foreach ($datas[0] as $key => $value)
                                                             @if($k>0)
                                                         <th class='border-0'> {{ $key }}</th>
