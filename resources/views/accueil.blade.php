@@ -2,6 +2,9 @@
     @section('content')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+
     <script>
         $( document ).ready(function() {
             pageNumber=0;
@@ -13,7 +16,7 @@
                     var libelle = datastypes[item]['LIBELLE']
                     for (let i = 0; i < libelle.length; i++) {
                         if(libelle[i] == " ") {
-                            libelle[i]="";  
+                            libelle[i]="";
                         }
 
                     }
@@ -132,7 +135,7 @@
             });
         });  
     </script>
-    
+
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
@@ -162,13 +165,14 @@
                     <!-- ============================================================== -->
                     <div class="ecommerce-widget">
                         <div class="row">
+
                         @foreach ($datastype as $key => $datatype)
                             @if (count($datastype) % 4 == 0)
-                            <div class='col-xl-3 col-md-6'>
+                            <div class='col-xl-3 col-md-6 '>
                             @elseif (count($datastype) % 3 == 0)
                             <div class='col-xl-4'>
                             @elseif (count($datastype) % 2 == 0)
-                            <div class='col-md-6'>  
+                            <div class='col-md-6'>
                             @else
                             <div class='col-12'>
                             @endif
@@ -226,14 +230,16 @@
                                                     $j=$j+1;
                                                 @endphp
                                             @else
-                                                @php 
-                                                    if ($i>1) {
+                                                @php
+                                                    if($i>1){
                                                         $moy= $moy/($i-1);
                                                     } else {
-                                                        $moy = $value->VALEUR;
+                                                        $moy=$value->VALEUR;
                                                     }
+
                                                     $evolution = (100* $value->VALEUR/$moy)-100;
                                                     $evolution = round($evolution,2);
+
                                                 @endphp
                                             @endif
                                         @endforeach
@@ -261,7 +267,7 @@
                         </div>
                         <div class="row">
                             <!-- ============================================================== -->
-                      
+
                             <!-- ============================================================== -->
 
                                           <!-- Données récentes  -->
@@ -332,6 +338,6 @@
             </div>
         <!-- ============================================================== -->
         <!-- end wrapper  -->
-        <!-- ============================================================== -->    
-    
+        <!-- ============================================================== -->
+
 @stop

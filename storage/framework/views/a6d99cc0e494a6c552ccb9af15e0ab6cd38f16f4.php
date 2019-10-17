@@ -47,6 +47,44 @@
                         options: {}
                     });
                 }
+
+                    }
+                    console.log(libelle.replace(/ /g,""));
+                    var label_graph = [];
+                    var data_graph = [];
+
+                        for  (var data in datas) {
+                            if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
+                                label_graph.push(datas[data]['DATETIMEDATA']);
+                                data_graph.push(datas[data]['DATASENSOR']);
+                            }
+                        }
+
+                    var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+                    // Configuration options go here
+                    options: {}
+                });
+>>>>>>> debug de dev apres assemblage
+=======
+                        // The data for our dataset
+                        data: {
+                            labels: label_graph,
+                            datasets: [{
+                                label: datastypes[item]['LIBELLE'],
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: data_graph
+                            }]
+                        },
+
+                        // Configuration options go here
+                        options: {}
+                    });
+                }
+>>>>>>> Ajout capteur
             }
            
         });  
@@ -133,66 +171,7 @@
                                 }
                                 
                             ?>
-                            <!--div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5>Dioxyde de carbonne(CO2)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Danger</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                            <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Monoxyde de carbonne(CO)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Normal</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-1.15%</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue2"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Oxyde d'azote (NOX)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Normal</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-3.21%</span>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
-                                            <span>N/A</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue3"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Radon (Rn)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Normal</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-3.00%</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue4"></div>
-                                </div>
-                            </div-->
-                        </div>
+                         </div>
                         <div class="row">
                             <!-- ============================================================== -->
                       
@@ -208,6 +187,9 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
+                                                        <?php 
+                                                        if(isset($datas[0])){
+                                                        foreach ($datas[0] as $key => $value) {
                                                         <?php 
                                                         if(isset($datas[0])){
                                                         foreach ($datas[0] as $key => $value) {
@@ -227,6 +209,8 @@
                                                             echo "</tr>";
                                                         }
                                                         }?>
+                                                    ?>
+                                                        }?>
                                                     <tr>
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
@@ -238,7 +222,6 @@
                             </div>
                             <!-- ============================================================== -->
                             <!-- end recent orders  -->
-
                         </div>
                     </div>
                 </div>

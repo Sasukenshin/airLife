@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a
+class ComposerStaticInit82e93ef8ba0f853aef7d78be9896968d
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -408,9 +408,11 @@ class ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a
         'App\\Http\\Controllers\\CapteurController' => __DIR__ . '/../..' . '/app/Http/Controllers/CapteurController.php',
         'App\\Http\\Controllers\\ConnexionController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConnexionController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\EmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmailController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\InformationController' => __DIR__ . '/../..' . '/app/Http/Controllers/InformationController.php',
         'App\\Http\\Controllers\\InscriptionController' => __DIR__ . '/../..' . '/app/Http/Controllers/InscriptionController.php',
+        'App\\Http\\Controllers\\OneSignalController' => __DIR__ . '/../..' . '/app/Http/Controllers/OneSignalController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -430,6 +432,7 @@ class ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a
         'App\\metier\\HomeModel' => __DIR__ . '/../..' . '/app/Metier/HomeModel.php',
         'App\\metier\\Save_Sensor' => __DIR__ . '/../..' . '/app/Metier/Save_Sensor.php',
         'App\\metier\\Users' => __DIR__ . '/../..' . '/app/Metier/Users.php',
+        'App\\metier\\notification' => __DIR__ . '/../..' . '/app/Metier/notification.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
         'BeyondCode\\DumpServer\\Dumper' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/Dumper.php',
@@ -4007,11 +4010,11 @@ class ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit21a6f788f9d706f2e443c7d3cda8757a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit82e93ef8ba0f853aef7d78be9896968d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit82e93ef8ba0f853aef7d78be9896968d::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit82e93ef8ba0f853aef7d78be9896968d::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit82e93ef8ba0f853aef7d78be9896968d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit82e93ef8ba0f853aef7d78be9896968d::$classMap;
 
         }, null, ClassLoader::class);
     }
