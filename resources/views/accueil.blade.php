@@ -291,7 +291,6 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-<<<<<<< HEAD
                                                     @isset($datas[0])
                                                         @foreach ($datas[0] as $key => $value)
                                                         <th class='border-0'> {{ $key }}</th>
@@ -309,28 +308,6 @@
                                                         @endforeach
                                                     @endisset
                                                     <tr>
-=======
-                                                        <?php
-                                                        if(isset($datas[0])){
-                                                        foreach ($datas[0] as $key => $value) {
-                                echo " <th class='border-0'>".$key."</th>";
-                            }
-                                                        ?>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($datas as $key => $data) {
-                                                            echo "<tr>";
-                                                            foreach ($data as $key => $value) {
-                                                                echo "<td>";
-                                                                echo $value;
-                                                                echo "</td>";
-                                                            }
-                                                            echo "</tr>";
-                                                        }
-                                                        }?>
-                                                    <tr>
->>>>>>> Ajout capteur
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
                                                 </tbody>

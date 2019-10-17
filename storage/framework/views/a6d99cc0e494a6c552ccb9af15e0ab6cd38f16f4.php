@@ -7,10 +7,6 @@
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             console.log(datas);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Ajout capteur
             if(typeof datas !== 'undefined' && datas.length > 0) {
                 for (var item in datastypes) {
                     var libelle = datastypes[item]['LIBELLE']
@@ -18,7 +14,6 @@
                         if(libelle[i] == " ") {
                             libelle[i]="";  
                         }
-<<<<<<< HEAD
 
                     }
                     console.log(libelle.replace(/ /g,""));
@@ -52,15 +47,6 @@
                         options: {}
                     });
                 }
-=======
-            for (var item in datastypes) {
-                var libelle = datastypes[item]['LIBELLE']
-                for (let i = 0; i < libelle.length; i++) {
-                    if(libelle[i] == " ") {
-                        libelle[i]="";
-                    }
-=======
->>>>>>> Ajout capteur
 
                     }
                     console.log(libelle.replace(/ /g,""));
@@ -78,8 +64,6 @@
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
                         type: 'line',
-
-<<<<<<< HEAD
                     // Configuration options go here
                     options: {}
                 });
@@ -140,33 +124,16 @@
                         <div class="row">
                             <?php
                                 //die();
-<<<<<<< HEAD
-<<<<<<< HEAD
                                 $div="";
-=======
->>>>>>> debug de dev apres assemblage
-=======
-                                $div="";
->>>>>>> Ajout capteur
                                 if (count($datastype) % 4 == 0) {
                                     $div= "<div class='col-xl-3 col-md-6'>";
                                 } elseif (count($datastype) % 3 == 0) {
                                     $div= "<div class='col-xl-4 col-md-4'>";
                                 } elseif (count($datastype) % 2 == 0) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Ajout capteur
                                     $div= "<div class='col-md-6'>";
                                 } else
                                 {
                                     $div= "<div class='col-12'>";
-<<<<<<< HEAD
-=======
-                                    $div= "<div class= col-md-6'>";
->>>>>>> debug de dev apres assemblage
-=======
->>>>>>> Ajout capteur
                                 }
                                 $div.="<div class='card'>";
                                 $div.="<div class='card-body'>";
@@ -204,66 +171,7 @@
                                 }
                                 
                             ?>
-                            <!--div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5>Dioxyde de carbonne(CO2)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Danger</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                            <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Monoxyde de carbonne(CO)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Normal</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-1.15%</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue2"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Oxyde d'azote (NOX)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Normal</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-3.21%</span>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
-                                            <span>N/A</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue3"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="text-muted">Radon (Rn)</h5>
-                                        <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">Normal</h1>
-                                        </div>
-                                        <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-3.00%</span>
-                                        </div>
-                                    </div>
-                                    <div id="sparkline-revenue4"></div>
-                                </div>
-                            </div-->
-                        </div>
+                         </div>
                         <div class="row">
                             <!-- ============================================================== -->
                       
@@ -279,19 +187,12 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         <?php 
                                                         if(isset($datas[0])){
                                                         foreach ($datas[0] as $key => $value) {
-=======
-                                                        <?php foreach ($datas[0] as $key => $value) {
->>>>>>> debug de dev apres assemblage
-=======
                                                         <?php 
                                                         if(isset($datas[0])){
                                                         foreach ($datas[0] as $key => $value) {
->>>>>>> Ajout capteur
                                 echo " <th class='border-0'>".$key."</th>";
                             }
                                                         ?>
@@ -307,15 +208,9 @@
                                                             }
                                                             echo "</tr>";
                                                         }
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         }?>
-=======
                                                     ?>
->>>>>>> debug de dev apres assemblage
-=======
                                                         }?>
->>>>>>> Ajout capteur
                                                     <tr>
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
@@ -327,21 +222,10 @@
                             </div>
                             <!-- ============================================================== -->
                             <!-- end recent orders  -->
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Ajout capteur
                         </div>
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
-        </div>
->>>>>>> debug de dev apres assemblage
-=======
->>>>>>> Ajout capteur
         <!-- ============================================================== -->
         <!-- end wrapper  -->
         <!-- ============================================================== -->    
