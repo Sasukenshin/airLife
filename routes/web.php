@@ -55,7 +55,6 @@ Route::get('/profil', 'InscriptionController@getProfil');
 Route::post('/postmodificationProfil', 'InscriptionController@postModifierProfil');
 Route::post('/modifierProfil', 'InscriptionController@modifierProfil');
 
-
 //Getcontact
 Route::get('/contact', function () {
     return view('contact');
@@ -67,7 +66,8 @@ Route::post('/contactMail','EmailController@sendMailContact');
 Route::post('/addIdOneSignal','OneSignalController@addIdOneSignal');
 
 //get notification
-Route::post('/getNotificationsUser', 'HomeController@getNotificationsUser');
+Route::post('/getNotificationsUser', 'NotificationController@getNotificationsUser');
 
+Route::get('/getNotifications', 'NotificationController@getNotificationsUserTotal')->name("notifications");
 
 

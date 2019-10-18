@@ -26,13 +26,13 @@
                             </div>
                             <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
                                 <div class="container" style="border-bottom:1px solid black">
-                                    <h2 class="panel-title">{{$unC->FIRSTNAME}} {{$unC->LASTNAME}}</h2>
+                                    <h1 class="panel-title">{{$unC->FIRSTNAME}} {{$unC->LASTNAME}}</h1>
                                 </div>
                                 <hr>
                                 <ul class="container details">
-                                    <li><p><span class="fas fa-map-marker" style="width:40px;"></span>ADRESSE</p></li>
-                                    <li><p><span class="fas fa-phone" style="width:40px;"></span>NUMEROTEL</p></li>
-                                    <li><p><span class="fas fa-at" style="width:40px;"></span>{{$unC->EMAIL}}</p></li>
+                                    <li><p><span class="fas fa-map-marker" style="width:40%;"> Adresse : </span>{{$unC->ADDRESS}}</p></li>
+                                    <li><p><span class="fas fa-phone" style="width:40%;"> Numero de téléphone : </span>{{$unC->NUM_TEL}}</p></li>
+                                    <li><p><span class="fas fa-at" style="width:40%;"> Email : </span>{{$unC->EMAIL}}</p></li>
 
                                 </ul>
 
@@ -45,4 +45,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
 @stop

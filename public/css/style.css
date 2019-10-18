@@ -1933,7 +1933,10 @@ Sidebar Page Navigations
 /*-----------------------
 Container / Wrapper
 -------------------------*/
-
+.connected-right
+{
+    margin-left:20%;
+}
 .dashboard-main-wrapper {
     min-height: 100%;
     padding-top: 60px;
@@ -6882,6 +6885,12 @@ Media Query
 /* Extra Small Devices, Phones */
 
 @media only screen and (max-width:480px) {
+
+    .connected-right
+    {
+        margin-left:20%;
+    }
+
     .dashboard-content {
     padding: 20px 20px 60px 20px;
 }

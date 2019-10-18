@@ -26,10 +26,16 @@ class notification extends Model implements Authenticatable
         $notifications = DB::table('notification')
             ->Select('textnotification', 'datenotif')
             ->Where('userid', '=', $id)
-            ->get();
+            ->take(10)->orderBy('datenotif', 'DESC')->get();
         return $notifications;
     }
 
-
+    public function getToutesLesNotifications($id) {
+        $notifications = DB::table('notification')
+            ->Select('textnotification', 'datenotif')
+            ->Where('userid', '=', $id)
+            ->orderBy('datenotif', 'DESC')->get();
+        return $notifications;
+    }
 
     }

@@ -34,8 +34,8 @@ class EmailController extends Controller {
             $data = ['email' => $user_mail, 'nom' => $nom, 'prenom' => $prenom, 'tel' => $tel, 'subject' => $title, 'content' => $content, 'date' => $format]; // ici ce sont les données qui sont transmis dans le view utilisé lors de l'envoi du mail
             Mail::send('mailContact', $data, function($message) use($data) { //fonction send qui va envoyer la view " mailContact "
                 $subject = $data['subject'];
-                $message->from('jeremycosta2102@gmail.com');  //Adresse email de l'emetteur
-
+                $message->from('noreply.airlife@gmail.com');  //Adresse email de l'emetteur
+                $message->to('jeremycosta21@gmail.com');
             });
 //        }
         return view('contact', compact('erreur'));
