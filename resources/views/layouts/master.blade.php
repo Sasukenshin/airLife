@@ -41,6 +41,7 @@
 
                success: function (data, statut) {
                    var i= 0;
+                   $( ".notification-list" ).empty();
                    $.each(data, function () {
 
 
@@ -126,53 +127,20 @@
                                 <input class="form-control" type="text" placeholder="Rechercher..">
                             </div>
                         </li>
+                        @if (auth()->check())
                         <li class="nav-item dropdown notification">
                             <a class="nav-link nav-icons" href="#" onclick="getNotifications();" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                             <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                                 <li>
-                                    <div class="notification-title"> Notification</div>
-                                    <div class="notification-list">
-                                        <div class="list-group">
-                                            <a href="#" class="list-group-item list-group-item-action active">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 1</span>a détecté un nouveau gaz.
-                                                        <div class="notification-date">Il y a 2 min</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 2</span>est arrêté.
-                                                        <div class="notification-date">Il y a 2 jours</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 1</span>a détecté un danger.
-                                                        <div class="notification-date">Il y a 15 min</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 2</span>a redémarré.
-                                                        <div class="notification-date">Il y a 12 min</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <div class="notification-title"> Notifications</div>
+                                    <div class="notification-list"></div>
                                 </li>
                                 <li>
-                                    <div class="list-footer"> <a href="#">Voir toutes les notifications</a></div>
+                                    <div class="list-footer"> <a href="{{route('notifications')}}">Voir toutes les notifications</a></div>
                                 </li>
                             </ul>
                         </li>
+                        @endif
                         <li class="nav-item dropdown connection">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
                             <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
@@ -294,7 +262,7 @@
 
 <div>
     @if (auth()->check())
-    <div class="dashboard-wrapper" style="margin-left:20%;">
+    <div class="dashboard-wrapper connected-right">
         @else
             <div class="dashboard-wrapper">
     @endif

@@ -5,7 +5,7 @@
     <!-- ============================================================== -->
     <!-- signup form  -->
     <!-- ============================================================== -->
-    <form class="splash-container" method="post" action="inscription">
+    <form class="splash-container" method="post" action="{!! URL::to('inscription') !!}">
         {{ csrf_field() }}
        <div id="connexion-contain">
         <div class="card">
@@ -36,6 +36,18 @@
                     <input class="form-control form-control-lg" name="email" type='email' placeholder="E-mail" value="{{ old('email') }}" required="">
                     @if($errors->has('email'))
                         <p class="text-danger">{{ $errors->first('email') }}</p>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" name="num_tel" type='tel' placeholder="Numero de téléphone" value="{{ old('num_tel') }}" required="">
+                    @if($errors->has('num_tel'))
+                        <p class="text-danger">{{ $errors->first('numTel') }}</p>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" name="address" type='text' placeholder="Adresse" value="{{ old('address') }}" required="">
+                    @if($errors->has('address'))
+                        <p class="text-danger">{{ $errors->first('address') }}</p>
                     @endif
                 </div>
                 <div class="form-group">
