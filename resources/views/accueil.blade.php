@@ -2,28 +2,31 @@
     @section('content')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+
     <script>
         $( document ).ready(function() {
+            pageNumber=0;
+            nbrDataTab=2;
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
-            console.log(datas);
             if(typeof datas !== 'undefined' && datas.length > 0) {
-                for (var item in datastypes) {
+                for (var item in datastypes) {  
                     var libelle = datastypes[item]['LIBELLE']
                     for (let i = 0; i < libelle.length; i++) {
                         if(libelle[i] == " ") {
-                            libelle[i]="";  
+                            libelle[i]="";
                         }
 
                     }
-                    console.log(libelle.replace(/ /g,""));
                     var label_graph = [];
                     var data_graph = [];
 
                         for  (var data in datas) {
                             if(datas[data]['IDDATATYPE'] ==  datastypes[item]['IDDATATYPE']) {
-                                label_graph.push(datas[data]['DATETIMEDATA']);
-                                data_graph.push(datas[data]['DATASENSOR']);
+                                label_graph.push(datas[data]['DATE']);
+                                data_graph.push(datas[data]['VALEUR']);
                             }
                         }
 
@@ -48,10 +51,91 @@
                     });
                 }
             }
-           
+            $( "#donnee_recente" ).on('click','#suivantPagination',function() {
+                if ((pageNumber+1)*nbrDataTab < datas.length) {
+                    $("#allData").empty();
+                    pageNumber = pageNumber+1;
+                    toAppend ="";
+                    for(i=0; i<nbrDataTab ; i++){
+                        j=0;
+                        toAppend = toAppend.concat("<tr>");
+                        for(var value in datas[nbrDataTab*pageNumber+i]) {
+                            if (nbrDataTab*pageNumber+i <= datas.length && j>0) {
+                                toAppend = toAppend.concat("<td>");
+                                toAppend = toAppend.concat(datas[nbrDataTab*pageNumber+i][value])
+                                toAppend = toAppend.concat("</td>");
+                            }
+                            j=j+1;
+                        }
+                        toAppend = toAppend.concat("</tr>");
+                    }
+                    if(datas.length-(pageNumber*nbrDataTab) <= nbrDataTab) {
+                        toAppend = toAppend.concat(`<tr>
+                                                <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
+                                                </tr>
+                                                `)
+                    } else {
+                        toAppend = toAppend.concat(`<tr>
+                                                <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
+                                                <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
+                                                <td></td>
+                                                <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
+                                                </tr>
+                                                `)
+                    }
+                   
+                    $( "#allData").append(toAppend);
+                }         
+            });
+            $( "#donnee_recente" ).on('click','#precedentPagination',function() {
+                if (pageNumber >  0) {
+                    $("#allData").empty();
+                    pageNumber = pageNumber-1;
+                    toAppend ="";
+                    for(i=0; i<nbrDataTab ; i++){
+                        j=0;
+                        toAppend = toAppend.concat("<tr>");
+                        for(var value in datas[nbrDataTab*pageNumber+i]) {
+                            if (nbrDataTab*pageNumber+i <= datas.length  && j>0) {
+                                toAppend = toAppend.concat("<td>");
+                                toAppend = toAppend.concat(datas[nbrDataTab*pageNumber+i][value])
+                                toAppend = toAppend.concat("</td>");
+                            }
+                            j=j+1;
+                        }
+                        toAppend = toAppend.concat("</tr>");
+                    }
+                    if(pageNumber ==0) {
+                        toAppend = toAppend.concat(`<tr>
+                                                    <td></td>
+                                                    <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
+                                                    <td></td>
+                                                    <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
+                                                    </tr>
+                                                    `)
+                    } else {
+                        toAppend = toAppend.concat(`<tr>
+                                                <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
+                                                <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
+                                                <td></td>
+                                                <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
+                                                </tr>
+                                                `)
+                    }
+                    $( "#allData").append(toAppend);
+
+                } else {
+
+                }
+                
+                
+            });
         });  
     </script>
-    
+
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
@@ -61,7 +145,7 @@
                     <!-- pageheader  -->
                     <!-- ============================================================== -->
                     <div class="row">
-                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
                                 <h2 class="pageheader-title">Tableau de bord général</h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
@@ -75,9 +159,6 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-                                <a href="ajout_capteur"><button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter un capteur</button></a>
-                            </div>
                     </div>
                     <!-- ============================================================== -->
                     <!-- end pageheader  -->
@@ -86,11 +167,11 @@
                         <div class="row">
                         @foreach ($datastype as $key => $datatype)
                             @if (count($datastype) % 4 == 0)
-                            <div class='col-xl-3 col-md-6'>
+                            <div class='col-xl-3 col-md-6 '>
                             @elseif (count($datastype) % 3 == 0)
-                            <div class='col-xl-4 col-md-4'>
+                            <div class='col-xl-4'>
                             @elseif (count($datastype) % 2 == 0)
-                            <div class='col-md-6'>  
+                            <div class='col-md-6'>
                             @else
                             <div class='col-12'>
                             @endif
@@ -144,26 +225,32 @@
                                         @foreach($temp as $key => $value)
                                             @if($j < $i-1)
                                                 @php
-                                                    $moy = $moy + $value->DATASENSOR;
+                                                    $moy = $moy + $value->VALEUR;
                                                     $j=$j+1;
                                                 @endphp
                                             @else
-                                                @php 
-                                                    $moy= $moy/($i-1);
-                                                    $evolution = (100* $value->DATASENSOR/$moy)-100;
+                                                @php
+                                                    if($i>1){
+                                                        $moy= $moy/($i-1);
+                                                    } else {
+                                                        $moy=$value->VALEUR;
+                                                    }
+
+                                                    $evolution = (100* $value->VALEUR/$moy)-100;
                                                     $evolution = round($evolution,2);
+
                                                 @endphp
                                             @endif
                                         @endforeach
-                                    @endisset
                                     @if($evolution >= 0)
                                     <div class='metric-label d-inline-block float-right text-success font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}</span>
+                                    <span><i class='fa fa-fw fa-arrow-up'></i></span><span>{{$evolution}}%</span>
                                     @else
                                     <div class='metric-label d-inline-block float-right text-danger font-weight-bold'>
-                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}</span>
+                                    <span><i class='fa fa-fw fa-arrow-down'></i></span><span>{{$evolution}}%</span>
                                     @endif
-                                </div>
+                                    </div>
+                                    @endisset
                             </div>
                             @php
                                 $canvasId = str_replace(" ","",$datatype->LIBELLE)
@@ -172,10 +259,14 @@
                         </div>
                     </div>
                     @endforeach
+                    @php
+                        $k=0;
+                        $nbrDataTab=2;
+                    @endphp
                         </div>
                         <div class="row">
                             <!-- ============================================================== -->
-                      
+
                             <!-- ============================================================== -->
 
                                           <!-- Données récentes  -->
@@ -185,29 +276,53 @@
                                     <h5 class="card-header">Données récentes </h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table">
+                                            <table id="donnee_recente" class="table">
+                                                @isset($datas[0])
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                    @isset($datas[0])
                                                         @foreach ($datas[0] as $key => $value)
+                                                            @if($k>0)
                                                         <th class='border-0'> {{ $key }}</th>
+                                                            @endif
+                                                            @php
+                                                                $k=$k+1;
+                                                            @endphp
                                                         @endforeach
                                                     </tr>
                                                 </thead>
-                                                        @foreach ($datas as $key2 => $data)
+                                                <tbody id="allData">
+                                                        @for ($i = 0; $i < $nbrDataTab; $i++)
                                                     <tr>
-                                                            @foreach ($data as $key3 => $value2)
+                                                            @php
+                                                                $k=0;
+                                                            @endphp
+                                                            @isset($datas[$i])
+                                                                @foreach ($datas[$i] as $key3 => $value2)
+                                                                    @if($k>0)
                                                         <td>
-                                                            {{ $value2 }}
+                                                                        {{ $value2 }}
                                                         </td>
-                                                            @endforeach
+                                                                    @endif
+                                                                    @php
+                                                                        $k=$k+1;
+                                                                    @endphp
+                                                                @endforeach
+                                                            @endisset
                                                     </tr>
-                                                        @endforeach                                 
-                                                    @endisset
+                                                        @endfor                                
+                                                    
                                                     <tr>
-                                                        <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
+                                                        <td></td>
+                                                        @if($nbrDataTab<$k)
+                                                        <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
+                                                        @else
+                                                        <td></td>
+                                                        @endif
+                                                        <td></td>
+                                                        <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
                                                 </tbody>
+                                                @endisset
                                             </table>
                                         </div>
                                     </div>
@@ -222,6 +337,6 @@
             </div>
         <!-- ============================================================== -->
         <!-- end wrapper  -->
-        <!-- ============================================================== -->    
-    
+        <!-- ============================================================== -->
+
 @stop

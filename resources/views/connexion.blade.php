@@ -33,7 +33,7 @@
                 <div class="card-footer-item card-footer-item-bordered">
                     <a href="inscription" class="footer-link">Créer un compte</a></div>
                 <div class="card-footer-item card-footer-item-bordered">
-                    <a href="forgot-password" class="footer-link">Alzheimer</a>
+                    <a href="forgot-password" class="footer-link">Mot de passe oublié</a>
                 </div>
             </div>
         </div>
