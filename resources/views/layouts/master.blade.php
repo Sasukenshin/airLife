@@ -252,10 +252,10 @@
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/">Statistiques</a>
+                                            <a class="nav-link" href="statistique">Statistiques</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Visualisation en direct</a>
+                                            <a class="nav-link" href="/">Visualisation en direct</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="capteur">Capteurs</a>
@@ -343,7 +343,6 @@
     <script src="css\vendor\charts\c3charts\c3.min.js"></script>
     <script src="css\vendor\charts\c3charts\d3-5.4.0.min.js"></script>
     <script src="css\vendor\charts\c3charts\C3chartjs.js"></script>
-    <script src="js\dashboard-ecommerce.js"></script>
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <script src="css\vendor\select2\js\select2.min.js"></script>
     <script src="css\vendor\summernote\js\summernote-bs4.js"></script>
