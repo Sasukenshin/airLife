@@ -30,7 +30,7 @@ Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
 
-
+Route::get('/statistique', 'StatistiqueController@getStatistiques');
 Route::get('/capteur', 'CapteurController@info_capteur');
 Route::post('/delete_capteur', 'CapteurController@delete_capteur');
 
