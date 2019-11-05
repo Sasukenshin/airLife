@@ -23,28 +23,34 @@ class StatistiqueController extends Controller
             Durée de mise en service
 
      */
-    public function getStatistiques()
+    public function getStatistiques(Request $request)
     {      
         if(auth()->guest()) 
         {
             return redirect('/connexion');
         }
-        $stat_par_capteurs = $this->getStatParCapteur();
-        
-        $dateFin= date("Y-m-d");
+        $dateFin= $request->input('dateFin', date("Y-m-d"));
         $dateFin =  strtotime($dateFin);
         $dateFinBackEnd =  strtotime("+1 day",$dateFin);
-        $dateDebut = strtotime("-1 year", $dateFin);
+        if ($request->has('dateDebut')) {
+            $dateDebut= $request->input('dateDebut');
+            $dateDebut = strtotime($dateDebut);
+            $dateDebut = date("Y-m-d", $dateDebut);
+        } else {
+            $dateDebut = strtotime("-1 years", $dateFin);
+            $dateDebut = date("Y-m-d", $dateDebut);
+        }
+        
         $dateFin = date("Y-m-d", $dateFin);
         $dateFinBackEnd = date("Y-m-d", $dateFinBackEnd);
-        $dateDebut = date("Y-m-d", $dateDebut);
+        $stat_par_capteurs = $this->getStatParCapteur($dateDebut,$dateFinBackEnd);
         $stat_par_gaz = $this->getStatParGaz($dateDebut,$dateFinBackEnd);
         return view('statistique' , ['stat_par_gaz' => $stat_par_gaz, 'stat_par_capteurs' => $stat_par_capteurs,'dateFin' => $dateFin, 'dateDebut' => $dateDebut]);
     }
-    public function getStatParCapteur()
+    public function getStatParCapteur($dateDebut, $dateFin)
     {  
         $model = new StatistiqueModel();
-        $stat_par_capteurs_brut = $model->getStatParCapteur();
+        $stat_par_capteurs_brut = $model->getStatParCapteur($dateDebut, $dateFin);
         return $stat_par_capteurs_brut;
     }
     public function getStatParGaz($dateDebut, $dateFin)

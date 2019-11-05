@@ -22,7 +22,8 @@
                 <div class="card ">
                     <div class="card-header text-center"><span class="splash-description">Période des valeurs</span></div>
                         <div class="card-body">
-                            <form action="enregistrerCapteur" method="post">
+                            <form action="statistique" method="post">
+                                @csrf
                                 <div class="form-row">
                                     <!--input class="form-control form-control-lg" name="id_sensor" type="text" placeholder="Identifiant du capteur" autocomplete="off" required=""-->
                                     <div class="col-6">

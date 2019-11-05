@@ -19,7 +19,7 @@ class StatistiqueModel extends Model {
         ];
 
         
-    public function getStatParCapteur()
+    public function getStatParCapteur($dateDebut,$dateFin)
     {
         $datas = DB::select(
             DB::raw(
@@ -29,6 +29,7 @@ class StatistiqueModel extends Model {
                     FROM sensor
                     LEFT JOIN users ON sensor.IDUSER = users.IDUSER
                     LEFT JOIN datas ON sensor.IDSENSOR = datas.IDSENSOR
+                    WHERE DATETIMEDATA < '$dateFin' AND DATETIMEDATA > '$dateDebut'
                     GROUP BY sensor.IDSENSOR,sensor.NAMESENSOR
                 ) AS rr
                 LEFT JOIN
@@ -37,6 +38,7 @@ class StatistiqueModel extends Model {
                     FROM sensor
                     LEFT JOIN users ON sensor.IDUSER = users.IDUSER
                     LEFT JOIN datas ON sensor.IDSENSOR = datas.IDSENSOR
+                    WHERE DATETIMEDATA < '$dateFin' AND DATETIMEDATA > '$dateDebut'
                     GROUP BY sensor.IDSENSOR,sensor.NAMESENSOR
                 ) AS ss ON rr.IDSENSOR = ss.IDSENSOR;"
             )
