@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\metier\Users;
-use Illuminate\Support\Facades\Session;
+//use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use DB;
+use Session;
 
 
 class ConnexionController extends Controller 
@@ -17,6 +19,7 @@ class ConnexionController extends Controller
         if (!auth()->guest()) {
             return redirect('/');
         }
+
         return view('connexion');
     }
 
@@ -26,15 +29,24 @@ class ConnexionController extends Controller
             'login' => ['required'],
             'mdp' => ['required']
         ]);
-        
+
+        $sessionid = Session::getId();
+
         $resultat = auth()->attempt([
             'login' => request('login'),
             'password' => request('mdp'),
             'confirmation_token' => null
         ]);
-        
+
         if($resultat)
         {
+            $panier = DB::table('panier')->where('sessionid', '=', $sessionid)->first();
+
+            if(!is_null($panier) && isset($panier) && !empty($panier) )
+            {
+                DB::table('panier')->where('sessionid', '=', $sessionid)->update(['iduser' => Auth::user()->iduser]);
+            }
+
             $user_email = Auth::user()->email;
              
             $connection = new Users();

@@ -182,11 +182,13 @@
                                         <h5 class="mb-0 text-white nav-user-name">Air Life</h5>
                                     @endif
                                 </div>
+                                <a class="dropdown-item" href="{{route('panier')}}"><i class="fas fa-shopping-basket"></i> Panier</a>
                                 @if (auth()->check())
                                     <a class="dropdown-item" href="profil"><i class="fas fa-user mr-2"></i>Profil </a>
                                     <a class="dropdown-item" href="deconnexion"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
                                 @else
-                                    <a class="dropdown-item" href="connexion"><i class="fas fa-power-off mr-2"></i>Connexion</a>
+                                    <a class="dropdown-item" href="{{route('connexion')}}"><i class="fas fa-power-off mr-2"></i>Connexion</a>
+
                                     <a class="dropdown-item" href="inscription"><i class="fas fa-sign-in-alt mr-2"></i>Inscription</a>
                                     <a class="dropdown-item" href="forgot-password"><i class="fas fa-unlock mr-2"></i>Mot de passe oublié</a>
                                 @endif
@@ -245,8 +247,15 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="info-air">Air</a>
                                         </li>
+
+
                                     </ul>
+
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('boutique')}}" ><i class="fas fa-shopping-cart"></i> Boutique</a>
+
                             </li>
                         </ul>
                     </div>
@@ -260,7 +269,7 @@
 
     </div>
 
-<div>
+
     @if (auth()->check())
     <div class="dashboard-wrapper connected-right">
         @else
@@ -268,35 +277,37 @@
     @endif
         @yield('content')
 
-         <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <div class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2019. Tous droits réservés.
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="about">À propos</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="{{route('contact')}}">Contact</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- end footer -->
-            <!-- ============================================================== -->
+
 
     </div>
 
 </div>
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    Copyright © 2019. Tous droits réservés.
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="text-md-right footer-links d-none d-sm-block">
+                        <a href="{{route('cgu')}}">CGU</a>
+                        <a href="about">À propos</a>
+                        <a href="javascript: void(0);">Support</a>
+                        <a href="{{route('contact')}}">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
 </body>
 
-    <script src="css\vendor\jquery\jquery-3.3.1.min.js"></script>
+
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="js\main-js.js"></script>

@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\metier\Users;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests;
+use Session;
 
-class AboutController extends Controller
-{
-    public function about()
-    {
-        
-        if(auth()->check()) 
-        {
-            $user_firstname = Auth::user()->firstname;
-            $user_lastname = Auth::user()->lastname;
-            
-            return view('about' , ['user_firstname' => $user_firstname, 'user_lastname' => $user_lastname]);
-        } else {
-            return view('about');
-        }             
+class SessionController extends Controller {
+    public function accessSessionData(Request $request) {
+
+        echo Session::getId();
+        if($request->session()->has('my_name'))
+            echo $request->session()->get('my_name');
+        else
+            echo 'No data in the session';
+    }
+    public function storeSessionData(Request $request) {
+       Session::getId();
+        $request->session()->put('my_name','Virat Gandhi');
+        echo "Data has been added to session";
+    }
+    public function deleteSessionData(Request $request) {
+        $request->session()->forget('my_name');
+        echo "Data has been removed from session.";
     }
 }

@@ -41,75 +41,8 @@ class EmailController extends Controller {
         return view('contact', compact('erreur'));
     }
 
-// sendMailContact
 
-    public function contactCloudCaissesEnregistreusesMacApple() {
 
-        $type = Request::input('type');
-        if ($type == "HOSTNCAST") {
-            $message = "Bonjour, je suis intéressé par votre hébergement HOSTNCAST";
-            $objet = "HOSTNCAST";
-            $typeM="informatique";
-        } else
-
-        if ($type == "HOUSING") {
-            $message = "Bonjour, je suis intéressé par votre hébergement HOUSING";
-            $objet = "HOUSING";
-            $typeM="informatique";
-        } else
-        if ($type == "CLOUD") {
-            $message = "Bonjour, je suis intéressé pas vos prestations de serveur en cloud privé ou dédié";
-            $objet = "CLOUD";
-            $typeM="informatique";
-        } else
-        if ($type == "DOMAINE") {
-            $message = "Bonjour, j'aimerai des renseignements quant au nom de domaine";
-            $objet = "DOMAINE";
-            $typeM="informatique";
-        } else
-        if ($type == "SITE") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la location et la création de site internet et e-commerce";
-            $objet = "SITE";
-            $typeM="informatique";
-        }else
-        if ($type == "CAISSE ENREGISTREUSE") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente et dépannage des caisses enregistreuses";
-            $objet = "Caisses enregistreuses";
-            $typeM="informatique";
-        }
-        else
-        if ($type == "iPhones reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iPhones reconditionnés";
-            $objet = "iPhones reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "iPads reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iPads reconditionnés";
-            $objet = "iPads reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "iMacs reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iMacs reconditionnés";
-            $objet = "iMacs reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "iPods reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iPods reconditionnés";
-            $objet = "iPods reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "Accessoires neufs") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente d'accessoires neufs Apple";
-            $objet = "Accessoires neufs";
-            $typeM="telephonie";
-        }else
-           if ($type == "MacBooks reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des MacBooks reconditionnés";
-            $objet = "MacBooks reconditionnés";
-            $typeM="telephonie";
-        }
-        return view('contact', compact('message', 'objet','typeM'));
-    }
 
     public function validerCommande() {
         $client = new llx_societe();

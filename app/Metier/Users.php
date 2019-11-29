@@ -19,7 +19,7 @@ class Users extends Model implements Authenticatable
 
     public $timestamps = false;
 
-    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email','address','numTel', 'confirmation_token','player_id_navigateurs','player_id_mobile'];
+    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email','address','num_tel', 'confirmation_token','player_id_navigateurs','player_id_mobile'];
 
     public function getRememberTokenName()
     {

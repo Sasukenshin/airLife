@@ -41,17 +41,26 @@ class NotificationController extends Controller
             if ($interval->h < 1)
             {
                 $uneNotification->datenotif = "Il y a " . $interval->i . " minute(s)";
+
             }
             elseif ($interval->d <1)
             {
                 $uneNotification->datenotif = "Il y a " . $interval->h . " heure(s)";
+
             }
             elseif ($interval->m<1)
             {
                 $uneNotification->datenotif = "Il y a " . $interval->d . " jour(s)";
+
+            }
+            elseif ($interval->y<1)
+            {
+                $uneNotification->datenotif = "Il y a " . $interval->m . " mois";
+
             }
 
         }
+        //print_r($mesNotifications);
 
         return response()->json($mesNotifications);
     }
