@@ -62,22 +62,22 @@
                                         <table width="100%" cellspacing="0" cellpadding="0">
                                             <tbody><tr>
                                                 <td align="float-right"><strong >Sous-total TTC :</strong></td>
-                                                <td align="float-right"><div class="float-right" id="sous_total_ttc"></div></td>
+                                                <td align="float-right"><div class="float-right" id="sous_total_ttc">{{$data['sousTotalTcc']}} €</div></td>
                                             </tr>
 
 
                                             <tr>
                                                 <td align="float-right"><strong >Frais de port TTC :</strong></td>
-                                                <td align="float-right"><div class="float-right" id="frais_port"></div></td>
+                                                <td align="float-right"><div class="float-right" id="frais_port">{{$data['fraisport']}} €</div></td>
                                             </tr>
                                             <tr>
                                                 <td align="float-right"><strong >Total TVA :</strong></td>
-                                                <td align="float-right"><div class="float-right" id="total_tva" ></div></td>
+                                                <td align="float-right"><div class="float-right" id="total_tva" >{{$data['totalTva']}} €</div></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-primary" align="float-right">Total TTC :</td>
                                                 <td class="text-primary" align="float-right">
-                                                    <div class="text-primary float-right" id="total_ttc" ></div>
+                                                    <div class="text-primary float-right" id="total_ttc" >{{$data['totalTtc']}} €</div>
                                                 </td>
                                             </tr>
                                             </tbody></table>
@@ -141,13 +141,13 @@ data: {_token: '{{csrf_token()}}', lignepanierid : lignepanierid},
 
 success: function (data, statut) {
 
-$("#qte"+lignepanierid).val(data["qte"]);
-$("#prix"+lignepanierid).val(data["prix"]);
+$("#qte"+lignepanierid).val(" "+data["qte"]);
+$("#prix"+lignepanierid).val(" "+data["prix"]);
 
-$("#sous_total_ttc").val(data["sous_total_ttc"]);
-$("#frais_port").val(data["frais_port_ttc"]);
-$("#total_tva").val(data["total_tva"]);
-$("#total_ttc").val(data["total_ttc"]);
+$("#sous_total_ttc").text(data["sous_total_ttc"]+" €");
+$("#frais_port").text(data["frais_port_ttc"]+" €");
+$("#total_tva").text(data["total_tva"]+" €");
+$("#total_ttc").text(data["total_ttc"]+" €");
 
 }
 
