@@ -114,14 +114,29 @@ class PanierController extends Controller {
 
         if(isset($lignespanier) && !is_null($lignespanier) && !empty($lignespanier) && count($lignespanier)>0)
         {
+
+            $sousTotalTcc=0;
             foreach ($lignespanier as $uneLignepanier)
             {
+                $sousTotalTcc += $uneLignepanier->prix * $uneLignepanier->qte;
                 $uneLignepanier->prix = $uneLignepanier->prix * $uneLignepanier->qte;
             }
-            return view("panier", compact('lignespanier'));
+
+            $moyenlivraison = DB::table('panier')->select('moyenlivraisonid')
+                ->where('idpanier', $panier->idpanier)->first();
+
+            $fraisport = DB::table('moyenlivraison')->select('prix')
+                ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
+
+            $totalTtc = $sousTotalTcc + $fraisport->prix;
+            $totalTva = round(($totalTtc)/120*20);
+            $data = array('fraisport' => $fraisport->prix, 'totalTtc'=> $totalTtc, 'totalTva'=>$totalTva, 'sousTotalTcc'=>$sousTotalTcc);
+            return view("panier", compact('lignespanier','data'));
         }
-        else
+        else {
+
             return view("panier");
+        }
 
 
 
@@ -191,12 +206,33 @@ class PanierController extends Controller {
         //DB::table('lignespanier')
           //  ->where('lignepanierid', $lignepanierid)
             //->update(['prix' => $article->prix -$prix->prix]);
-        $article = DB::table('lignespanier')->select('qte','prix')->where('lignepanierid' ,$lignepanierid)->first();
+        $article = DB::table('lignespanier')->select('idpanier','qte','prix')->where('lignepanierid' ,$lignepanierid)->first();
         }
        // return response()->json($article->qte,$prix->prix);
+        //calcultotalpanier
+        $lesLignesPaniers= DB::table('lignespanier')
+            ->where('idpanier', $article->idpanier)->get();
+        $sousTotalTcc =0;
+        foreach($lesLignesPaniers as $laLigne)
+        {
+            $sousTotalTcc += $laLigne->prix * $laLigne->qte;
+        }
+        $moyenlivraison = DB::table('panier')->select('moyenlivraisonid')
+            ->where('idpanier', $article->idpanier)->first();
+
+        $fraisport = DB::table('moyenlivraison')->select('prix')
+            ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
+
+        $totalTtc = $sousTotalTcc + $fraisport->prix;
+        $totalTva = round(($totalTtc)/120*20);
         return response()->json([
             'qte' => $article->qte,
-            'prix' => $article->prix * $article->qte
+            'prix' => $article->prix * $article->qte,
+            'sous_total_ttc' => $sousTotalTcc,
+            'frais_port_ttc' => $fraisport->prix,
+            'total_tva' => $totalTva,
+            'total_ttc' => $totalTtc
+
         ]);
     }
 
