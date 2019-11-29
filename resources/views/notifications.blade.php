@@ -13,10 +13,9 @@
             <div class="col-xs-12 col-sm-12 col-md-12" >
 
 
-                    <h1 class="panel-title text-center">Vos notifications</h1>
+                    <h1 class="panel-title text-center">Liste des notifications</h1>
 
-                <div class="container">
-                    <div>
+
                         <div class="row">
 
 
@@ -48,7 +47,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
     </div>
 @stop

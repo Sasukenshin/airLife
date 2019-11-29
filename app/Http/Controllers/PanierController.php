@@ -2,153 +2,202 @@
 
 namespace App\Http\Controllers;
 
-use Request;
-use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Session;
-
-class ArticleController extends Controller {
-
-    public function sendMailContact() { //fonction pour le mail contact
-        $title = Request::input('objet');
-        if ($title == null)
-            $title = "Contact";
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Datetime;
+use Session;
+use DB;
+use DateInterval;
 
 
+class PanierController extends Controller {
+
+    public function addPanier(Request $request) //fonction pour add un article à un panier
+    {
+        $today = date("Y-m-d");
+        $today2 = date("Y-m-d");
+        // $dateLivraison = date("Y-m-d");
+        $today = DateTime::createFromFormat("Y-m-d", $today);
+        $today2 = DateTime::createFromFormat("Y-m-d", $today2);
+        $today2=$today2->add(new DateInterval('PT1H'));
+        $artid=$request['artid'];
+
+        $article = DB::table('articles')->where('artid', '=', $artid)->first();
+        $ajoutJour = 'P'.$article->delai.'D';
+
+        $dateLivraison = $today->add(new DateInterval($ajoutJour));
+        $dateLivraison = $dateLivraison->format('Y-m-d');
+
+        $today = $today->format('Y-m-d');
+
+        if(!auth()->guest())
+        {
+            $panierExist = DB::table('panier')->where('iduser' ,Auth::user()->iduser)->first();
 
 
-        $nom = Request::input('nom');
-        $prenom = Request::input('prenom');
-        $user_mail = Request::input('mail');
-        $tel = Request::input('tel');
-        $content = Request::input('message');
-        $carbon = Carbon::today();
-        $timestamp = $carbon->timestamp;
-        $Date = $carbon->format('y/m/d');
-        $format = $carbon->format('d/m/y');
-        $captcha = Request::input('g-recaptcha-response');
-        $erreur = "Veuillez certifier que vous n'êtes pas un robot ";
+            if(empty($panierExist)) {
+                $id = DB::table('panier')->insertGetId([
+                    'datepanier' => $today2, 'iduser' => Auth::user()->iduser, 'sessionid' => Session::getId(), 'done' => '0',
 
-//        if ($captcha == true) {
-            $erreur = "Le message a bien été envoyé";
-            $data = ['email' => $user_mail, 'nom' => $nom, 'prenom' => $prenom, 'tel' => $tel, 'subject' => $title, 'content' => $content, 'date' => $format]; // ici ce sont les données qui sont transmis dans le view utilisé lors de l'envoi du mail
-            Mail::send('mailContact', $data, function($message) use($data) { //fonction send qui va envoyer la view " mailContact "
-                $subject = $data['subject'];
-                $message->from('noreply.airlife@gmail.com');  //Adresse email de l'emetteur
-                $message->to('jeremycosta21@gmail.com');
-            });
-//        }
-        return view('contact', compact('erreur'));
-    }
+                ]);
+            }
+            else
+            {
+                $articleExist = DB::table('lignespanier')->where('artid',$artid)->where('idpanier', $panierExist->idpanier)->first();
+                $id = $panierExist->idpanier;
+            }
 
-// sendMailContact
 
-    public function contactCloudCaissesEnregistreusesMacApple() {
+            if(empty($articleExist)){
+            DB::table('lignespanier')->insert([
+                'idpanier' => $id, 'artid' => $artid, 'dateLivraison' => $dateLivraison, 'prix' => $article->prix,
 
-        $type = Request::input('type');
-        if ($type == "HOSTNCAST") {
-            $message = "Bonjour, je suis intéressé par votre hébergement HOSTNCAST";
-            $objet = "HOSTNCAST";
-            $typeM="informatique";
-        } else
+            ]);
+            }else
+            {
+                DB::table('lignespanier')->where('lignepanierid', $articleExist->lignepanierid)->increment('qte');
+            }
 
-        if ($type == "HOUSING") {
-            $message = "Bonjour, je suis intéressé par votre hébergement HOUSING";
-            $objet = "HOUSING";
-            $typeM="informatique";
-        } else
-        if ($type == "CLOUD") {
-            $message = "Bonjour, je suis intéressé pas vos prestations de serveur en cloud privé ou dédié";
-            $objet = "CLOUD";
-            $typeM="informatique";
-        } else
-        if ($type == "DOMAINE") {
-            $message = "Bonjour, j'aimerai des renseignements quant au nom de domaine";
-            $objet = "DOMAINE";
-            $typeM="informatique";
-        } else
-        if ($type == "SITE") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la location et la création de site internet et e-commerce";
-            $objet = "SITE";
-            $typeM="informatique";
-        }else
-        if ($type == "CAISSE ENREGISTREUSE") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente et dépannage des caisses enregistreuses";
-            $objet = "Caisses enregistreuses";
-            $typeM="informatique";
         }
         else
-        if ($type == "iPhones reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iPhones reconditionnés";
-            $objet = "iPhones reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "iPads reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iPads reconditionnés";
-            $objet = "iPads reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "iMacs reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iMacs reconditionnés";
-            $objet = "iMacs reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "iPods reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des iPods reconditionnés";
-            $objet = "iPods reconditionnés";
-            $typeM="telephonie";
-        }else
-          if ($type == "Accessoires neufs") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente d'accessoires neufs Apple";
-            $objet = "Accessoires neufs";
-            $typeM="telephonie";
-        }else
-           if ($type == "MacBooks reconditionnés") {
-            $message = "Bonjour, j'aimerai des renseignements quant à la vente des MacBooks reconditionnés";
-            $objet = "MacBooks reconditionnés";
-            $typeM="telephonie";
+        {
+
+            $panierExist = DB::table('panier')->where('sessionid' ,Session::getId())->first();
+
+            if(empty($panierExist) ) {
+
+                $id = DB::table('panier')->insertGetId([
+                    'datepanier' => $today2, 'sessionid' => Session::getId(), 'done' => '0',
+
+                ]);
+            }
+            else
+            {
+                $articleExist = DB::table('lignespanier')->where('artid',$artid)->where('idpanier', $panierExist->idpanier)->first();
+                $id = $panierExist->idpanier;
+            }
+            if(empty($articleExist)) {
+                DB::table('lignespanier')->insert([
+                    'idpanier' => $id, 'artid' => $artid, 'dateLivraison' => $dateLivraison, 'prix' => $article->prix,
+
+                ]);
+            }
+            else{
+                DB::table('lignespanier')->where('lignepanierid', $articleExist->lignepanierid)->increment('qte');
+            }
+
+
         }
-        return view('contact', compact('message', 'objet','typeM'));
+
+        return response()->json($article->libelle);
     }
 
-    public function validerCommande() {
-        $client = new llx_societe();
-        $uneCommande = new rw_netcdes();
-        $unProduit = new rw_netcdes_det();
-        $error = "";
-        $idClient = Session::get('idcli');
-        $NumCommande = $uneCommande->getIdCommandeClient($idClient);
-        $total_ttc = 0;
-        $infosClient= $client->getLesInfosClient($idClient);
+
+    public function getPanier() //fonction pour retourner le panier d'un client
+    {
+
+       if(!auth()->guest())
+       {
+           $panier = DB::table('panier')->where('iduser', '=', Auth::user()->iduser)->first();
+           if(!is_null($panier) && isset($panier) && !empty($panier) )
+           $lignespanier = DB::table('lignespanier')->join('articles', 'lignespanier.artid', '=', 'articles.artid')->where('idpanier', '=', $panier->idpanier)->get();
+
+       }
+       else
+       {
+           $panier = DB::table('panier')->where('sessionid', '=', Session::getId())->first();
+           if(!is_null($panier) && isset($panier) && !empty($panier) )
+           $lignespanier = DB::table('lignespanier')->join('articles', 'lignespanier.artid', '=', 'articles.artid')->where('idpanier', '=', $panier->idpanier)->get();
+
+       }
 
 
-        $lesProduits = $unProduit->getlesProduitsCommande($NumCommande);
-        foreach ($lesProduits as $unP) {
-            $total_ttc += $unP->price_ttc * $unP->quantite;
+        if(isset($lignespanier) && !is_null($lignespanier) && !empty($lignespanier) && count($lignespanier)>0)
+        {
+            foreach ($lignespanier as $uneLignepanier)
+            {
+                $uneLignepanier->prix = $uneLignepanier->prix * $uneLignepanier->qte;
+            }
+            return view("panier", compact('lignespanier'));
         }
-        $uneCommande->majBDD($NumCommande);
-        $carbon = Carbon::today();
-        $format = $carbon->format('d/m/y');
-        $subject = "Recapitulatif commande numéro $NumCommande->rowid";
-
-        //email pour Riotware
-        $data = ['idCommande' => $NumCommande->rowid, 'total' => $total_ttc, 'date' => $format, 'lesProduits' => $lesProduits, 'subject' => $subject,'NomCli'=>$infosClient->nom, 'EmailCli'=>$infosClient->email, 'TelCli'=>$infosClient->phone ];
-        Mail::send('mailRecapEntreprise', $data, function($message) use($data) {
-            $subject = $data['subject'];
-            $message->from('riotware.recuperation@gmail.com');
-            $message->to('riotware.recuperation@gmail.com')->subject($subject);
-        });
+        else
+            return view("panier");
 
 
-        Mail::send('mailRecapClient', $data, function($message) use($data) {
-             $client = new llx_societe();
-              $idClient = Session::get('idcli');
-            $infosClient= $client->getLesInfosClient($idClient);
-            $subject = $data['subject'];
-            $message->from('riotware.recuperation@gmail.com');
-            $message->to( $infosClient->email)->subject($subject);
-        });
-        return redirect('/');
+
+    }
+
+    public function deleteLignePanier(Request $request) //fonction pour delete une ligne panier d'un client
+    {
+        $lignepanierid=$request['lignepanierid'];
+        DB::table('lignespanier')->where('lignepanierid', $lignepanierid)->delete();
+
+        //return response()->json($lignepanierid);
+        return redirect('/panier');
+    }
+
+
+
+
+    public function addQte(Request $request) //fonction pour add une quantité
+    {
+        $lignepanierid=$request['lignepanierid'];
+        $article = DB::table('lignespanier')->select('idpanier','qte','artid','prix')->where('lignepanierid' ,$lignepanierid)->first();
+        if ($article->qte<100) {
+           // $prix = DB::table('articles')->select('prix')->where('artid', $article->artid)->first();
+            DB::table('lignespanier')->where('lignepanierid', $lignepanierid)->increment('qte');
+           // DB::table('lignespanier')
+             //   ->where('lignepanierid', $lignepanierid)
+               // ->update(['prix' => $article->prix + $prix->prix]);
+            $article = DB::table('lignespanier')->select('idpanier','qte', 'prix')->where('lignepanierid', $lignepanierid)->first();
+        }
+
+
+        //calcultotalpanier
+        $lesLignesPaniers= DB::table('lignespanier')
+            ->where('idpanier', $article->idpanier)->get();
+        $sousTotalTcc =0;
+        foreach($lesLignesPaniers as $laLigne)
+        {
+            $sousTotalTcc += $laLigne->prix * $laLigne->qte;
+        }
+        $moyenlivraison = DB::table('panier')->select('moyenlivraisonid')
+            ->where('idpanier', $article->idpanier)->first();
+
+        $fraisport = DB::table('moyenlivraison')->select('prix')
+            ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
+
+        $totalTtc = $sousTotalTcc + $fraisport->prix;
+        $totalTva = round(($totalTtc)/120*20);
+        return response()->json([
+            'qte' => $article->qte,
+            'prix' => $article->prix * $article->qte,
+            'sous_total_ttc' => $sousTotalTcc,
+            'frais_port_ttc' => $fraisport->prix,
+            'total_tva' => $totalTva,
+            'total_ttc' => $totalTtc
+
+        ]);
+    }
+
+    public function lessQte(Request $request) //fonction pour add une quantité
+    {
+        $lignepanierid=$request['lignepanierid'];
+        $article = DB::table('lignespanier')->select('qte','artid','prix')->where('lignepanierid' ,$lignepanierid)->first();
+        if ($article->qte>1)
+        {
+       // $prix = DB::table('articles')->select('prix')->where('artid' ,$article->artid)->first();
+        DB::table('lignespanier')->where('lignepanierid', $lignepanierid)->decrement('qte');
+        //DB::table('lignespanier')
+          //  ->where('lignepanierid', $lignepanierid)
+            //->update(['prix' => $article->prix -$prix->prix]);
+        $article = DB::table('lignespanier')->select('qte','prix')->where('lignepanierid' ,$lignepanierid)->first();
+        }
+       // return response()->json($article->qte,$prix->prix);
+        return response()->json([
+            'qte' => $article->qte,
+            'prix' => $article->prix * $article->qte
+        ]);
     }
 
 }

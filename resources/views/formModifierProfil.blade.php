@@ -3,12 +3,12 @@
 
         <div class="col-md-12 well well-md">
 
-            <center><h1>Modification du profil</h1></center>
+          <h1>Modification du profil</h1></center>
             <br><br>
 
             {!! Form::open(['url' => 'modifierProfil']) !!}
             <div class="container">
-                <div class="jumbotron">
+
                     <div class="row">
                         <div class="col-md-8 col-xs-12 col-sm-6 col-lg-4">
                             <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
@@ -17,7 +17,7 @@
                             <div class="container" style="border-bottom:1px solid black">
                                 <h2 class="panel-title">{{$unC->FIRSTNAME}} {{$unC->LASTNAME}}</h2>
                             </div>
-                            <hr>
+                            </br>
                             <ul class="container details">
                                 <li> <label class="col-md-4 control-label"><i class="far fa-arrow-alt-circle-right"></i> Prénom : </label><input type="text"  style="width:150px;" value="{{$unC->FIRSTNAME}}" name="firstname" required=""></li>
                                 <li> <label class="col-md-4 control-label"><i class="far fa-arrow-alt-circle-right"></i> Nom : </label><input type="text"  style="width:150px;" value="{{$unC->LASTNAME}}" name="lastname" required=""></li>
@@ -48,9 +48,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
+            </div>
             {!! Form::close() !!}
-        </div>
+
         </div>
         @stop
 

@@ -180,7 +180,7 @@
                                 }
 
                             ?>
-                            <!--div class="col-xl-3 col-md-6">
+                            <div class="col-xl-3 col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5>Dioxyde de carbonne(CO2)</h5>
@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
                                             <span>N/A</span>
->>>>>>> Ajout capteur
+
                                         </div>
                                     @isset($datas[0])
                                         @php
@@ -277,12 +277,12 @@
                     @endforeach
                         </div>
                         <div class="row">
-                            <!-- ============================================================== -->
 
-                            <!-- ============================================================== -->
 
-                                          <!-- Données récentes  -->
-                            <!-- ============================================================== -->
+
+
+
+
                             <div class="col-12">
                                 <div class="card">
                                     <h5 class="card-header">Données récentes </h5>
@@ -291,7 +291,7 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-<<<<<<< HEAD
+
                                                     @isset($datas[0])
                                                         @foreach ($datas[0] as $key => $value)
                                                         <th class='border-0'> {{ $key }}</th>
@@ -309,7 +309,7 @@
                                                         @endforeach
                                                     @endisset
                                                     <tr>
-=======
+
                                                         <?php
                                                         if(isset($datas[0])){
                                                         foreach ($datas[0] as $key => $value) {
@@ -330,7 +330,7 @@
                                                         }
                                                         }?>
                                                     <tr>
->>>>>>> Ajout capteur
+
                                                         <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
                                                 </tbody>

@@ -10,68 +10,16 @@ use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 use DB;
 
 
-class Users extends Model implements Authenticatable
+class Articles extends Model implements Authenticatable
 {
-    protected $primaryKey = 'iduser';
+    protected $primaryKey = 'artid';
 
     use BasicAuthenticatable;
     use \Illuminate\Notifications\Notifiable;
 
     public $timestamps = false;
 
-    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email','address','numTel', 'confirmation_token','player_id_navigateurs','player_id_mobile'];
+    protected $fillable = ['libelle', 'description', 'prix', 'delai'];
 
-    public function getRememberTokenName()
-    {
-        return '';
-    }
-
-    public function setSession($user_email)
-    {
-        $iduser = DB::table('users')
-          ->Select()
-          ->where('email', '=', $user_email)
-          ->first();
-
-        if($iduser)
-        {
-            Session::put('id', $iduser->iduser);
-        }
-        return $iduser;
-    }
-
-
-
-    public function getClient($id) {
-        $client = DB::table('users')
-            ->Select('FIRSTNAME', 'LASTNAME',  'EMAIL', 'ADDRESS', 'NUM_TEL')
-            ->Where('IDUSER', '=', $id)
-            ->first();
-        return $client;
-    }
-
-    //Dialogue aves la bdd pour modifier le profil d'un utilisateur
-    public function modificationProfil($id, $adresse, $password, $mail, $firstname,$lastname,$numtel) {
-        //$password = password_hash($password,PASSWORD_DEFAULT);
-        if ($password == "*******")
-        {
-            DB::table('users')->where('IDUSER', $id)
-                ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname,  'EMAIL' => $mail, 'ADDRESS' => $adresse, 'NUM_TEL' => $numtel]);
-        }
-        else {
-            $password = Hash::make(request('password'));
-            DB::table('users')->where('IDUSER', $id)
-                ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname, 'password' => $password, 'EMAIL' => $mail, 'ADDRESS' => $adresse, 'NUM_TEL' => $numtel]);
-        }
-    }
-
-
-
-
-public function insertIDOneSignal($player_id_navigateurs,$id)
-{
-    DB::table('users')->where('IDUSER', $id)
-        ->update(['player_id_navigateurs' => $player_id_navigateurs]);
-}
 
     }

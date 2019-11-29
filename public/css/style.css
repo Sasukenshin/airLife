@@ -163,6 +163,12 @@ body {
     color: #71748d;
     background-color: #efeff6;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    position: relative;
+}
+
+html {
+    min-height: 100vh;
 }
 
 h1,
@@ -933,7 +939,7 @@ Borders
 }
 
 .border {
-    border: 1px solid #e6e6f2 !important;
+    border: 1px solid black !important;
 }
 
 .border-top {

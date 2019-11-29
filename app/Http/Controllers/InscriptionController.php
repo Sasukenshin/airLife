@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\metier\Client;
-use App\User;
+
 use Request;
 use App\Http\Controllers\Controller;
 use App\metier\Users;
@@ -52,7 +52,7 @@ class InscriptionController extends Controller
             'confirmation_token' => str_replace('/', '', bcrypt(str_random(16)))
         ]);
 
-        $utilisateur->notify(new RegisteredUser());
+       // $utilisateur->notify(new RegisteredUser());
 
         return redirect('/connexion');
     }
