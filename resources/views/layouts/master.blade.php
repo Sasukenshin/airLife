@@ -50,9 +50,9 @@
                            "                                                  <div class=\"notification-list-user-img\"><img src=\"img/user.png\"  class=\"user-avatar-md rounded-circle\"></div>" +
                            "                                                  <div class=\"notification-list-user-block\">"+data[i].textnotification+
                            "                                                        <div class=\"notification-date\">"+data[i].datenotif +"</div>" +
-                           "                                                   </div>" +
                            "                                               </div>" +
-                           "                                            </a>" );
+                           "                                                   </div>\" +\n" +
+                           "                           \"                                            </a>" );
                        i++;
                    });
 
