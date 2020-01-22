@@ -101,7 +101,7 @@ class PanierController extends Controller {
            $panier = DB::table('panier')->where('iduser', '=', Auth::user()->iduser)->first();
            if(!is_null($panier) && isset($panier) && !empty($panier) )
            $lignespanier = DB::table('lignespanier')->join('articles', 'lignespanier.artid', '=', 'articles.artid')->where('idpanier', '=', $panier->idpanier)->get();
-
+           $userinfo = DB::table('users')->where('iduser', '=', Auth::user()->iduser)->first();
        }
        else
        {
@@ -124,14 +124,22 @@ class PanierController extends Controller {
 
             $moyenlivraison = DB::table('panier')->select('moyenlivraisonid')
                 ->where('idpanier', $panier->idpanier)->first();
+            $moyenlivraisons = DB::table('moyenlivraison')->get();
+            $moyenpaiements = DB::table('moyenpaiement')->get();
 
             $fraisport = DB::table('moyenlivraison')->select('prix')
                 ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
 
             $totalTtc = $sousTotalTcc + $fraisport->prix;
             $totalTva = round(($totalTtc)/120*20);
+
             $data = array('fraisport' => $fraisport->prix, 'totalTtc'=> $totalTtc, 'totalTva'=>$totalTva, 'sousTotalTcc'=>$sousTotalTcc);
-            return view("panier", compact('lignespanier','data'));
+            if(isset($userinfo) && !is_null($userinfo) && !empty($userinfo)){
+                return view("panier", compact('lignespanier','data', 'moyenlivraisons','moyenpaiements','userinfo'));
+            }
+            else
+                return view("panier", compact('lignespanier','data', 'moyenlivraisons','moyenpaiements'));
+
         }
         else {
 

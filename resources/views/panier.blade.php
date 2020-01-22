@@ -57,57 +57,146 @@
                                     </tbody>
 
                             </table>
-                                    <div class ="col-md-5 float-right">
-                                        <div class="text-primary mt-2">TOTAL DE VOTRE COMMANDE</div>
-                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                            <tbody><tr>
-                                                <td align="float-right"><strong >Sous-total TTC :</strong></td>
-                                                <td align="float-right"><div class="float-right" id="sous_total_ttc">{{$data['sousTotalTcc']}} €</div></td>
-                                            </tr>
 
 
-                                            <tr>
-                                                <td align="float-right"><strong >Frais de port TTC :</strong></td>
-                                                <td align="float-right"><div class="float-right" id="frais_port">{{$data['fraisport']}} €</div></td>
-                                            </tr>
-                                            <tr>
-                                                <td align="float-right"><strong >Total TVA :</strong></td>
-                                                <td align="float-right"><div class="float-right" id="total_tva" >{{$data['totalTva']}} €</div></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-primary" align="float-right">Total TTC :</td>
-                                                <td class="text-primary" align="float-right">
-                                                    <div class="text-primary float-right" id="total_ttc" >{{$data['totalTtc']}} €</div>
-                                                </td>
-                                            </tr>
-                                            </tbody></table>
-                                    </div>
                                 </div>
-                                @else
 
-                                <h2>Panier vide</h2>
-                                <br>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            Votre panier est vide actuellement..
-                                        </div>
-                                    @if (!auth()->check())
-                                    <div class="col-md-12">
-                                        Si vous avez déjà un compte <a href="{{route('connexion')}}">Connectez-vous</a> pour voir votre panier. Si ce n'est pas encore le cas, vous pouvez <a href="inscription">vous inscrire.</a>
-                                    </div>
-                                        @endif
-                                     </div>
-
-                                @endif
 
 
 
 </div>
 </div>
+
 </div>
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="text-primary mt-2">Information</div>
+                <div class="content_etape">
+                    @if (isset($userinfo))
+                        <div>
+                            Bienvenue <b>{{$userinfo->firstname}}  {{$userinfo->lastname}}!</b><br>
+                            ({{$userinfo->email}})
+                        </div>
+                        <div class="text-primary mt-2">Adresse de facturation</div>
+                        <div class="form-group">
+                            <label>Nom <b>*</b> : </label>
+                            <input type="text" placeholder="Nom" id="Flastname" name="Flastname" value="{{$userinfo->lastname}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Prénoom <b>*</b> : </label>
+                            <input type="text" placeholder="Prénom" id="Ffirstname" name="Ffirstname" value="{{$userinfo->firstname}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Adresse <b>*</b> : </label>
+                            <input type="text" placeholder="Adresse" id="Faddress" name="Faddress" value="{{$userinfo->address}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ville  <b>*</b> : </label>
+                            <input type="text" placeholder="Ville" id="Fville" name="Fville" value="{{$userinfo->city}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Code postal  <b>*</b> : </label>
+                            <input type="text" placeholder="Code postal" id="Fcp" name="Fcp" value="{{$userinfo->postalCode}}" required>
+                        </div>
+
+                    @else
+
+
+                    @endif
+
+                </div>
+
+            </div>
+            <div class="col-md-4">
+
+                <div class="text-primary mt-2">Moyen de paiement</div>
+                <div class="content_etape">
+
+                    @foreach ($moyenpaiements as $unP)
+                        <div>
+                            <label>
+                                <div >
+                                    <input type="radio" name="moyenpaiement" id="{{$unP->moyenpaiementid}}" style="display:inline-block;" >
+                                    <strong>{{$unP->libelle}}</strong>
+
+                                </div>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+            <div class="col-md-4">
+
+                <div class="text-primary mt-2">Mode de livraison</div>
+                <div class="content_etape">
+
+                    @foreach ($moyenlivraisons as $unM)
+                        <div>
+                            <label>
+                                <div >
+                                    <input type="radio" name="modelivraison" id="{{$unM->moyenlivraisonid}}" style="display:inline-block;" >
+                                    <strong>{{$unM->libelle}}</strong>
+
+                                    <span>{{$unM->prix}} euros</span>
+
+
+
+                                </div>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+
+            <div class="text-primary mt-2">TOTAL DE VOTRE COMMANDE</div>
+            <table class="col-md-12" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td align="float-right"><strong>Sous-total TTC :</strong></td>
+                    <td align="float-right"><div   class="float-right"  id="sous_total_ttc">{{$data['sousTotalTcc']}} €</div></td>
+                </tr>
+
+
+                <tr>
+                    <td align="float-right"><strong >Frais de port TTC :</strong></td>
+                    <td align="float-right"><div class="float-right" id="frais_port">{{$data['fraisport']}} €</div></td>
+                </tr>
+                <tr>
+                    <td align="float-right"><strong >Total TVA :</strong></td>
+                    <td align="float-right"><div class="float-right" id="total_tva" >{{$data['totalTva']}} €</div></td>
+                </tr>
+                <tr>
+                    <td class="text-primary" align="float-right">Total TTC :</td>
+                    <td class="text-primary" align="float-right">
+                        <div class="text-primary float-right" id="total_ttc" >{{$data['totalTtc']}} €</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
 </div>
 
+
+
+@else
+
+    <h2>Panier vide</h2>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            Votre panier est vide actuellement..
+        </div>
+        @if (!auth()->check())
+            <div class="col-md-12">
+                Si vous avez déjà un compte <a href="{{route('connexion')}}">Connectez-vous</a> pour voir votre panier. Si ce n'est pas encore le cas, vous pouvez <a href="inscription">vous inscrire.</a>
+            </div>
+        @endif
+    </div>
+
+@endif
+    </div>
 <script>
 function addQte(lignepanierid)
 {
