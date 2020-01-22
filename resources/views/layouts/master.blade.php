@@ -41,6 +41,7 @@
 
                success: function (data, statut) {
                    var i= 0;
+                   $( ".notification-list" ).empty();
                    $.each(data, function () {
 
 
@@ -49,9 +50,9 @@
                            "                                                  <div class=\"notification-list-user-img\"><img src=\"img/user.png\"  class=\"user-avatar-md rounded-circle\"></div>" +
                            "                                                  <div class=\"notification-list-user-block\">"+data[i].textnotification+
                            "                                                        <div class=\"notification-date\">"+data[i].datenotif +"</div>" +
-                           "                                                   </div>" +
                            "                                               </div>" +
-                           "                                            </a>" );
+                           "                                                   </div> " +
+                           "                                                                     </a>" );
                        i++;
                    });
 
@@ -126,53 +127,20 @@
                                 <input class="form-control" type="text" placeholder="Rechercher..">
                             </div>
                         </li>
+                        @if (auth()->check())
                         <li class="nav-item dropdown notification">
                             <a class="nav-link nav-icons" href="#" onclick="getNotifications();" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                             <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                                 <li>
-                                    <div class="notification-title"> Notification</div>
-                                    <div class="notification-list">
-                                        <div class="list-group">
-                                            <a href="#" class="list-group-item list-group-item-action active">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 1</span>a détecté un nouveau gaz.
-                                                        <div class="notification-date">Il y a 2 min</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 2</span>est arrêté.
-                                                        <div class="notification-date">Il y a 2 jours</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 1</span>a détecté un danger.
-                                                        <div class="notification-date">Il y a 15 min</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></div>
-                                                    <div class="notification-list-user-block"><span class="notification-list-user-name">Capteur 2</span>a redémarré.
-                                                        <div class="notification-date">Il y a 12 min</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <div class="notification-title"> Notifications</div>
+                                    <div class="notification-list"></div>
                                 </li>
                                 <li>
-                                    <div class="list-footer"> <a href="#">Voir toutes les notifications</a></div>
+                                    <div class="list-footer"> <a href="{{route('notifications')}}">Voir toutes les notifications</a></div>
                                 </li>
                             </ul>
                         </li>
+                        @endif
                         <li class="nav-item dropdown connection">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
                             <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
@@ -214,11 +182,13 @@
                                         <h5 class="mb-0 text-white nav-user-name">Air Life</h5>
                                     @endif
                                 </div>
+                                <a class="dropdown-item" href="{{route('panier')}}"><i class="fas fa-shopping-basket"></i> Panier</a>
                                 @if (auth()->check())
                                     <a class="dropdown-item" href="profil"><i class="fas fa-user mr-2"></i>Profil </a>
                                     <a class="dropdown-item" href="deconnexion"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
                                 @else
-                                    <a class="dropdown-item" href="connexion"><i class="fas fa-power-off mr-2"></i>Connexion</a>
+                                    <a class="dropdown-item" href="{{route('connexion')}}"><i class="fas fa-power-off mr-2"></i>Connexion</a>
+
                                     <a class="dropdown-item" href="inscription"><i class="fas fa-sign-in-alt mr-2"></i>Inscription</a>
                                     <a class="dropdown-item" href="forgot-password"><i class="fas fa-unlock mr-2"></i>Mot de passe oublié</a>
                                 @endif
@@ -277,8 +247,15 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="info-air">Air</a>
                                         </li>
+
+
                                     </ul>
+
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('boutique')}}" ><i class="fas fa-shopping-cart"></i> Boutique</a>
+
                             </li>
                         </ul>
                     </div>
@@ -292,43 +269,45 @@
 
     </div>
 
-<div>
+
     @if (auth()->check())
-    <div class="dashboard-wrapper" style="margin-left:20%;">
+    <div class="dashboard-wrapper connected-right">
         @else
             <div class="dashboard-wrapper">
     @endif
         @yield('content')
 
-         <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <div class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2019. Tous droits réservés.
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="about">À propos</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="{{route('contact')}}">Contact</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- end footer -->
-            <!-- ============================================================== -->
+
 
     </div>
 
 </div>
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    Copyright © 2019. Tous droits réservés.
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="text-md-right footer-links d-none d-sm-block">
+                        <a href="{{route('cgu')}}">CGU</a>
+                        <a href="about">À propos</a>
+                        <a href="javascript: void(0);">Support</a>
+                        <a href="{{route('contact')}}">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
 </body>
 
-    <script src="css\vendor\jquery\jquery-3.3.1.min.js"></script>
+
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="js\main-js.js"></script>

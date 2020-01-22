@@ -5,8 +5,10 @@
     <!-- ============================================================== -->
     <!-- signup form  -->
     <!-- ============================================================== -->
-    <form class="splash-container" method="post" action="inscription">
-        {{ csrf_field() }}
+    {!! Form::open(['url' => 'inscriptions']) !!}
+
+        <div class="splash-container">
+
        <div id="connexion-contain">
         <div class="card">
             <div class="card-header">
@@ -36,6 +38,18 @@
                     <input class="form-control form-control-lg" name="email" type='email' placeholder="E-mail" value="{{ old('email') }}" required="">
                     @if($errors->has('email'))
                         <p class="text-danger">{{ $errors->first('email') }}</p>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" name="num_tel" type='tel' placeholder="Numero de téléphone" value="{{ old('num_tel') }}" required="">
+                    @if($errors->has('num_tel'))
+                        <p class="text-danger">{{ $errors->first('num_tel') }}</p>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" name="address" type='text' placeholder="Adresse" value="{{ old('address') }}" required="">
+                    @if($errors->has('address'))
+                        <p class="text-danger">{{ $errors->first('address') }}</p>
                     @endif
                 </div>
                 <div class="form-group">
@@ -72,7 +86,8 @@
             </div>
         </div>
        </div>
-    </form>
+        </div>
+    {!! Form::close() !!}
 </body>
 
 @stop

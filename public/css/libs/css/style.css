@@ -163,8 +163,21 @@ body {
     color: #71748d;
     background-color: #efeff6;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    position: relative;
 }
 
+html {
+    height: 100vh;
+}
+
+
+.btnaddpanier
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
 h1,
 h2,
 h3,
@@ -933,7 +946,7 @@ Borders
 }
 
 .border {
-    border: 1px solid #e6e6f2 !important;
+    border: 1px solid black !important;
 }
 
 .border-top {
@@ -1934,6 +1947,11 @@ Sidebar Page Navigations
 Container / Wrapper
 -------------------------*/
 
+.connected-right
+{
+    margin-left:20%;
+}
+
 .dashboard-main-wrapper {
     min-height: 100%;
     padding-top: 60px;
@@ -1942,10 +1960,11 @@ Container / Wrapper
 
 .dashboard-wrapper {
     position: relative;
-    left: 0;
+    left: 2%;
 
     margin-top: 5%;
     min-height: auto !important;
+    padding-bottom:1%;
 
 }
 
@@ -6880,6 +6899,12 @@ Media Query
 /* Extra Small Devices, Phones */
 
 @media only screen and (max-width:480px) {
+    .connected-right
+    {
+        margin-left:5%;
+    }
+
+
     .dashboard-content {
     padding: 20px 20px 60px 20px;
 }

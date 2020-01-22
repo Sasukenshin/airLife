@@ -3,12 +3,12 @@
 
         <div class="col-md-12 well well-md">
 
-            <center><h1>Modification du profil</h1></center>
+          <h1>Modification du profil</h1></center>
             <br><br>
 
             {!! Form::open(['url' => 'modifierProfil']) !!}
             <div class="container">
-                <div class="jumbotron">
+
                     <div class="row">
                         <div class="col-md-8 col-xs-12 col-sm-6 col-lg-4">
                             <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
@@ -17,14 +17,24 @@
                             <div class="container" style="border-bottom:1px solid black">
                                 <h2 class="panel-title">{{$unC->FIRSTNAME}} {{$unC->LASTNAME}}</h2>
                             </div>
-                            <hr>
+                            </br>
                             <ul class="container details">
-                                <li> <label class="col-md-4 control-label"><i class="far fa-arrow-alt-circle-right"></i> Prénom : </label><input type="text"  style="width:150px;" value="{{$unC->FIRSTNAME}}" name="firstname"></li>
-                                <li> <label class="col-md-4 control-label"><i class="far fa-arrow-alt-circle-right"></i> Nom : </label><input type="text"  style="width:150px;" value="{{$unC->LASTNAME}}" name="lastname"></li>
-                                <li> <label class="col-md-4 control-label"><i class="fas fa-key"> </i> Mot de passe : </label><input type="password" style="width:150px;" value="*******" name="password"></li>
-                                <li> <label class="col-md-4 control-label"><i class= "fas fa-phone"> </i> Numéro de téléphone : </label><input type="text"  style="width:150px;" value="NUMTEL" name="numerotel"></li>
-                                <li> <label class="col-md-4 control-label"><i class= "fas fa-at"> </i> Email : </label><input type="email" style="width:150px;"value="{{$unC->EMAIL}}" name="mail"></li>
-
+                                <li> <label class="col-md-4 control-label"><i class="far fa-arrow-alt-circle-right"></i> Prénom : </label><input type="text"  style="width:150px;" value="{{$unC->FIRSTNAME}}" name="firstname" required=""></li>
+                                <li> <label class="col-md-4 control-label"><i class="far fa-arrow-alt-circle-right"></i> Nom : </label><input type="text"  style="width:150px;" value="{{$unC->LASTNAME}}" name="lastname" required=""></li>
+                                <li> <label class="col-md-4 control-label"><i class="fas fa-key"> </i> Mot de passe : </label><input type="password" style="width:150px;" value="*******" name="password" required=""></li>
+                                <li> <label class="col-md-4 control-label"><i class="fas fa-key"> </i> Confirmer votre mot de passe : </label><input type="password" style="width:150px;" value="*******" name="password_confirm" required=""></li>
+                                @if($erreurPassword != "")
+                                    <p class="text-danger">{!! $erreurPassword !!}  </p>
+                                @endif
+                                <li> <label class="col-md-4 control-label"><i class= "fas fa-phone"> </i> Numéro de téléphone : </label><input type="tel"  style="width:150px;" value="{{$unC->NUM_TEL}}" name="num_tel" required=""></li>
+                                @if($erreurTelephone != "")
+                                    <p class="text-danger">{!! $erreurTelephone !!}  </p>
+                                @endif
+                                <li> <label class="col-md-4 control-label"><i class= "fas fa-at"> </i> Email : </label><input type="email" style="width:150px;"value="{{$unC->EMAIL}}" name="mail" required=""></li>
+                                @if($erreurMail != "")
+                                    <p class="text-danger">{!! $erreurMail !!}  </p>
+                                @endif
+                                <li> <label class="col-md-4 control-label"><i class= "fas fa-map-marker"> </i> Adresse  : </label><input type="text" style="width:150px;"value="{{$unC->ADDRESS}}" name="address" required=""></li>
                             </ul>
 
                             <div class="panel-footer">
@@ -38,8 +48,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
+            </div>
             {!! Form::close() !!}
+
         </div>
         @stop
 

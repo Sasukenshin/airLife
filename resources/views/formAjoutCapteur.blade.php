@@ -2,7 +2,7 @@
 @section('content')
 <body>
     <div class="splash-container">
-        <div id="connexion-contain"
+        <div id="connexion-contain">
         <div class="card ">
             <div class="card-header text-center"><span class="splash-description">Ajout d'un capteur</span></div>
             <div class="card-body">
@@ -31,7 +31,7 @@
             </div>
         </div>                
     </div>     
-
+    </div>
 </body>
  
     <div class="alert alert-danger">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\metier\Client;
-use App\User;
+
 use Request;
 use App\Http\Controllers\Controller;
 use App\metier\Users;
@@ -31,7 +31,10 @@ class InscriptionController extends Controller
             'lastname' => ['required'],
             'email' => ['email'],
             'mdp' => ['required', 'confirmed', 'min:6'],
-            'mdp_confirmation' => ['required']
+            'mdp_confirmation' => ['required'],
+            'address' =>['required'],
+            'num_tel' =>['required','digits:10']
+
         ], [
             'mdp.min' => 'Pour des raisons de sécurité, votre mot de passe doit faire au moins :min caractères.'
         ]);
@@ -42,10 +45,14 @@ class InscriptionController extends Controller
             'firstname' => request('firstname'),
             'lastname' => request('lastname'),
             'email' => request('email'),
+            'num_tel' => request('num_tel'),
+            'address' => request('address'),
+            'player_id_navigateurs' => '',
+            'player_id_mobile' => '',
             'confirmation_token' => str_replace('/', '', bcrypt(str_random(16)))
         ]);
 
-        $utilisateur->notify(new RegisteredUser());
+       // $utilisateur->notify(new RegisteredUser());
 
         return redirect('/connexion');
     }
@@ -83,8 +90,11 @@ class InscriptionController extends Controller
 
         $unClient = new Users();
         $unC = $unClient->getClient(Auth::user()->iduser);
-        $erreur = "";
-        return view('formModifierProfil', compact('erreur', 'unC'));
+
+        $erreurPassword="";
+        $erreurMail = "";
+        $erreurTelephone="";
+        return view('formModifierProfil', compact('erreurPassword','erreurMail','erreurTelephone', 'unC'));
     }
 
     /* Récupère en post les données du formulaire de modification d'un client
@@ -92,17 +102,51 @@ class InscriptionController extends Controller
      * puis renvoie la page profil du client.
      */
 
-    public function modifierProfil() {
-        $unClient = new Users();
-//        $adresse = Request::input('adressecli');
-//        $tel = Request::input('telcli');
-        $adresse="";
+    public function modifierProfil()
+    {
+        $unC = new Users();
+        $adresse = Request::input('address');
+        $numtel = Request::input('num_tel');
         $password = Request::input('password');
+        $password_confirm = Request::input('password_confirm');
         $mail = Request::input('mail');
         $firstname = Request::input('firstname');
         $lastname = Request::input('lastname');
-        $unClient->modificationProfil(Auth::user()->iduser, $adresse, $password, $mail, $firstname,$lastname);
 
-        return redirect('/profil');
+        $erreurPassword="";
+        $erreurTelephone = "";
+        $erreurMail="";
+        if ($password != $password_confirm) {
+            $erreurPassword = "Les mots de passes doivent être identiques <br>";
+        }
+        if (strlen($password) < 6) {
+            $erreurPassword .= "Le mot de passe doit contenir au moins 6 caractères";
+        }
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $erreurMail = "L'adresse email n'est pas correcte";
+        }
+
+        if (strlen($numtel) != 10) {
+            if (!preg_match('/^[0-9-+]$/', $numtel)) { // error } else { // good }
+                $erreurTelephone ="Le numero de téléphone n'est pas correcte";
+            }
+            $erreurTelephone ="Le numero de téléphone n'est pas correcte";
+        }
+
+
+        if($erreurPassword != "" || $erreurMail != "" || $erreurTelephone != "" )
+        {
+            $unC->ADDRESS= $adresse;
+            $unC->FIRSTNAME=$firstname;
+            $unC->LASTNAME = $lastname;
+            $unC->EMAIL = $mail;
+            $unC->NUM_TEL = $numtel;
+            return view('formModifierProfil', compact('erreurPassword', 'erreurTelephone','erreurMail','unC'));
+
+        }
+        else {
+            $unC->modificationProfil(Auth::user()->iduser, $adresse, $password, $mail, $firstname, $lastname, $numtel);
+            return redirect('/profil');
+        }
     }
 }

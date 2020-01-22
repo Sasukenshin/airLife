@@ -23,16 +23,18 @@ Route::get('/about', 'AboutController@about');
 
 Route::get('/inscription', 'InscriptionController@formulaire');
 
-Route::post('/inscription', 'InscriptionController@traitement');
+Route::post('/inscriptions', 'InscriptionController@traitement');
+
 
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
 
+
 Route::get('/capteur', 'CapteurController@info_capteur');
 Route::post('/delete_capteur', 'CapteurController@delete_capteur');
 
-Route::get('/connexion', 'ConnexionController@formulaire');
+Route::get('/connexion', 'ConnexionController@formulaire')->name("connexion");
 
 Route::post('/connexion', 'ConnexionController@traitement');
 
@@ -55,11 +57,15 @@ Route::get('/profil', 'InscriptionController@getProfil');
 Route::post('/postmodificationProfil', 'InscriptionController@postModifierProfil');
 Route::post('/modifierProfil', 'InscriptionController@modifierProfil');
 
-
 //Getcontact
 Route::get('/contact', function () {
     return view('contact');
 })->name("contact");
+
+//cgu
+Route::get('/cgu', function () {
+    return view('conditionsGenerales');
+})->name("cgu");
 
 Route::post('/contactMail','EmailController@sendMailContact');
 
@@ -67,7 +73,25 @@ Route::post('/contactMail','EmailController@sendMailContact');
 Route::post('/addIdOneSignal','OneSignalController@addIdOneSignal');
 
 //get notification
-Route::post('/getNotificationsUser', 'HomeController@getNotificationsUser');
+Route::post('/getNotificationsUser', 'NotificationController@getNotificationsUser');
+
+Route::get('/getNotifications', 'NotificationController@getNotificationsUserTotal')->name("notifications");
 
 
 
+
+//add panier
+Route::post('/addpanier','PanierController@addPanier');
+Route::get('/panier', 'PanierController@getPanier')->name("panier");
+Route::post('/addQte','PanierController@addQte');
+Route::post('/lessQte','PanierController@lessQte');
+Route::post('/deleteLignePanier','PanierController@deleteLignePanier');
+
+//Session
+Route::get('session/get','SessionController@accessSessionData');
+Route::get('session/set','SessionController@storeSessionData');
+Route::get('session/remove','SessionController@deleteSessionData');
+
+
+//boutique
+Route::get('/boutique', 'HomeController@getBoutique')->name("boutique");

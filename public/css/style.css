@@ -163,6 +163,12 @@ body {
     color: #71748d;
     background-color: #efeff6;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    position: relative;
+}
+
+html {
+    min-height: 100vh;
 }
 
 h1,
@@ -933,7 +939,7 @@ Borders
 }
 
 .border {
-    border: 1px solid #e6e6f2 !important;
+    border: 1px solid black !important;
 }
 
 .border-top {
@@ -1933,7 +1939,10 @@ Sidebar Page Navigations
 /*-----------------------
 Container / Wrapper
 -------------------------*/
-
+.connected-right
+{
+    margin-left:20%;
+}
 .dashboard-main-wrapper {
     min-height: 100%;
     padding-top: 60px;
@@ -6882,6 +6891,12 @@ Media Query
 /* Extra Small Devices, Phones */
 
 @media only screen and (max-width:480px) {
+
+    .connected-right
+    {
+        margin-left:20%;
+    }
+
     .dashboard-content {
     padding: 20px 20px 60px 20px;
 }
