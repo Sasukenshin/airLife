@@ -51,8 +51,8 @@
                            "                                                  <div class=\"notification-list-user-block\">"+data[i].textnotification+
                            "                                                        <div class=\"notification-date\">"+data[i].datenotif +"</div>" +
                            "                                               </div>" +
-                           "                                                   </div>\" +\n" +
-                           "                           \"                                            </a>" );
+                           "                                                   </div> " +
+                           "                                                                     </a>" );
                        i++;
                    });
 

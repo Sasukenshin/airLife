@@ -95,7 +95,7 @@ class PanierController extends Controller {
 
     public function getPanier() //fonction pour retourner le panier d'un client
     {
-
+       
        if(!auth()->guest())
        {
            $panier = DB::table('panier')->where('iduser', '=', Auth::user()->iduser)->first();
@@ -105,6 +105,7 @@ class PanierController extends Controller {
        }
        else
        {
+
            $panier = DB::table('panier')->where('sessionid', '=', Session::getId())->first();
            if(!is_null($panier) && isset($panier) && !empty($panier) )
            $lignespanier = DB::table('lignespanier')->join('articles', 'lignespanier.artid', '=', 'articles.artid')->where('idpanier', '=', $panier->idpanier)->get();
