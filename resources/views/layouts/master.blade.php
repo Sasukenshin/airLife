@@ -27,11 +27,10 @@
 
 
 {{--    notifications --}}
+    @if (auth()->check())
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    @endif
     <script>
-
-
-
        function getNotifications()
        {
            $.ajax({
@@ -60,8 +59,6 @@
 
            })
        }
-
-
         var OneSignal = window.OneSignal || [];
 
         OneSignal.push(function() {
@@ -74,7 +71,7 @@
             });
             OneSignal.sendTag("user_id", "4444", function (tagsSent) {
                 // Callback called when tags have finished sending
-                console.log("Tags have finished sending!");
+                //console.log("Tags have finished sending!");
             });
             OneSignal.getUserId(function (id) {
 
@@ -94,8 +91,6 @@
 
             });
         });
-
-
     </script>
 
 
@@ -327,8 +322,6 @@
 
 </div>
 </body>
-
-    <script src="css\vendor\jquery\jquery-3.3.1.min.js"></script>
     <script src="css\vendor\slimscroll\jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="js\main-js.js"></script>

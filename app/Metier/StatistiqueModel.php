@@ -48,12 +48,13 @@ class StatistiqueModel extends Model {
     public function getStatParGaz($dateDebut,$dateFin)
     {
         $datas = DB::table('sensor')
-            ->select('sensor.IDSENSOR', 'sensor.NAMESENSOR as CAPTEUR', 'datas.DATASENSOR as RELEVE')
+            ->select('datas.IDDATATYPE', 'datatype.LIBELLE as CAPTEUR', 'datas.DATASENSOR as RELEVE')
             ->leftJoin('users', 'sensor.IDUSER', '=', 'users.iduser')
             ->leftJoin('datas', 'sensor.IDSENSOR', '=', 'datas.IDSENSOR')
+            ->leftJoin('datatype', 'datatype.IDDATATYPE', '=', 'datas.IDDATATYPE')
             ->where('DATETIMEDATA', '>', $dateDebut)  
             ->where('DATETIMEDATA', '<', $dateFin)  
-            ->orderBy('sensor.IDSENSOR','datas.DATASENSOR')
+            ->orderBy('datas.IDDATATYPE', 'datatype.LIBELLE')
             ->get();
         return $datas;
     }

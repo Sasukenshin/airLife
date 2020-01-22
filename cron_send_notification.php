@@ -1,19 +1,18 @@
 <?PHP
-function sendMessage(){
-
-    $content = array(
-        "en" => 'Testing Message'
-    );
-
+function sendMessage($content, $playerId, $data = array("test"=>"ok","caca" => "pipi"),$icone=""){
+    if(empty($content) || $content == null){
+        return "Message nécéssaire à l'envoie d'une notification";
+    } else if(empty($playerId) || $playerId == null) {
+        return "Player ID nécéssaire à l'envoie d'une notification";
+    }
+    print_r(json_encode($data));
+    echo "<br><br>";
     $fields = array(
         'app_id' => "b0b15de8-0982-4a93-afc8-ad4c7c0e109f",
 
-
-
-        'data' => array("foo" => "bar"),
-        'large_icon' =>"ic_launcher_round.png",
+        'large_icon' => $icone,
         'contents' => $content,
-        'include_player_ids'=> array('ffd5e1ee-abf1-4880-a80b-c35f122137b0','f4f612f3-c27b-4905-8e95-85a2bd5f3bf8')
+        'include_player_ids'=> $playerId
 
     );
 
@@ -36,8 +35,9 @@ function sendMessage(){
 
     return $response;
 }
-
-$response = sendMessage();
+$ID=array('6c0d3b43-30d1-4781-9a4d-029954bde1e8');
+$message=array('en' => 'Hi i\'m fine and u ?', 'fr'=> "Salut je vais bien et toi ?");
+$response = sendMessage($message, $ID);
 $return["allresponses"] = $response;
 $return = json_encode( $return);
 print("\n\nJSON received:\n");
