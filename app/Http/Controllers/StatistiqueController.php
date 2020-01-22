@@ -57,16 +57,15 @@ class StatistiqueController extends Controller
     {  
         $model = new StatistiqueModel();
         $stat_par_gaz_brut = $model->getStatParGaz($dateDebut, $dateFin);
-        $id=0;
+        $id=-1;
         $min=10000000000000;
         $max=-10000000000000;
         $moyenne=0;
         $mediane=[];
         $nombreReleve=0;
         $stat_par_gaz=[];
-
         foreach ($stat_par_gaz_brut as $counter => $valeur) {
-            if (!isset($stat_par_gaz[$valeur->IDSENSOR])) {
+            if (!isset($stat_par_gaz[$valeur->IDDATATYPE])) {
                 if (isset($stat_par_gaz[$id])) {
                     $stat_par_gaz[$id]->MOYENNE = round($moyenne / $nombreReleve,2);
                     $stat_par_gaz[$id]->MEDIANE = round($mediane[$nombreReleve/2]);
@@ -80,28 +79,41 @@ class StatistiqueController extends Controller
                     $mediane=[];
                     $nombreReleve=0;
                 }
-                $id =$valeur->IDSENSOR;
-                $stat_par_gaz[$valeur->IDSENSOR] = (object) array('CAPTEUR' => $valeur->CAPTEUR,'NB_RELEVE' => 0, 'MOYENNE' => 0, 'MEDIANE' => 0, 'MAX' => 0, 'MIN' => 0);
+                $id =$valeur->IDDATATYPE;
+                $stat_par_gaz[$valeur->IDDATATYPE] = (object) array('CAPTEUR' => $valeur->CAPTEUR,'NB_RELEVE' => 0, 'MOYENNE' => 0, 'MEDIANE' => 0, 'MAX' => 0, 'MIN' => 0);
                 $nombreReleve = 1;
-                if($min>$valeur->RELEVE){
+                if ($min>$valeur->RELEVE) {
                     $min = $valeur->RELEVE;
                 }
-                if($max<$valeur->RELEVE){
+                if ($max<$valeur->RELEVE) {
                     $max = $valeur->RELEVE;
                 }
                 $moyenne = $moyenne + $valeur->RELEVE;
                 $mediane[]=$valeur->RELEVE;                
             } else {
                 $nombreReleve = $nombreReleve +1;
-                if($min>$valeur->RELEVE){
+                if ($min>$valeur->RELEVE) {
                     $min = $valeur->RELEVE;
                 }
-                if($max<$valeur->RELEVE){
+                if ($max<$valeur->RELEVE) {
                     $max = $valeur->RELEVE;
                 }
                 $moyenne = $moyenne + $valeur->RELEVE;
                 $mediane[]=$valeur->RELEVE;
             }
+        }
+        if (isset($stat_par_gaz[$id])) {
+            $stat_par_gaz[$id]->MOYENNE = round($moyenne / $nombreReleve,2);
+            $stat_par_gaz[$id]->MEDIANE = round($mediane[$nombreReleve/2]);
+            $stat_par_gaz[$id]->MAX = $max;
+            $stat_par_gaz[$id]->MIN = $min;
+            $stat_par_gaz[$id]->NB_RELEVE = $nombreReleve;
+            //RESET DES VARIABLES
+            $min=10000000000000;
+            $max=-10000000000000;
+            $moyenne=0;
+            $mediane=[];
+            $nombreReleve=0;
         }
         return $stat_par_gaz;
     }

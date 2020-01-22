@@ -29,7 +29,7 @@
                                 data_graph.push(datas[data]['VALEUR']);
                             }
                         }
-
+                    console.log(data_graph);
                     var ctx = document.getElementById(libelle.replace(/ /g,"")).getContext('2d');
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
