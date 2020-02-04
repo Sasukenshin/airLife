@@ -61,7 +61,7 @@
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table id="donnee_recente" class="table">
-                                                @isset($capteurs)
+                                                @if(count($capteurs)>0)
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <th class='border-0'> Capteurs </th>
@@ -83,7 +83,9 @@
                                                     </tr>  
                                                     @endforeach                          
                                                 </tbody>
-                                                @endisset
+                                                @else
+                                                    <p> Vous ne disposez actuellement d'aucun capteurs pensez à en achetter via le lien boutique ou ajouter en de nouveaux ! ! ! </p>
+                                                @endif
                                             </table>
                                         </div>
                                     </div>

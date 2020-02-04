@@ -27,6 +27,9 @@ class CapteurController extends Controller
                 $capteurs[$valeur->CAPTEUR] = (object) array('GAZ' => $valeur->GAZ, 'IDSENSOR' => $valeur->IDSENSOR);
             }
         }
+        if (!isset($capteurs)) {
+            $capteurs = [];
+        }
         return view('capteur' , ['capteurs' => $capteurs]);
     }
     
