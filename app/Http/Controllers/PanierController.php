@@ -34,7 +34,6 @@ class PanierController extends Controller {
         {
             $panierExist = DB::table('panier')->where('iduser' ,Auth::user()->iduser)->first();
 
-
             if(empty($panierExist)) {
                 $id = DB::table('panier')->insertGetId([
                     'datepanier' => $today2, 'iduser' => Auth::user()->iduser, 'sessionid' => Session::getId(), 'done' => '0',
@@ -46,26 +45,20 @@ class PanierController extends Controller {
                 $articleExist = DB::table('lignespanier')->where('artid',$artid)->where('idpanier', $panierExist->idpanier)->first();
                 $id = $panierExist->idpanier;
             }
-
-
             if(empty($articleExist)){
             DB::table('lignespanier')->insert([
                 'idpanier' => $id, 'artid' => $artid, 'dateLivraison' => $dateLivraison, 'prix' => $article->prix,
-
             ]);
             }else
             {
                 DB::table('lignespanier')->where('lignepanierid', $articleExist->lignepanierid)->increment('qte');
             }
-
         }
         else
         {
-
             $panierExist = DB::table('panier')->where('sessionid' ,Session::getId())->first();
 
             if(empty($panierExist) ) {
-
                 $id = DB::table('panier')->insertGetId([
                     'datepanier' => $today2, 'sessionid' => Session::getId(), 'done' => '0',
 
@@ -85,17 +78,12 @@ class PanierController extends Controller {
             else{
                 DB::table('lignespanier')->where('lignepanierid', $articleExist->lignepanierid)->increment('qte');
             }
-
-
         }
-
         return response()->json($article->libelle);
     }
 
-
     public function getPanier() //fonction pour retourner le panier d'un client
     {
-       
        if(!auth()->guest())
        {
            $panier = DB::table('panier')->where('iduser', '=', Auth::user()->iduser)->first();
@@ -105,17 +93,14 @@ class PanierController extends Controller {
        }
        else
        {
-
            $panier = DB::table('panier')->where('sessionid', '=', Session::getId())->first();
            if(!is_null($panier) && isset($panier) && !empty($panier) )
            $lignespanier = DB::table('lignespanier')->join('articles', 'lignespanier.artid', '=', 'articles.artid')->where('idpanier', '=', $panier->idpanier)->get();
 
        }
 
-
         if(isset($lignespanier) && !is_null($lignespanier) && !empty($lignespanier) && count($lignespanier)>0)
         {
-
             $sousTotalTcc=0;
             foreach ($lignespanier as $uneLignepanier)
             {
@@ -134,8 +119,9 @@ class PanierController extends Controller {
             $totalTtc = $sousTotalTcc + $fraisport->prix;
             $totalTva = round(($totalTtc)/120*20);
 
-            $data = array('fraisport' => $fraisport->prix, 'totalTtc'=> $totalTtc, 'totalTva'=>$totalTva, 'sousTotalTcc'=>$sousTotalTcc);
+            $data = array('fraisport' => $fraisport->prix, 'totalTtc'=> $totalTtc, 'totalTva'=>$totalTva, 'sousTotalTcc'=>$sousTotalTcc,'panierid' => $panier->idpanier, 'moyenlivraisonid' => $panier->moyenlivraisonid, 'moyenpaiementid' => $panier->moyenpaiementid  );
             if(isset($userinfo) && !is_null($userinfo) && !empty($userinfo)){
+
                 return view("panier", compact('lignespanier','data', 'moyenlivraisons','moyenpaiements','userinfo'));
             }
             else
@@ -146,22 +132,45 @@ class PanierController extends Controller {
 
             return view("panier");
         }
-
-
-
     }
-
     public function deleteLignePanier(Request $request) //fonction pour delete une ligne panier d'un client
     {
         $lignepanierid=$request['lignepanierid'];
         DB::table('lignespanier')->where('lignepanierid', $lignepanierid)->delete();
 
-        //return response()->json($lignepanierid);
         return redirect('/panier');
     }
 
 
+     function calculTotalPanier($idpanier){
+        $tableauTotalPanier = array();
 
+         $tableauTotalPanier['sousTotalTcc'] =0;
+         $tableauTotalPanier['fraisport'] =0;
+         $tableauTotalPanier['totalTtc']=0;
+         $tableauTotalPanier['totalTva']=0;
+        $lesLignesPaniers= DB::table('lignespanier')
+            ->where('idpanier', $idpanier)->get();
+        $sousTotalTcc =0;
+        foreach($lesLignesPaniers as $laLigne)
+        {
+            $sousTotalTcc += $laLigne->prix * $laLigne->qte;
+        }
+        $moyenlivraison = DB::table('panier')->select('moyenlivraisonid')
+            ->where('idpanier', $idpanier)->first();
+
+        $fraisport = DB::table('moyenlivraison')->select('prix')
+            ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
+
+        $totalTtc = $sousTotalTcc + $fraisport->prix;
+        $totalTva = round(($totalTtc)/120*20);
+         $tableauTotalPanier['sousTotalTcc'] =$sousTotalTcc;
+         $tableauTotalPanier['fraisport'] =$fraisport->prix;
+         $tableauTotalPanier['totalTtc']=$totalTtc;
+         $tableauTotalPanier['totalTva']=$totalTva;
+
+        return $tableauTotalPanier;
+    }
 
     public function addQte(Request $request) //fonction pour add une quantité
     {
@@ -176,30 +185,16 @@ class PanierController extends Controller {
             $article = DB::table('lignespanier')->select('idpanier','qte', 'prix')->where('lignepanierid', $lignepanierid)->first();
         }
 
-
         //calcultotalpanier
-        $lesLignesPaniers= DB::table('lignespanier')
-            ->where('idpanier', $article->idpanier)->get();
-        $sousTotalTcc =0;
-        foreach($lesLignesPaniers as $laLigne)
-        {
-            $sousTotalTcc += $laLigne->prix * $laLigne->qte;
-        }
-        $moyenlivraison = DB::table('panier')->select('moyenlivraisonid')
-            ->where('idpanier', $article->idpanier)->first();
 
-        $fraisport = DB::table('moyenlivraison')->select('prix')
-            ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
-
-        $totalTtc = $sousTotalTcc + $fraisport->prix;
-        $totalTva = round(($totalTtc)/120*20);
+        $tableauTotalPanier = self::calculTotalPanier($article->idpanier);
         return response()->json([
             'qte' => $article->qte,
             'prix' => $article->prix * $article->qte,
-            'sous_total_ttc' => $sousTotalTcc,
-            'frais_port_ttc' => $fraisport->prix,
-            'total_tva' => $totalTva,
-            'total_ttc' => $totalTtc
+            'sous_total_ttc' =>$tableauTotalPanier['sousTotalTcc'],
+            'frais_port_ttc' => $tableauTotalPanier['fraisport'],
+            'total_tva' => $tableauTotalPanier['totalTva'],
+            'total_ttc' => $tableauTotalPanier['totalTtc']
 
         ]);
     }
@@ -212,37 +207,106 @@ class PanierController extends Controller {
         {
        // $prix = DB::table('articles')->select('prix')->where('artid' ,$article->artid)->first();
         DB::table('lignespanier')->where('lignepanierid', $lignepanierid)->decrement('qte');
-        //DB::table('lignespanier')
-          //  ->where('lignepanierid', $lignepanierid)
-            //->update(['prix' => $article->prix -$prix->prix]);
+
         $article = DB::table('lignespanier')->select('idpanier','qte','prix')->where('lignepanierid' ,$lignepanierid)->first();
         }
-       // return response()->json($article->qte,$prix->prix);
         //calcultotalpanier
-        $lesLignesPaniers= DB::table('lignespanier')
-            ->where('idpanier', $article->idpanier)->get();
-        $sousTotalTcc =0;
-        foreach($lesLignesPaniers as $laLigne)
-        {
-            $sousTotalTcc += $laLigne->prix * $laLigne->qte;
-        }
-        $moyenlivraison = DB::table('panier')->select('moyenlivraisonid')
-            ->where('idpanier', $article->idpanier)->first();
-
-        $fraisport = DB::table('moyenlivraison')->select('prix')
-            ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
-
-        $totalTtc = $sousTotalTcc + $fraisport->prix;
-        $totalTva = round(($totalTtc)/120*20);
+        $tableauTotalPanier = self::calculTotalPanier($article->idpanier);
         return response()->json([
             'qte' => $article->qte,
             'prix' => $article->prix * $article->qte,
-            'sous_total_ttc' => $sousTotalTcc,
-            'frais_port_ttc' => $fraisport->prix,
-            'total_tva' => $totalTva,
-            'total_ttc' => $totalTtc
+            'sous_total_ttc' =>$tableauTotalPanier['sousTotalTcc'],
+            'frais_port_ttc' => $tableauTotalPanier['fraisport'],
+            'total_tva' => $tableauTotalPanier['totalTva'],
+            'total_ttc' => $tableauTotalPanier['totalTtc']
 
         ]);
+    }
+
+    public function updateTransport(Request $request) //fonction pour update le mode de transport
+    {
+        $moyenlivraisonid=$request['radioValue'];
+        $idpanier = $request['idpanier'];
+        $fraisport = DB::table('moyenlivraison')->select('prix')->where('moyenlivraisonid' ,$moyenlivraisonid)->first();
+
+        if($fraisport->prix != 0) {
+            DB::table('panier')->where('idpanier', '=', $idpanier)->update(['moyenlivraisonid' => $moyenlivraisonid]);
+            //calcultotalpanier
+            $tableauTotalPanier = self::calculTotalPanier($idpanier);
+            return response()->json([
+                'sous_total_ttc' =>$tableauTotalPanier['sousTotalTcc'],
+                'frais_port_ttc' => $tableauTotalPanier['fraisport'],
+                'total_tva' => $tableauTotalPanier['totalTva'],
+                'total_ttc' => $tableauTotalPanier['totalTtc']
+
+            ]);
+        }
+        else
+            return "error";
+    }
+
+    public function updateMoyenPaiement(Request $request) //fonction pour mettre à jour le mode de paiement
+    {
+        $moyenpaiementid=$request['radioValue'];
+        $idpanier = $request['idpanier'];
+        $moyenP = DB::table('moyenpaiement')->where('moyenpaiementid' ,$moyenpaiementid)->first();
+        if($moyenP->moyenpaiementid != null) {
+            DB::table('panier')->where('idpanier', '=', $idpanier)->update(['moyenpaiementid' => $moyenpaiementid]);
+        }
+        else
+            return "error";
+    }
+
+
+    public function traitement() // validation du panier
+    {
+        if(auth()->guest())
+        {
+            return back()->withError("Veuillez vous connecter afin de pouvoir valider votre panier.")->withInput();
+        }else {
+            request()->validate([
+                'Flastname2' => ['required'],
+                'Ffirstname2' => ['required'],
+                'Faddress2' => ['required'],
+                'Fville2' => ['required'],
+                'Fcp2' => ['required'],
+                'Ftel2' => ['required'],
+            ], [
+                'Flastname2.required' => 'Veuillez entrer votre nom.',
+                'Ffirstname2.required' => 'Veuillez entrer votre prénom.',
+                'Faddress2.required' => 'Veuillez entrer votre adresse.',
+                'Fville2.required' => 'Veuillez entrer votre ville.',
+                'Fcp2.required' => 'Veuillez entrer votre code postal.',
+                'Ftel2.required' => 'Veuillez entrer votre numéro de téléphone.'
+            ]);
+            $panierid = request('panierid');
+            $Flastname = request('Flastname2');
+            $Ffirstname = request('Ffirstname2');
+            $Faddress = request('Faddress2');
+            $Fville = request('Fville2');
+            $Fcp = request('Fcp2');
+            $Ftel = request('Ftel2');
+            $Fmail = request('Fmail');
+
+            if($panierid != "" && !auth()->guest()){
+
+
+                $tableauTotalPanier  = self::calculTotalPanier($panierid);
+                $totalHT = $tableauTotalPanier['totalTtc'] - $tableauTotalPanier['totalTva'];
+                //on passe le panier en "done = 1 et on met à jour les données (ttc, ht, adresse facturation ...)
+                DB::table('panier')->where('idpanier', '=', $panierid)->update(['totalTTC' =>  $tableauTotalPanier['totalTtc'], 'totalHT' => $totalHT , 'totalTTC_sansfraisport' => $tableauTotalPanier['sousTotalTcc'], 'TVA' => $tableauTotalPanier['totalTva'] , 'fraisPort' =>$tableauTotalPanier['fraisport'], 'firstname' =>$Ffirstname , 'lastname' =>$Flastname, 'address' =>  $Faddress, 'postalCode' => $Fcp, 'city' => $Fville,'dateValidation' => time(),'num_tel' => $Ftel,'email' => $Fmail] );
+                $panier = DB::table('panier')->where('idpanier', '=', $panierid)->first();
+                return view("paypal", compact ('panier'));
+            }
+        }
+    }
+
+    public function retourCommande(){
+
+        $panierid = request('factureid');
+        DB::table('panier')->where('idpanier', '=', $panierid)->update(['done' =>1]);
+
+        return view ('retourcommande');
     }
 
 }

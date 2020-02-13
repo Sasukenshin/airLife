@@ -117,11 +117,7 @@
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item">
-                            <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="text" placeholder="Rechercher..">
-                            </div>
-                        </li>
+
                         @if (auth()->check())
                         <li class="nav-item dropdown notification">
                             <a class="nav-link nav-icons" href="#" onclick="getNotifications();" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
@@ -181,6 +177,7 @@
                                 @if (auth()->check())
                                     <a class="dropdown-item" href="profil"><i class="fas fa-user mr-2"></i>Profil </a>
                                     <a class="dropdown-item" href="deconnexion"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
+
                                 @else
                                     <a class="dropdown-item" href="{{route('connexion')}}"><i class="fas fa-power-off mr-2"></i>Connexion</a>
 
@@ -204,7 +201,7 @@
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="#">Menu</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler mt-2" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -212,6 +209,37 @@
                             <li class="nav-divider">
                                 Menu
                             </li>
+
+                            <li class="nav-item d-block d-lg-none">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fa fa-fw fa-user-circle"></i>Profil</a>
+                                <div id="submenu-4" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        @if (auth()->check())
+                                            <li class="nav-item">
+                                                 <a class="nav-link" href="profil">Profil </a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link" href="{{route('notifications')}}">Voir toutes les notifications</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                 <a class="nav-link" href="deconnexion">Déconnexion</a>
+                                            </li>
+                                        @else
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{route('connexion')}}">Connexion</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                 <a class="nav-link" href="inscription"></i>Inscription</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="forgot-password">Mot de passe oublié</a>
+                                            </li>
+                                        @endif
+
+                                    </ul>
+                                </div>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Tableau de bord</a>
                                 <div id="submenu-1" class="collapse submenu" style="">
@@ -224,6 +252,10 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="capteur">Capteurs</a>
+                                        </li>
+
+                                        <li class="nav-item d-block d-lg-none">
+                                            <a class="nav-link" href="capteur">test</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -248,8 +280,22 @@
 
                                 </div>
                             </li>
+                            <li class="nav-item d-block d-lg-none">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-user-circle"></i>Boutique</a>
+                                <div id="submenu-3" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('panier')}}">Panier</a>
+                                        </li>
+
+                                        <li class="nav-item d-block d-lg-none">
+                                            <a class="nav-link" href="{{route('boutique')}}">Liste des articles</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('boutique')}}" ><i class="fas fa-shopping-cart"></i> Boutique</a>
+                                <a class="nav-link d-none d-lg-block" href="{{route('boutique')}}" ><i class="fas fa-shopping-cart"></i> Boutique</a>
 
                             </li>
                         </ul>
@@ -257,7 +303,115 @@
                 </nav>
             </div>
         </div>
-        @endif
+        @else
+            <div class="nav-left-sidebar sidebar-dark d-block d-lg-none">
+                <div class="menu-list">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="d-xl-none d-lg-none" href="#">Menu</a>
+                        <button class="navbar-toggler mt-2" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav flex-column">
+                                <li class="nav-divider">
+                                    Menu
+                                </li>
+
+                                <li class="nav-item d-block d-lg-none">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fa fa-fw fa-user-circle"></i>Profil</a>
+                                    <div id="submenu-4" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            @if (auth()->check())
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="profil">Profil </a>
+                                                </li>
+                                                <li>
+                                                    <a lass="nav-link" href="{{route('notifications')}}">Voir toutes les notifications</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="deconnexion">Déconnexion</a>
+                                                </li>
+                                            @else
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{route('connexion')}}">Connexion</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="inscription"></i>Inscription</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="forgot-password">Mot de passe oublié</a>
+                                                </li>
+                                            @endif
+
+                                        </ul>
+                                    </div>
+                                </li>
+                                @if (auth()->check())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Tableau de bord</a>
+                                    <div id="submenu-1" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="statistique">Statistiques</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/">Visualisation en direct</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="capteur">Capteurs</a>
+                                            </li>
+
+                                            <li class="nav-item d-block d-lg-none">
+                                                <a class="nav-link" href="capteur">test</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                @endif
+                                <li class="nav-divider">
+                                    Administration
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fas fa-fw fa-info-circle"></i>Informations générales</a>
+                                    <div id="submenu-2" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="info-capteurs">Capteurs</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="info-air">Air</a>
+                                            </li>
+
+
+                                        </ul>
+
+                                    </div>
+                                </li>
+                                <li class="nav-item d-block d-lg-none">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-user-circle"></i>Boutique</a>
+                                    <div id="submenu-3" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{route('panier')}}">Panier</a>
+                                            </li>
+
+                                            <li class="nav-item d-block d-lg-none">
+                                                <a class="nav-link" href="{{route('boutique')}}">Liste des articles</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-none d-lg-block" href="{{route('boutique')}}" ><i class="fas fa-shopping-cart"></i> Boutique</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+@endif
+
         <!-- ============================================================== -->
         <!-- end left sidebar -->
         <!-- ============================================================== -->

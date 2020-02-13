@@ -1960,9 +1960,9 @@ Container / Wrapper
 
 .dashboard-wrapper {
     position: relative;
-    left: 2%;
 
-    margin-top: 5%;
+
+    margin-top: 2%;
     min-height: auto !important;
     padding-bottom:1%;
 

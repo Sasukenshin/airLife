@@ -40,6 +40,7 @@ Route::get('/connexion', 'ConnexionController@formulaire')->name("connexion");
 Route::post('/connexion', 'ConnexionController@traitement');
 
 Route::get('/deconnexion', 'ConnexionController@deconnexion');
+Route::post('/deconnexionPanier', 'ConnexionController@deconnexionPanier')->name("deconnexionPanier");
 
 
 
@@ -81,12 +82,16 @@ Route::get('/getNotifications', 'NotificationController@getNotificationsUserTota
 
 
 
-//add panier
+//panier
 Route::post('/addpanier','PanierController@addPanier');
 Route::get('/panier', 'PanierController@getPanier')->name("panier");
 Route::post('/addQte','PanierController@addQte');
 Route::post('/lessQte','PanierController@lessQte');
 Route::post('/deleteLignePanier','PanierController@deleteLignePanier');
+Route::post('/updateTransport','PanierController@updateTransport');
+Route::post('/updateMoyenPaiement','PanierController@updateMoyenPaiement');
+Route::post('/validerPanier', 'PanierController@traitement');
+Route::get('/retourcommande/{factureid}', 'PanierController@retourCommande');
 
 //Session
 Route::get('session/get','SessionController@accessSessionData');

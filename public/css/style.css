@@ -1953,7 +1953,7 @@ Container / Wrapper
 .dashboard-wrapper {
     position: relative;
     left: 0;
-    margin-top: 5%;
+    margin-top: 2%;
     min-height: auto !important;
 
 }
@@ -7009,3 +7009,29 @@ Media Query
 
 
 .label-contact-2{text-align:left; }
+
+
+/* panier */
+
+.valider_commande {
+    margin: 15px 0;
+    text-align: right;}
+
+.box_cgv {
+    margin: auto;
+    padding: 10px 0;
+}
+.box_cgv a {
+    color: #077ee8;
+    text-decoration: underline;
+}
+.valid_client {
+    background: #49b2ae;
+    border: none;
+    color: #fff;
+    font: 16px Gotham-Medium;
+    padding: 10px 50px;
+    text-transform: uppercase;
+    cursor: pointer;
+    float:right;
+}

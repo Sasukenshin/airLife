@@ -55,17 +55,22 @@ class ConnexionController extends Controller
             /* $user = new Users();
             $userId = $user->*/
             Session::put('email', Auth::user()->email);
-            return redirect('/');
+            return redirect('/panier');
         }
-        
-        return back()->withInput()->withErrors([
-            'login' => 'Vos identifiants sont incorrects.',
-        ]);
+        return back()->withError("Veuillez vous connecter afin de pouvoir valider votre panier.")->withInput();
+
     }
     
     public function deconnexion()
     {
         auth()->logout();
         return(redirect('/'));
-    }    
+    }
+
+    public function deconnexionPanier(Request $request)
+    {
+        auth()->logout();
+        $response = "ok";
+        return response()->json($response);
+    }
 }
