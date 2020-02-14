@@ -9,7 +9,7 @@
     <input type="hidden" name="no_note" value="1">
     <input type="hidden" name="no_shipping" value="2">
     <input type="hidden" name="currency_code" value="EUR">
-    <input type="hidden" name="address1" value="{{$panier->idpanier}}">
+    <input type="hidden" name="address1" value="{{$panier->address}}">
     <input type="hidden" name="city" value="{{$panier->city}}">
     <input type="hidden" name="country\" value="FR">
     <input type="hidden" name="first_name" value="{{$panier->firstname}}">

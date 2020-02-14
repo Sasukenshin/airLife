@@ -8,6 +8,7 @@ use Datetime;
 use Session;
 use DB;
 use DateInterval;
+use PDF;
 
 
 class PanierController extends Controller {
@@ -301,12 +302,31 @@ class PanierController extends Controller {
         }
     }
 
-    public function retourCommande(){
+    public function retourCommande($panierid){
 
-        $panierid = request('factureid');
+
         DB::table('panier')->where('idpanier', '=', $panierid)->update(['done' =>1]);
 
+
+        return redirect("/commandeValidee");
+    }
+    public function commandeValidee()
+    {
         return view ('retourcommande');
     }
 
+
+    public function orderPdf($idpanier)
+    {
+        $order= DB::table('panier')->select('*')
+            ->where('idpanier', $idpanier)->first();
+        $pdf = PDF::loadView('order_pdf', compact('order'));
+        $name = "commandeNo-".$order->idpanier.".pdf";
+
+        return $pdf->download($name);
+    }
+
+
 }
+
+

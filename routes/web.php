@@ -91,8 +91,9 @@ Route::post('/deleteLignePanier','PanierController@deleteLignePanier');
 Route::post('/updateTransport','PanierController@updateTransport');
 Route::post('/updateMoyenPaiement','PanierController@updateMoyenPaiement');
 Route::post('/validerPanier', 'PanierController@traitement');
-Route::get('/retourcommande/{factureid}', 'PanierController@retourCommande');
-
+Route::post('/retourcommande', 'PanierController@retourCommande');
+Route::get('/retourcommande/{panierid}', 'PanierController@retourCommande');
+Route::get('/commandeValidee', 'PanierController@commandeValidee');
 //Session
 Route::get('session/get','SessionController@accessSessionData');
 Route::get('session/set','SessionController@storeSessionData');
@@ -101,3 +102,6 @@ Route::get('session/remove','SessionController@deleteSessionData');
 
 //boutique
 Route::get('/boutique', 'HomeController@getBoutique')->name("boutique");
+
+
+Route::get('/pdf/{order}', ['as' => 'order.pdf', 'uses' => 'PanierController@orderPdf']);
