@@ -53,6 +53,18 @@
                     @endif
                 </div>
                 <div class="form-group">
+                    <input class="form-control form-control-lg" name="postalCode" type='text' placeholder="Code Postal" value="{{ old('postalCode') }}" required="">
+                    @if($errors->has('postalCode'))
+                        <p class="text-danger">{{ $errors->first('postalCode') }}</p>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" name="city" type='text' placeholder="Ville" value="{{ old('city') }}" required="">
+                    @if($errors->has('city'))
+                        <p class="text-danger">{{ $errors->first('city') }}</p>
+                    @endif
+                </div>
+                <div class="form-group">
                     <input class="form-control form-control-lg" name="mdp" type="password"  placeholder="Mot de passe" required="">
                     @if($errors->has('mdp'))
                         <p class="text-danger">{{ $errors->first('mdp') }}</p>
@@ -72,14 +84,14 @@
                         <input class="custom-control-input" required="" type="checkbox"><span class="custom-control-label">Pour créer votre compte, veuillez accepter les <a href="#">conditions générales du site</a></span>
                     </label>
                 </div>
-                <div class="form-group row pt-0">
+                <!--div class="form-group row pt-0">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
                         <button class="btn btn-block btn-social btn-facebook " type="button">Facebook</button>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <button class="btn  btn-block btn-social btn-twitter" type="button">Twitter</button>
                     </div>
-                </div>
+                </div-->
             </div>
             <div class="card-footer bg-white">
                 <p>Déjà membre? <a href="connexion" class="text-secondary">Se connecter ici.</a></p>

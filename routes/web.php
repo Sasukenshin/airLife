@@ -14,6 +14,7 @@
 Route::auth();
 
 Route::get('/', 'HomeController@home')->name("accueil");
+Route::get('accueil', 'HomeController@home')->name("accueil");
 
 Route::get('/info-capteurs', 'InformationController@info_capteurs');
 
