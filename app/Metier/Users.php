@@ -19,7 +19,7 @@ class Users extends Model implements Authenticatable
 
     public $timestamps = false;
 
-    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email','address','num_tel', 'confirmation_token','player_id_navigateurs','player_id_mobile'];
+    protected $fillable = ['login', 'password', 'firstname', 'lastname', 'email','address','postalCode','city','num_tel', 'confirmation_token','player_id_navigateurs','player_id_mobile'];
 
     public function getRememberTokenName()
     {
@@ -44,24 +44,24 @@ class Users extends Model implements Authenticatable
 
     public function getClient($id) {
         $client = DB::table('users')
-            ->Select('FIRSTNAME', 'LASTNAME',  'EMAIL', 'ADDRESS', 'NUM_TEL')
+            ->Select('FIRSTNAME', 'LASTNAME',  'EMAIL', 'ADDRESS', 'NUM_TEL', 'CITY', 'POSTALCODE')
             ->Where('IDUSER', '=', $id)
             ->first();
         return $client;
     }
 
     //Dialogue aves la bdd pour modifier le profil d'un utilisateur
-    public function modificationProfil($id, $adresse, $password, $mail, $firstname,$lastname,$numtel) {
+    public function modificationProfil($id, $adresse, $password, $mail, $firstname,$lastname,$numtel,$postalCode, $city) {
         //$password = password_hash($password,PASSWORD_DEFAULT);
         if ($password == "*******")
         {
             DB::table('users')->where('IDUSER', $id)
-                ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname,  'EMAIL' => $mail, 'ADDRESS' => $adresse, 'NUM_TEL' => $numtel]);
+                ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname,  'EMAIL' => $mail, 'ADDRESS' => $adresse, 'NUM_TEL' => $numtel, 'POSTALCODE' => $postalCode, 'CITY' => $city]);
         }
         else {
             $password = Hash::make(request('password'));
             DB::table('users')->where('IDUSER', $id)
-                ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname, 'password' => $password, 'EMAIL' => $mail, 'ADDRESS' => $adresse, 'NUM_TEL' => $numtel]);
+                ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname, 'password' => $password, 'EMAIL' => $mail, 'ADDRESS' => $adresse, 'NUM_TEL' => $numtel, 'POSTALCODE' => $postalCode, 'CITY' => $city]);
         }
     }
 

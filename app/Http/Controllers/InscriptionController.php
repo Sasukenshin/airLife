@@ -4,13 +4,14 @@ namespace app\http\controllers;
 
 use app\metier\client;
 
-use request;
-use app\http\controllers\controller;
-use app\metier\users;
-use illuminate\support\facades\hash;
-use \app\notifications\registereduser;
-use illuminate\support\facades\auth;
-
+use Request;
+use App\Http\Controllers\Controller;
+use App\metier\Users;
+use Illuminate\Support\Facades\Hash;
+use \App\Notifications\RegisteredUser;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\InscriptionMail;
+use Mail;
 
 class inscriptioncontroller extends controller
 {
@@ -26,20 +27,21 @@ class inscriptioncontroller extends controller
     public function traitement()
     {
         request()->validate([
-            'login' => ['required', 'min:4'],
+            'login' => ['required', 'min:4','unique:users'],
             'firstname' => ['required'],
             'lastname' => ['required'],
-            'email' => ['email'],
+            'email' => ['email','unique:users'],
             'mdp' => ['required', 'confirmed', 'min:6'],
             'mdp_confirmation' => ['required'],
             'address' =>['required'],
+            'postalCode' =>['required'],
+            'city' =>['required','string'],
             'num_tel' =>['required','digits:10']
 
         ], [
             'mdp.min' => 'pour des raisons de sécurité, votre mot de passe doit faire au moins :min caractères.'
         ]);
-
-        $utilisateur = users::create([
+        $utilisateur = Users::create([
             'login' => request('login'),
             'password' => hash::make(request('mdp')),
             'firstname' => request('firstname'),
@@ -47,6 +49,8 @@ class inscriptioncontroller extends controller
             'email' => request('email'),
             'num_tel' => request('num_tel'),
             'address' => request('address'),
+            'postalCode' => request('postalCode'),
+            'city' => request('city'),
             'player_id_navigateurs' => '',
             'player_id_mobile' => '',
             'confirmation_token' => str_replace('/', '', bcrypt(str_random(16)))
@@ -54,7 +58,17 @@ class inscriptioncontroller extends controller
 
         $utilisateur->notify(new registereduser());
 
+        /*$utilisateur['texte']= "That a test";
+        try {
+            Mail::to(request('email'))->send(new InscriptionMail($utilisateur));
+        } catch (Exception $e) {
+            report($e);
+            return false;
+        }*/
+        
         return redirect('/connexion');
+        
+       // $utilisateur->notify(new RegisteredUser());
     }
 
     public function confirm($id, $token)
@@ -104,18 +118,20 @@ class inscriptioncontroller extends controller
 
     public function modifierprofil()
     {
-        $unc = new users();
-        $adresse = request::input('address');
-        $numtel = request::input('num_tel');
-        $password = request::input('password');
-        $password_confirm = request::input('password_confirm');
-        $mail = request::input('mail');
-        $firstname = request::input('firstname');
-        $lastname = request::input('lastname');
+        $unC = new Users();
+        $adresse = Request::input('address');
+        $numtel = Request::input('num_tel');
+        $password = Request::input('password');
+        $password_confirm = Request::input('password_confirm');
+        $mail = Request::input('mail');
+        $firstname = Request::input('firstname');
+        $lastname = Request::input('lastname');
+        $postalCode = Request::input('postalCode');
+        $city = Request::input('city');
 
-        $erreurpassword="";
-        $erreurtelephone = "";
-        $erreurmail="";
+        $erreurPassword="";
+        $erreurTelephone = "";
+        $erreurMail="";
         if ($password != $password_confirm) {
             $erreurpassword = "les mots de passes doivent être identiques <br>";
         }
@@ -136,16 +152,18 @@ class inscriptioncontroller extends controller
 
         if($erreurpassword != "" || $erreurmail != "" || $erreurtelephone != "" )
         {
-            $unc->address= $adresse;
-            $unc->firstname=$firstname;
-            $unc->lastname = $lastname;
-            $unc->email = $mail;
-            $unc->num_tel = $numtel;
-            return view('formmodifierprofil', compact('erreurpassword', 'erreurtelephone','erreurmail','unc'));
+            $unC->ADDRESS= $adresse;
+            $unC->FIRSTNAME=$firstname;
+            $unC->LASTNAME = $lastname;
+            $unC->EMAIL = $mail;
+            $unC->NUM_TEL = $numtel;
+            $unC->POSTALCODE = $postalCode;
+            $unC->CITY = $city;
+            return view('formModifierProfil', compact('erreurPassword', 'erreurTelephone','erreurMail','unC'));
 
         }
         else {
-            $unc->modificationprofil(auth::user()->iduser, $adresse, $password, $mail, $firstname, $lastname, $numtel);
+            $unC->modificationProfil(Auth::user()->iduser, $adresse, $password, $mail, $firstname, $lastname, $numtel, $postalCode, $city);
             return redirect('/profil');
         }
     }

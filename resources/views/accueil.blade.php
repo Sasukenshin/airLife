@@ -133,6 +133,31 @@
                 
                 
             });
+            function RefreshData()
+            {
+                $.ajax({
+                        url:"{!! URL::to('refresh-accueil') !!}",
+                        type: 'POST',
+                        data: {_token: '{{csrf_token()}}' },
+                        success: function (data) {
+                            if  (!isEmpty(data)) {
+                                location.reload();
+                            }
+                        },
+                        error: function () {
+                            console.log("Rafraichssement de la page érroné");
+                        }
+
+                })
+            }
+            function isEmpty(obj) {
+                for(var key in obj) {
+                    if(obj.hasOwnProperty(key))
+                        return false;
+                }
+                return true;
+            }
+            setInterval( RefreshData, 25000 );
         });  
     </script>
 
@@ -281,7 +306,7 @@
                                                     <tr class="border-0">
                                                         @foreach ($datas[0] as $key => $value)
                                                             @if($k>0)
-                                                        <th class='border-0'> {{ $key }}</th>
+                                                        <th id="{{ $k }}" class='border-0'> {{ $key }}</th>
                                                             @endif
                                                             @php
                                                                 $k=$k+1;

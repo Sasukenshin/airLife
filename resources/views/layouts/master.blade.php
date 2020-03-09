@@ -252,7 +252,7 @@
                                             <a class="nav-link" href="statistique">Statistiques</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/">Visualisation en direct</a>
+                                            <a class="nav-link" href="accueil">Visualisation en direct</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="capteur">Capteurs</a>
