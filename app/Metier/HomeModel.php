@@ -19,14 +19,26 @@ class HomeModel extends Model {
         ];
 
 
-    public function getDatas() {
-       $datas = DB::table('datas')
-            ->select('datatype.IDDATATYPE', 'datas.DATETIMEDATA as DATE', 'datatype.LIBELLE as GAZ', 'datas.DATASENSOR as VALEUR', 'sensor.NAMESENSOR as CAPTEUR')
-            ->leftJoin('datatype', 'datas.IDDATATYPE', '=', 'datatype.IDDATATYPE')
-            ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'datas.IDSENSOR')
-            ->where('IDUSER', '=', Auth::user()->iduser) 
-            ->orderBy('datas.DATETIMEDATA','desc')
-            ->get();
+    public function getDatas($recent = false) {
+        if (!$recent) {
+            $datas = DB::table('datas')
+                ->select('datatype.IDDATATYPE', 'datas.DATETIMEDATA as DATE', 'datatype.LIBELLE as GAZ', 'datas.DATASENSOR as VALEUR', 'sensor.NAMESENSOR as CAPTEUR')
+                ->leftJoin('datatype', 'datas.IDDATATYPE', '=', 'datatype.IDDATATYPE')
+                ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'datas.IDSENSOR')
+                ->where('IDUSER', '=', Auth::user()->iduser) 
+                ->orderBy('datas.DATETIMEDATA','desc')
+                ->get();
+        } else {
+            $time = date("Y-m-d H:i:s",time() - 30);
+            $datas = DB::table('datas')
+                ->select('datatype.IDDATATYPE', 'datas.DATETIMEDATA as DATE', 'datatype.LIBELLE as GAZ', 'datas.DATASENSOR as VALEUR', 'sensor.NAMESENSOR as CAPTEUR')
+                ->leftJoin('datatype', 'datas.IDDATATYPE', '=', 'datatype.IDDATATYPE')
+                ->leftJoin('sensor', 'sensor.IDSENSOR', '=', 'datas.IDSENSOR')
+                ->where('IDUSER', '=', Auth::user()->iduser)
+                ->where('DATETIMEDATA', '>', $time) 
+                ->orderBy('datas.DATETIMEDATA','desc')
+                ->get();
+        }
         return $datas;
     }
     public function getSensors() {
