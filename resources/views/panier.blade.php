@@ -86,7 +86,7 @@
 
                         </div>
 
-                        <div class="text-primary mt-2">Adresse de facturation</div>
+                        <div class="text-primary mt-2">Adresse de livraison</div>
                         <div class="form-group">
                             <label class="col-md-6">Nom <b>*</b> : </label>
                             <input type="text"  class="col-md-5" placeholder="Nom" id="Flastname" name="Flastname" value="{{$userinfo->lastname}}" required >

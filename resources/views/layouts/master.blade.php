@@ -176,6 +176,7 @@
                                 <a class="dropdown-item" href="{{route('panier')}}"><i class="fas fa-shopping-basket"></i> Panier</a>
                                 @if (auth()->check())
                                     <a class="dropdown-item" href="profil"><i class="fas fa-user mr-2"></i>Profil </a>
+                                    <a class="dropdown-item" href="{{route('commandes')}}"><i class="fas fa-list"></i> &nbsp Mes Commandes </a>
                                     <a class="dropdown-item" href="deconnexion"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
 
                                 @else
@@ -220,6 +221,9 @@
                                             </li>
                                             <li>
                                                 <a class="nav-link" href="{{route('notifications')}}">Voir toutes les notifications</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link" href="{{route('commandes')}}">Mes commandes</a>
                                             </li>
                                             <li class="nav-item">
                                                  <a class="nav-link" href="deconnexion">Déconnexion</a>
@@ -324,6 +328,9 @@
                                             @if (auth()->check())
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="profil">Profil </a>
+                                                </li>
+                                                <li>
+                                                    <a lass="nav-link" href="{{route('commande')}}">Mes commandes</a>
                                                 </li>
                                                 <li>
                                                     <a lass="nav-link" href="{{route('notifications')}}">Voir toutes les notifications</a>

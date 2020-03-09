@@ -104,4 +104,8 @@ Route::get('session/remove','SessionController@deleteSessionData');
 Route::get('/boutique', 'HomeController@getBoutique')->name("boutique");
 
 
-Route::get('/pdf/{order}', ['as' => 'order.pdf', 'uses' => 'PanierController@orderPdf']);
+
+Route::get('/getCommandes', 'PanierController@getlescommandes')->name("commandes");
+
+
+Route::get('/pdf/{order}','PanierController@orderPdf')->name("downloadPDF");

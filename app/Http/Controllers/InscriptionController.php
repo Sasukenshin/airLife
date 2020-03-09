@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\http\controllers;
 
-use App\metier\Client;
+use app\metier\client;
 
-use Request;
-use App\Http\Controllers\Controller;
-use App\metier\Users;
-use Illuminate\Support\Facades\Hash;
-use \App\Notifications\RegisteredUser;
-use Illuminate\Support\Facades\Auth;
+use request;
+use app\http\controllers\controller;
+use app\metier\users;
+use illuminate\support\facades\hash;
+use \app\notifications\registereduser;
+use illuminate\support\facades\auth;
 
 
-class InscriptionController extends Controller
+class inscriptioncontroller extends controller
 {
     public function formulaire()
     {
@@ -36,12 +36,12 @@ class InscriptionController extends Controller
             'num_tel' =>['required','digits:10']
 
         ], [
-            'mdp.min' => 'Pour des raisons de sécurité, votre mot de passe doit faire au moins :min caractères.'
+            'mdp.min' => 'pour des raisons de sécurité, votre mot de passe doit faire au moins :min caractères.'
         ]);
 
-        $utilisateur = Users::create([
+        $utilisateur = users::create([
             'login' => request('login'),
-            'password' => Hash::make(request('mdp')),
+            'password' => hash::make(request('mdp')),
             'firstname' => request('firstname'),
             'lastname' => request('lastname'),
             'email' => request('email'),
@@ -52,14 +52,14 @@ class InscriptionController extends Controller
             'confirmation_token' => str_replace('/', '', bcrypt(str_random(16)))
         ]);
 
-       // $utilisateur->notify(new RegisteredUser());
+        $utilisateur->notify(new registereduser());
 
         return redirect('/connexion');
     }
 
     public function confirm($id, $token)
     {
-        $user = Users::where('iduser', $id)->first();
+        $user = users::where('iduser', $id)->first();
 
         if($user)
         {
@@ -68,85 +68,87 @@ class InscriptionController extends Controller
             return redirect('/');
         } else
         {
-            return redirect('/connexion')->with('error', 'Ce lien ne semble plus valide');
+            return redirect('/connexion')->with('error', 'ce lien ne semble plus valide');
         }
     }
 
 
 
     //modification profil
-    public function getProfil() {
-    $unClient = new Users();
-    $unC = $unClient->getClient(Auth::user()->iduser);
+    public function getprofil() {
+        $unclient = new users();
+        $unc = $unclient->getclient(auth::user()->iduser);
 
-    return view('profil', compact('unC'));
-}
+        return view('profil', compact('unc'));
+    }
 
-    /* Créer l'appel de récupération des données d'un client
+    /* créer l'appel de récupération des données d'un client
      * et renvoie ces données au formulaire de modification d'un client.
      */
 
-    public function postModifierProfil() {
+    public function postmodifierprofil() {
 
-        $unClient = new Users();
-        $unC = $unClient->getClient(Auth::user()->iduser);
+        $unclient = new users();
+        $unc = $unclient->getclient(auth::user()->iduser);
 
-        $erreurPassword="";
-        $erreurMail = "";
-        $erreurTelephone="";
-        return view('formModifierProfil', compact('erreurPassword','erreurMail','erreurTelephone', 'unC'));
+        $erreurpassword="";
+        $erreurmail = "";
+        $erreurtelephone="";
+        return view('formmodifierprofil', compact('erreurpassword','erreurmail','erreurtelephone', 'unc'));
     }
 
-    /* Récupère en post les données du formulaire de modification d'un client
+    /* récupère en post les données du formulaire de modification d'un client
      * et créer l'appel de la modification des données d'un client
      * puis renvoie la page profil du client.
      */
 
-    public function modifierProfil()
+    public function modifierprofil()
     {
-        $unC = new Users();
-        $adresse = Request::input('address');
-        $numtel = Request::input('num_tel');
-        $password = Request::input('password');
-        $password_confirm = Request::input('password_confirm');
-        $mail = Request::input('mail');
-        $firstname = Request::input('firstname');
-        $lastname = Request::input('lastname');
+        $unc = new users();
+        $adresse = request::input('address');
+        $numtel = request::input('num_tel');
+        $password = request::input('password');
+        $password_confirm = request::input('password_confirm');
+        $mail = request::input('mail');
+        $firstname = request::input('firstname');
+        $lastname = request::input('lastname');
 
-        $erreurPassword="";
-        $erreurTelephone = "";
-        $erreurMail="";
+        $erreurpassword="";
+        $erreurtelephone = "";
+        $erreurmail="";
         if ($password != $password_confirm) {
-            $erreurPassword = "Les mots de passes doivent être identiques <br>";
+            $erreurpassword = "les mots de passes doivent être identiques <br>";
         }
         if (strlen($password) < 6) {
-            $erreurPassword .= "Le mot de passe doit contenir au moins 6 caractères";
+            $erreurpassword .= "le mot de passe doit contenir au moins 6 caractères";
         }
-        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $erreurMail = "L'adresse email n'est pas correcte";
+        if (!filter_var($mail, filter_validate_email)) {
+            $erreurmail = "l'adresse email n'est pas correcte";
         }
 
         if (strlen($numtel) != 10) {
             if (!preg_match('/^[0-9-+]$/', $numtel)) { // error } else { // good }
-                $erreurTelephone ="Le numero de téléphone n'est pas correcte";
+                $erreurtelephone ="le numero de téléphone n'est pas correcte";
             }
-            $erreurTelephone ="Le numero de téléphone n'est pas correcte";
+            $erreurtelephone ="le numero de téléphone n'est pas correcte";
         }
 
 
-        if($erreurPassword != "" || $erreurMail != "" || $erreurTelephone != "" )
+        if($erreurpassword != "" || $erreurmail != "" || $erreurtelephone != "" )
         {
-            $unC->ADDRESS= $adresse;
-            $unC->FIRSTNAME=$firstname;
-            $unC->LASTNAME = $lastname;
-            $unC->EMAIL = $mail;
-            $unC->NUM_TEL = $numtel;
-            return view('formModifierProfil', compact('erreurPassword', 'erreurTelephone','erreurMail','unC'));
+            $unc->address= $adresse;
+            $unc->firstname=$firstname;
+            $unc->lastname = $lastname;
+            $unc->email = $mail;
+            $unc->num_tel = $numtel;
+            return view('formmodifierprofil', compact('erreurpassword', 'erreurtelephone','erreurmail','unc'));
 
         }
         else {
-            $unC->modificationProfil(Auth::user()->iduser, $adresse, $password, $mail, $firstname, $lastname, $numtel);
+            $unc->modificationprofil(auth::user()->iduser, $adresse, $password, $mail, $firstname, $lastname, $numtel);
             return redirect('/profil');
         }
     }
+
+
 }

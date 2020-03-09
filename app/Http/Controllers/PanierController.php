@@ -318,15 +318,48 @@ class PanierController extends Controller {
 
     public function orderPdf($idpanier)
     {
-        $order= DB::table('panier')->select('*')
-            ->where('idpanier', $idpanier)->first();
-        $pdf = PDF::loadView('order_pdf', compact('order'));
+        $order= DB::table('panier')->join('moyenpaiement', 'panier.moyenpaiementid', '=', 'moyenpaiement.moyenpaiementid')
+            ->join('moyenlivraison', 'panier.moyenlivraisonid', '=', 'moyenlivraison.moyenlivraisonid')
+            ->join('users','panier.iduser','=','users.iduser')
+            ->select('moyenpaiement.libelle as moyenpaiement'
+                ,'moyenlivraison.libelle as moyenlivraison'
+                ,'panier.firstname as Lfirstname'
+                ,'panier.lastname as Llastname'
+                ,'panier.email as Lemail'
+                ,'panier.num_tel as Lnum_tel'
+                ,'panier.address as Laddress'
+                ,'panier.totalTTC','panier.totalHT'
+                ,'panier.TVA','totalTTC_sansfraisport'
+                ,'panier.city as Lcity'
+                ,'panier.postalCode as LpostalCode'
+                ,'users.firstname as Ffirstname'
+                ,'users.lastname as Flastname'
+                ,'users.email as Femail'
+                ,'users.num_tel as Fnum_tel'
+                ,'users.address as Faddress'
+                ,'users.city as Fcity'
+                ,'users.postalCode as FpostalCode'
+                ,'panier.idpanier as idpanier')
+            ->where('panier.idpanier', $idpanier)->first();
+
+        $lignespanier = DB::table('lignespanier')->join('articles', 'lignespanier.artid', '=', 'articles.artid')->where('idpanier', '=', $idpanier)->get();
+        $pdf = PDF::loadView('order_pdf', compact('order','lignespanier'));
         $name = "commandeNo-".$order->idpanier.".pdf";
 
         return $pdf->download($name);
     }
 
+    public function getlescommandes()
+    {
 
+        if (!auth()->guest()) {
+
+            $commandes = DB::table('panier')->join('moyenpaiement', 'panier.moyenpaiementid', '=', 'moyenpaiement.moyenpaiementid')->join('moyenlivraison', 'panier.moyenlivraisonid', '=', 'moyenlivraison.moyenlivraisonid')->where('iduser', '=', auth::user()->iduser)->where('done','=','1')->select('dateValidation', 'moyenpaiement.libelle as moyenpaiement','moyenlivraison.libelle as moyenlivraison','totalTTC','idpanier')->get();
+
+            return view("commandes", compact ('commandes'));
+        }
+
+    }
 }
 
 

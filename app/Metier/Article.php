@@ -22,4 +22,6 @@ class Articles extends Model implements Authenticatable
     protected $fillable = ['libelle', 'description', 'prix', 'delai'];
 
 
-    }
+}
+
+
