@@ -91,9 +91,10 @@ class inscriptioncontroller extends controller
     //modification profil
     public function getprofil() {
         $unclient = new users();
-        $unc = $unclient->getclient(auth::user()->iduser);
 
-        return view('profil', compact('unc'));
+        $unC = $unclient->getclient(auth::user()->iduser);
+
+        return view('profil', compact('unC'));
     }
 
     /* créer l'appel de récupération des données d'un client
@@ -103,12 +104,12 @@ class inscriptioncontroller extends controller
     public function postmodifierprofil() {
 
         $unclient = new users();
-        $unc = $unclient->getclient(auth::user()->iduser);
+        $unC = $unclient->getclient(auth::user()->iduser);
 
-        $erreurpassword="";
-        $erreurmail = "";
-        $erreurtelephone="";
-        return view('formmodifierprofil', compact('erreurpassword','erreurmail','erreurtelephone', 'unc'));
+        $erreurPassword="";
+        $erreurMail = "";
+        $erreurTelephone="";
+        return view('formmodifierprofil', compact('erreurPassword','erreurMail','erreurTelephone', 'unC'));
     }
 
     /* récupère en post les données du formulaire de modification d'un client
@@ -129,28 +130,28 @@ class inscriptioncontroller extends controller
         $postalCode = Request::input('postalCode');
         $city = Request::input('city');
 
-        $erreurPassword="";
+        $erreurPassword ="";
         $erreurTelephone = "";
         $erreurMail="";
         if ($password != $password_confirm) {
-            $erreurpassword = "les mots de passes doivent être identiques <br>";
+            $erreurPassword = "les mots de passes doivent être identiques <br>";
         }
         if (strlen($password) < 6) {
-            $erreurpassword .= "le mot de passe doit contenir au moins 6 caractères";
+            $erreurPassword .= "le mot de passe doit contenir au moins 6 caractères";
         }
-        if (!filter_var($mail, filter_validate_email)) {
-            $erreurmail = "l'adresse email n'est pas correcte";
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $erreurMail = "l'adresse email n'est pas correcte";
         }
 
         if (strlen($numtel) != 10) {
             if (!preg_match('/^[0-9-+]$/', $numtel)) { // error } else { // good }
-                $erreurtelephone ="le numero de téléphone n'est pas correcte";
+                $erreurTelephone ="le numero de téléphone n'est pas correcte";
             }
-            $erreurtelephone ="le numero de téléphone n'est pas correcte";
+            $erreurTelephone ="le numero de téléphone n'est pas correcte";
         }
 
 
-        if($erreurpassword != "" || $erreurmail != "" || $erreurtelephone != "" )
+        if($erreurPassword != "" || $erreurMail != "" || $erreurTelephone != "" )
         {
             $unC->ADDRESS= $adresse;
             $unC->FIRSTNAME=$firstname;
