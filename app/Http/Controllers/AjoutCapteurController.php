@@ -45,8 +45,8 @@ class AjoutCapteurController extends Controller
         
         if($date_ajout_sensor != NULL)
         {
-            $date_plus_cinq=$date_ajout_sensor->date_heure_ajout+300;
-            if($date_plus_cinq < time())
+            $date_plus_cinq = strtotime($date_ajout_sensor->date_heure_ajout)+300; 
+            if($date_plus_cinq <= time())
             {
                 $error = 'Ce capteur existe mais le délai de 5 minutes est dépassé ';
                 return view('formAjoutCapteur',['error' => $error,'user_firstname' => $user_firstname, 'user_lastname' => $user_lastname]);
