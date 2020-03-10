@@ -46,6 +46,9 @@ class AjoutCapteurController extends Controller
         if($date_ajout_sensor != NULL)
         {
             $date_plus_cinq = strtotime($date_ajout_sensor->date_heure_ajout)+300; 
+            print_r("Date à ne pas exceder (Date de base + 5min)".date("Y-m-d H:i:s",$date_plus_cinq));
+            print_r("Date actuelle".date("Y-m-d H:i:s",time()));
+            die();
             if($date_plus_cinq <= time())
             {
                 $error = 'Ce capteur existe mais le délai de 5 minutes est dépassé ';
