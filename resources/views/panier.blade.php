@@ -7,7 +7,7 @@
 </head>
 
 
-    <div class="container">
+    <div class="container-fluid dashboard-content ">
 
         <div class="row">
 
@@ -15,14 +15,10 @@
 
 
                     <h2 class="panel-title text-center">Mon panier</h2>
-
-
-                        <div class="row">
-
                                 @if (isset($lignespanier))
                                 <div class="col-md-12">
                                     <input type="hidden" id="panierid" value="{{$data['panierid']}}">
-                                    <table id="notification" class="table">
+                                    <table id="notification" class="table table-hover border border-dark">
                                     <thead class="bg-light">
                                     <tr class="border-0">
                                         <th class='border-0 text-center'> Image </th>
@@ -50,23 +46,21 @@
                                                 <input id="prix{{$uneL->lignepanierid}}" value=" {{ $uneL->prix }}" style="width:60px;" disabled>
                                             </td>
                                             <td class="text-center">
-                                                <button onclick="deleteLignePanier({{ $uneL->lignepanierid }})"> <i class="far fa-trash-alt"></i>  </button >
-                                            </td>
-
+                                                <button onclick="deleteLignePanier({{ $uneL->lignepanierid }})"> <i class="far fa-trash-alt"></i>  </button ></td>
 
                                         </tr>
                                     @endforeach
                                     </tbody>
 
-                            </table>
+                                     </table>
 
-
+                                    <br>
                                 </div>
 
 
 
 
-</div>
+
 </div>
 
 </div>
@@ -77,6 +71,7 @@
 
                 <div class="col-md-12">
                     <div class="text-primary mt-2">Information</div>
+                    <br>
                     @if (isset($userinfo))
 
                         <div class="text-center">
@@ -87,6 +82,7 @@
                         </div>
 
                         <div class="text-primary mt-2">Adresse de livraison</div>
+                    <br>
                         <div class="form-group">
                             <label class="col-md-6">Nom <b>*</b> : </label>
                             <input type="text"  class="col-md-5" placeholder="Nom" id="Flastname" name="Flastname" value="{{$userinfo->lastname}}" required >
@@ -161,6 +157,7 @@
             <div class="col-md-4">
 
                 <div class="text-primary mt-2">Moyen de paiement</div>
+                <br>
                 <div class="content_etape">
 
                     @foreach ($moyenpaiements as $unP)
@@ -184,6 +181,7 @@
             <div class="col-md-4">
 
                 <div class="text-primary mt-2">Mode de livraison</div>
+                <br>
                 <div class="content_etape">
 
                     @foreach ($moyenlivraisons as $unM)
@@ -206,10 +204,15 @@
                         </div>
                     @endforeach
                 </div>
-
+<br> <br>
             <div class="text-primary mt-2">TOTAL DE VOTRE COMMANDE</div>
             <table class="col-md-12" cellspacing="0" cellpadding="0">
-                <tbody><tr>
+                <tbody>
+                <tr>
+                    <td align="float-right"><strong>Total HT:</strong></td>
+                    <td align="float-right"><div   class="float-right"  id="totalHT">{{$data['totalHT']}} €</div></td>
+                </tr>
+                <tr>
                     <td align="float-right"><strong>Sous-total TTC :</strong></td>
                     <td align="float-right"><div   class="float-right"  id="sous_total_ttc">{{$data['sousTotalTcc']}} €</div></td>
                 </tr>
@@ -267,7 +270,7 @@
         </div>
     </div>
 @else
-
+<div class="col-md-12" style="min-height: 69vh;">
     <h2>Panier vide</h2>
     <br>
     <div class="row">
@@ -280,10 +283,10 @@
             </div>
         @endif
     </div>
-
+    </div>
 @endif
     </div>
-
+</div>
 <script>
 
     $(document).ready(function(){
@@ -319,7 +322,7 @@
                     data: {_token: '{{csrf_token()}}', radioValue : radioValue, idpanier : idpanier},
                  success: function (data, statut) {
 
-
+                        $("#totalHT").text(data["totalHT"]+" €");
                         $("#sous_total_ttc").text(data["sous_total_ttc"]+" €");
                         $("#frais_port").text(data["frais_port_ttc"]+" €");
                         $("#total_tva").text(data["total_tva"]+" €");
@@ -360,6 +363,7 @@
 
         $("#qte"+lignepanierid).val(" "+ data["qte"]);
         $("#prix"+lignepanierid).val(" " +data["prix"]);
+        $("#totalHT").text(data["totalHT"]+" €");
         $("#sous_total_ttc").text(data["sous_total_ttc"]+" €");
         $("#frais_port").text(data["frais_port_ttc"]+" €");
         $("#total_tva").text(data["total_tva"]+" €");
@@ -381,7 +385,7 @@
 
         $("#qte"+lignepanierid).val(" "+data["qte"]);
         $("#prix"+lignepanierid).val(" "+data["prix"]);
-
+        $("#totalHT").text(data["totalHT"]+" €");
         $("#sous_total_ttc").text(data["sous_total_ttc"]+" €");
         $("#frais_port").text(data["frais_port_ttc"]+" €");
         $("#total_tva").text(data["total_tva"]+" €");

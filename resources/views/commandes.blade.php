@@ -3,7 +3,7 @@
 @section('content')
 
     <head>
-        <title>Notifications</title>
+        <title>Mes commandes</title>
     </head>
 
 

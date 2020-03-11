@@ -17,7 +17,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12" >
 
-                {!! Form::open(['url' => '/postmodificationProfil']) !!}
+                {!! Form::open(['url' => '/modificationProfil']) !!}
                 <div class="container">
                     <div class="jumbotron">
                         <div class="row">
@@ -30,9 +30,12 @@
                                 </div>
                                 <hr>
                                 <ul class="container details">
-                                    <li><p><span class="fas fa-map-marker" style="width:40%;"> Adresse : </span>{{$unC->ADDRESS}}</p></li>
-                                    <li><p><span class="fas fa-phone" style="width:40%;"> Numero de téléphone : </span>{{$unC->NUM_TEL}}</p></li>
-                                    <li><p><span class="fas fa-at" style="width:40%;"> Email : </span>{{$unC->EMAIL}}</p></li>
+                                    <li><span class="fas fa-map-marker" style="width:40%;">&nbsp Adresse : </span>{{$unC->ADDRESS}}</li>
+                                    <li><span class="fas fa-map-marker" style="width:40%;">&nbsp Code postal : </span>{{$unC->POSTALCODE}}</li>
+                                    <li><span class="fas fa-map-marker" style="width:40%;">&nbsp Ville : </span>{{$unC->CITY}}</li>
+                                    <li><span class="fas fa-phone" style="width:40%;"> Numero de téléphone : </span>{{$unC->NUM_TEL}}</li>
+                                    <li><span class="fas fa-at" style="width:40%;"> Email : </span>{{$unC->EMAIL}}</li>
+
 
                                 </ul>
 

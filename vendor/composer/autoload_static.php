@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1
+class ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -4608,11 +4608,11 @@ class ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Deprecated' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Deprecated.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Example' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Example.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Factory\\StaticMethod' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Factory/StaticMethod.php',
-        'phpDocumentor\\Reflection\\DocBlock\\Tags\\Factory\\Strategy' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Factory/Strategy.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Formatter' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Formatter.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Formatter\\AlignFormatter' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Formatter/AlignFormatter.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Formatter\\PassthroughFormatter' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Formatter/PassthroughFormatter.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Generic' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Generic.php',
+        'phpDocumentor\\Reflection\\DocBlock\\Tags\\InvalidTag' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/InvalidTag.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Link' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Link.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Method' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Method.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Param' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Param.php',
@@ -4644,6 +4644,7 @@ class ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1
         'phpDocumentor\\Reflection\\Types\\Array_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Array_.php',
         'phpDocumentor\\Reflection\\Types\\Boolean' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Boolean.php',
         'phpDocumentor\\Reflection\\Types\\Callable_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Callable_.php',
+        'phpDocumentor\\Reflection\\Types\\ClassString' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/ClassString.php',
         'phpDocumentor\\Reflection\\Types\\Collection' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Collection.php',
         'phpDocumentor\\Reflection\\Types\\Compound' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Compound.php',
         'phpDocumentor\\Reflection\\Types\\Context' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Context.php',
@@ -4668,11 +4669,11 @@ class ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit70b74f7eb9c5fabbc97a4c4bacc1e6b1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$classMap;
 
         }, null, ClassLoader::class);
     }

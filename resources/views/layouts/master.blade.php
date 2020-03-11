@@ -330,7 +330,7 @@
                                                     <a class="nav-link" href="profil">Profil </a>
                                                 </li>
                                                 <li>
-                                                    <a lass="nav-link" href="{{route('commande')}}">Mes commandes</a>
+                                                    <a lass="nav-link" href="{{route('commandes')}}">Mes commandes</a>
                                                 </li>
                                                 <li>
                                                     <a lass="nav-link" href="{{route('notifications')}}">Voir toutes les notifications</a>
