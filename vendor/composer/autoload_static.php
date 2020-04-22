@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06
+class ComposerStaticInitd0cade3f6cbc4935b97dec16c1848016
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1317,6 +1317,7 @@ class ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06
         'GuzzleHttp\\RetryMiddleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RetryMiddleware.php',
         'GuzzleHttp\\TransferStats' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/TransferStats.php',
         'GuzzleHttp\\UriTemplate' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/UriTemplate.php',
+        'GuzzleHttp\\Utils' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Utils.php',
         'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
         'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
         'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
@@ -3430,7 +3431,7 @@ class ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06
         'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
         'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
-        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'Psr\\SimpleCache\\CacheException' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheException.php',
@@ -3811,6 +3812,7 @@ class ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06
         'Symfony\\Component\\Console\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/symfony/console/Exception/InvalidArgumentException.php',
         'Symfony\\Component\\Console\\Exception\\InvalidOptionException' => __DIR__ . '/..' . '/symfony/console/Exception/InvalidOptionException.php',
         'Symfony\\Component\\Console\\Exception\\LogicException' => __DIR__ . '/..' . '/symfony/console/Exception/LogicException.php',
+        'Symfony\\Component\\Console\\Exception\\MissingInputException' => __DIR__ . '/..' . '/symfony/console/Exception/MissingInputException.php',
         'Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException' => __DIR__ . '/..' . '/symfony/console/Exception/NamespaceNotFoundException.php',
         'Symfony\\Component\\Console\\Exception\\RuntimeException' => __DIR__ . '/..' . '/symfony/console/Exception/RuntimeException.php',
         'Symfony\\Component\\Console\\Formatter\\OutputFormatter' => __DIR__ . '/..' . '/symfony/console/Formatter/OutputFormatter.php',
@@ -4669,11 +4671,11 @@ class ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitaaaf23cb1952511c3a180bdab0139d06::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd0cade3f6cbc4935b97dec16c1848016::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd0cade3f6cbc4935b97dec16c1848016::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitd0cade3f6cbc4935b97dec16c1848016::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitd0cade3f6cbc4935b97dec16c1848016::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitd0cade3f6cbc4935b97dec16c1848016::$classMap;
 
         }, null, ClassLoader::class);
     }

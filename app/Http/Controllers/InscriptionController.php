@@ -53,10 +53,10 @@ class inscriptioncontroller extends controller
             'city' => request('city'),
             'player_id_navigateurs' => '',
             'player_id_mobile' => '',
-            'confirmation_token' => str_replace('/', '', bcrypt(str_random(16)))
+          
         ]);
 
-        $utilisateur->notify(new registereduser());
+        // $utilisateur->notify(new registereduser());
 
         /*$utilisateur['texte']= "That a test";
         try {
@@ -66,7 +66,7 @@ class inscriptioncontroller extends controller
             return false;
         }*/
         
-        return redirect('/connexion');
+        return redirect('/connexion')->withError("Votre inscription a bien été prise en compte.")->withInput();
         
        // $utilisateur->notify(new RegisteredUser());
     }

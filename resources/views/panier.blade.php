@@ -128,7 +128,7 @@
                         </div>
 
                     @else
-                        <form action="connexion" method="post" id="formulaireConnexion">
+                        <form action="connexionPanier" method="post" id="formulaireConnexion">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <input class="form-control form-control-lg" name="login" type="text" placeholder="Identifiant" autocomplete="off" required="" value="{{ old('login') }}">

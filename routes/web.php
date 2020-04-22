@@ -40,6 +40,7 @@ Route::post('/delete_capteur', 'CapteurController@delete_capteur');
 Route::get('/connexion', 'ConnexionController@formulaire')->name("connexion");
 
 Route::post('/connexion', 'ConnexionController@traitement');
+Route::post('/connexionPanier', 'ConnexionController@traitement2');
 
 Route::get('/deconnexion', 'ConnexionController@deconnexion');
 Route::post('/deconnexionPanier', 'ConnexionController@deconnexionPanier')->name("deconnexionPanier");
