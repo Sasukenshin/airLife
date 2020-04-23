@@ -56,10 +56,12 @@ Route::post('/enregistrerCapteur', 'AjoutCapteurController@enregistrerCapteur');
 
 //Get
 Route::get('/profil', 'InscriptionController@getProfil');
+Route::get('/modificationProfil', 'InscriptionController@postModifierProfil');
+Route::get('/modificationPreference', 'InscriptionController@postModifierPreference');
 
 //Post
-Route::post('/postmodificationProfil', 'InscriptionController@postModifierProfil');
 Route::post('/modifierProfil', 'InscriptionController@modifierProfil');
+Route::post('/modifierPreference', 'InscriptionController@modifierPreference');
 
 //Getcontact
 Route::get('/contact', function () {

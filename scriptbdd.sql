@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  25/02/2019 17:45:43                      */
+/* Date de crï¿½ation :  25/02/2019 17:45:43                      */
 /*==============================================================*/
 
 
@@ -40,9 +40,9 @@ create table SENSOR
 );
 
 /*==============================================================*/
-/* Table : TO_CAPTURE                                           */
+/* Table : to_capture                                           */
 /*==============================================================*/
-create table TO_CAPTURE
+create table to_capture
 (
    IDSENSOR             numeric(15,0) not null  comment '',
    IDDATATYPE           numeric(3,0) not null  comment '',
@@ -50,9 +50,9 @@ create table TO_CAPTURE
 );
 
 /*==============================================================*/
-/* Table : TO_CHOOSE                                            */
+/* Table : Seuil                                          */
 /*==============================================================*/
-create table TO_CHOOSE
+create table Seuil
 (
    IDUSER               numeric(5,0) not null  comment '',
    IDDATATYPE           numeric(3,0) not null  comment '',
@@ -79,10 +79,10 @@ alter table DATAS add constraint FK_DATAS_TO_RAISE_SENSOR foreign key (IDSENSOR)
 alter table SENSOR add constraint FK_SENSOR_TO_HAVE_USERS foreign key (IDUSER)
       references USERS (IDUSER) on delete restrict on update restrict;
 
-alter table TO_CAPTURE add constraint FK_TO_CAPTU_TO_CAPTUR_SENSOR foreign key (IDSENSOR)
+alter table to_capture add constraint FK_TO_CAPTU_TO_CAPTUR_SENSOR foreign key (IDSENSOR)
       references SENSOR (IDSENSOR) on delete restrict on update restrict;
 
-alter table TO_CAPTURE add constraint FK_TO_CAPTU_TO_CAPTUR_DATATYPE foreign key (IDDATATYPE)
+alter table to_capture add constraint FK_TO_CAPTU_TO_CAPTUR_DATATYPE foreign key (IDDATATYPE)
       references DATATYPE (IDDATATYPE) on delete restrict on update restrict;
 
 alter table TO_CHOOSE add constraint FK_TO_CHOOS_TO_CHOOSE_USERS foreign key (IDUSER)
