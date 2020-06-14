@@ -220,9 +220,9 @@
                                         <thead class="bg-light">
                                             <tr class="border-0">
                                                 <th class='border-0'> Nom du Gaz</th>
-                                                <th class='border-0'> Nombre de relevé</th>
-                                                <th class='border-0'> Moyenne des relevé</th>
-                                                <th class='border-0'> Médiane des relevé</th>
+                                                <th class='border-0'> Nombre de relevés</th>
+                                                <th class='border-0'> Moyenne des relevés</th>
+                                                <th class='border-0'> Médiane des relevés</th>
                                                 <th class='border-0'> Maximal relevé</th>
                                                 <th class='border-0'> Minimum relevé</th>
                                             </tr>
@@ -265,8 +265,8 @@
                                         <thead class="bg-light">
                                             <tr class="border-0">
                                                 <th class='border-0'> Nom des capteurs</th>
-                                                <th class='border-0'> Nombre de relevé</th>
-                                                <th class='border-0'> Nombre de jour de depuis mise en service</th>
+                                                <th class='border-0'> Nombre de relevés</th>
+                                                <th class='border-0'> Nombre de jours de depuis mise en service</th>
                                             </tr>
                                         </thead>
                                         <tbody id="allData">
