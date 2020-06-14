@@ -34,7 +34,7 @@
                             @foreach ($commandes as $uneC)
                                 <tr>
                                     <td class="text-center">
-                                        {{ $uneC->dateValidation }}
+                                      {{date('d/m/Y H:i:s',$uneC->dateValidation)}}  
                                     </td>
                                     <td class="text-center">
                                         {{ $uneC->moyenlivraison }}

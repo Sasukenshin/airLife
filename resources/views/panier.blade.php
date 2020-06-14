@@ -32,7 +32,7 @@
                                     @foreach ($lignespanier as $uneL)
                                         <tr id="tr{{ $uneL->lignepanierid }}">
                                             <td class="text-center">
-
+                                            <img src="img\capteur_img.png" width="100px" height="100px">
                                             </td>
                                             <td class="text-center">
                                                 {{ $uneL->libelle }}

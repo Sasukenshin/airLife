@@ -360,7 +360,7 @@ class PanierController extends Controller {
         if (!auth()->guest()) {
 
             $commandes = DB::table('panier')->join('moyenpaiement', 'panier.moyenpaiementid', '=', 'moyenpaiement.moyenpaiementid')->join('moyenlivraison', 'panier.moyenlivraisonid', '=', 'moyenlivraison.moyenlivraisonid')->where('iduser', '=', auth::user()->iduser)->where('done','=','1')->select('dateValidation', 'moyenpaiement.libelle as moyenpaiement','moyenlivraison.libelle as moyenlivraison','totalTTC','idpanier')->get();
-
+            
             return view("commandes", compact ('commandes'));
         }
 
