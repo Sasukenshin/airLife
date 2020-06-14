@@ -11,7 +11,9 @@
 <div class="container">
     <div class="row">
 <div class="col-md-12">
-    <h1>Facture numéro : {{$order->idpanier}}</h1>
+    <div style="display:inline-block"><img src="img\logo.png"  height="70" width="70" alt="" style="margin-top:2%"><span> Facture numéro : {{$order->idpanier}}</span></div>
+
+
     <div class="col-md-6" style="border-style: solid;">
         <h2>Adresse de facturation</h2>
         <div>
@@ -34,12 +36,15 @@
     </div>
     </div>
 </div>
+
     </div>
+    <br>
+    <br>
     <table id="notification" class="table">
         <thead class="bg-light">
         <tr class="border-0">
-            <th class='border-0 text-center'> Image </th>
             <th class='border-0 text-center'> Article </th>
+            <th class='border-0 text-center'> Qté </th>
             <th class='border-0 text-center'> Description </th>
             <th class='border-0 text-center'> Prix </th>
 
@@ -48,29 +53,38 @@
         <tbody id="allData">
         @foreach ($lignespanier as $uneL)
             <tr id="tr{{ $uneL->lignepanierid }}">
-                <td class="text-center">
-
-                </td>
+             
                 <td class="text-center">
                     {{ $uneL->libelle }}
+                </td>
+                <td class="text-center">
+                    {{ $uneL->qte }}
                 </td>
                 <td class="text-center">
                     {{ $uneL->description }}
                 </td>
 
                 <td class="text-center">
-                    {{ $uneL->prix }}
+                    {{ $uneL->prix }} €
                 </td>
+              
 
 
 
             </tr>
         @endforeach
+        <tr>
+        <td>  </td>
+        <td>  </td>
+        <td><b> Total TTC : </b></td>
+        <td>{{$order->totalTTC}} € </td>
+        </tr>
         </tbody>
 
     </table>
     <div id="col-md-12">
         <!--Texte du panier pour la loi Chatel-->
+
         <div class="texteperso"><p style="text-align: justify; "><span style="color:#e63937;"><strong>*</strong></span> Conformément au code de la consommation, vous avez un droit de rétractation dans un délai de 14 jours à partir de la livraison, sauf sur les produits visés par ce code.</p>
         </div>
     </div>

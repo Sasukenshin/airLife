@@ -132,36 +132,7 @@
                             </ul>
                         </li>
                         @endif
-                        <li class="nav-item dropdown connection">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
-                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                                <li class="connection-list">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="img\github-logo.png" alt="" > <span>Github</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="img\facebook-logo.jpg" alt="" > <span>Facebook</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="img\dropbox-logo.png" alt="" > <span>Dropbox</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="img\twitter-logo.png" alt=""> <span>Twitter</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="img\instagram-logo.png" alt="" ><span>Instagram</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="img\slack-logo.png" alt="" > <span>Slack</span></a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </ul>
-                        </li>
+                     
                         <li class="nav-item dropdown nav-user">
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img\user.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
@@ -330,7 +301,7 @@
                                                     <a class="nav-link" href="profil">Profil </a>
                                                 </li>
                                                 <li>
-                                                    <a lass="nav-link" href="{{route('commande')}}">Mes commandes</a>
+                                                    <a lass="nav-link" href="{{route('commandes')}}">Mes commandes</a>
                                                 </li>
                                                 <li>
                                                     <a lass="nav-link" href="{{route('notifications')}}">Voir toutes les notifications</a>

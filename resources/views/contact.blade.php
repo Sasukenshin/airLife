@@ -26,48 +26,48 @@
                         <h2 class="col-md-offset-2 ">Contact par mail</h2>
                         <br/>
 
-                        <div class="col-md-8 control-label div-contact-1" style="margin:auto;">
+                        <div class="col-md-9 control-label div-contact-1" style="margin:auto;">
                             <div class="row">
-                            <label class="col-md-4 control-label label-contact" style="text-align:left;"><i class="far fa-arrow-alt-circle-right"></i>  Nom  : </label>  <input type='text' name='nom' placeholder="Votre nom" class='form-control col-md-8' required>
+                            <label class="col-md-5 control-label label-contact" style="text-align:left;"><i class="far fa-arrow-alt-circle-right"></i>  Nom  : </label>  <input type='text' name='nom' placeholder="Votre nom" class='form-control col-md-7' required>
                             </div>
                         </div>
 
 
 
 
-                        <div class="col-md-8 control-label div-contact-1" >
+                        <div class="col-md-9 control-label div-contact-1" >
                             <div class="row">
-                                <label class="col-md-4 control-label label-contact" style="text-align:left; margin-top:auto;"><i class="far fa-arrow-alt-circle-right"></i> Prénom : </label>
-                                <input type='text' name='prenom' placeholder="Votre prénom" class='col-md-8 form-control' required>
+                                <label class="col-md-5 control-label label-contact" style="text-align:left; margin-top:auto;"><i class="far fa-arrow-alt-circle-right"></i> Prénom : </label>
+                                <input type='text' name='prenom' placeholder="Votre prénom" class='col-md-7 form-control' required>
                             </div>
                         </div>
 
 
 
-                        <div class="col-md-8 div-contact-1" >
+                        <div class="col-md-9 div-contact-1" >
                             <div class="row">
-                                <label class="col-md-4 control-label label-contact"><i class="fas fa-at"> </i> Adresse e-mail : </label>
-                                <input type='email' name='mail' placeholder="Votre adresse email"  class='col-md-8 form-control' required >
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="col-md-8 div-contact-1" >
-                            <div class="row">
-                                <label class="col-md-4 control-label label-contact"><i class="fas fa-phone"> </i> Téléphone : </label>
-                                <input type='tel' name='tel' placeholder="Votre numéro de téléphone"  class='col-md-8 form-control' required >
+                                <label class="col-md-5 control-label label-contact"><i class="fas fa-at"> </i> Adresse e-mail : </label>
+                                <input type='email' name='mail' placeholder="Votre adresse email"  class='col-md-7 form-control' required >
                             </div>
                         </div>
 
 
 
 
-                        <div class="col-md-8 div-contact-1">
+                        <div class="col-md-9 div-contact-1" >
                             <div class="row">
-                                <label class="col-md-4 control-label label-contact-2"><i class="fas fa-pencil-alt"></i> Votre message : </label>
-                                <textarea class="form-control col-md-8 " id="message" name="message" placeholder="Entrez votre message ici" rows="10" required></textarea>
+                                <label class="col-md-5 control-label label-contact"><i class="fas fa-phone"> </i> Téléphone : </label>
+                                <input type='tel' name='tel' placeholder="Votre numéro de téléphone"  class='col-md-7 form-control' required >
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-md-9 div-contact-1">
+                            <div class="row">
+                                <label class="col-md-5 control-label label-contact-2"><i class="fas fa-pencil-alt"></i> Votre message : </label>
+                                <textarea class="form-control col-md-7" id="message" name="message" placeholder="Entrez votre message ici" rows="10" required></textarea>
                             </div>
                         </div>
 

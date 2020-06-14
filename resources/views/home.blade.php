@@ -27,7 +27,7 @@
 
                                         <input id="artid" name="artid" type="hidden" value=" {{ $unArt->artid }}">
 
-                                    <div class="text-center mt-4">
+                                    <div class="text-center mt-4" style="min-height:80%">
                                         <h2 >{{ $unArt->libelle }}</h2>
                                         </br>
                                         <img  src="img\capteur_img.png">
@@ -38,15 +38,13 @@
                                         <h4>
                                         {{ $unArt->description }}
                                         </h4>
-
-
-                                        <h4>
-                                            <span>Prix</span>
-                                             <span> {{ $unArt->prix }} euros </span>
-                                        </h4>
-
                                     </div>
-
+                                    <div class="text-center">
+                                     <h4>
+                                        <span>Prix</span>
+                                        <span> {{ $unArt->prix }} euros </span>
+                                    </h4>
+                                    </div>
                                         <button class="btn btn-primary btn-lg btn-block btnaddpanier" onclick="addpanier({{ $unArt->artid }})">Ajouter au panier</button>
 
 

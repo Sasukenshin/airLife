@@ -55,6 +55,10 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Se connecter</button>
                 </form>
             </div>
+            @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
             <div class="card-footer bg-white p-0  ">
                 <div class="card-footer-item card-footer-item-bordered">
                     <a href="inscription" class="footer-link">Créer un compte</a></div>

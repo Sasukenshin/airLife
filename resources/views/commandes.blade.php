@@ -3,7 +3,7 @@
 @section('content')
 
     <head>
-        <title>Notifications</title>
+        <title>Mes commandes</title>
     </head>
 
 
@@ -34,7 +34,7 @@
                             @foreach ($commandes as $uneC)
                                 <tr>
                                     <td class="text-center">
-                                        {{ $uneC->dateValidation }}
+                                      {{date('d/m/Y H:i:s',$uneC->dateValidation)}}  
                                     </td>
                                     <td class="text-center">
                                         {{ $uneC->moyenlivraison }}
@@ -43,7 +43,7 @@
                                         {{ $uneC->moyenpaiement }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $uneC->totalTTC }}
+                                        {{ $uneC->totalTTC }}€
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route('downloadPDF', ['ID' => $uneC->idpanier ] ) }}">Télécharger le pdf</a>

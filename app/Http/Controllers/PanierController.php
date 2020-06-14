@@ -118,9 +118,9 @@ class PanierController extends Controller {
                 ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
 
             $totalTtc = $sousTotalTcc + $fraisport->prix;
-            $totalTva = round(($totalTtc)/120*20);
-
-            $data = array('fraisport' => $fraisport->prix, 'totalTtc'=> $totalTtc, 'totalTva'=>$totalTva, 'sousTotalTcc'=>$sousTotalTcc,'panierid' => $panier->idpanier, 'moyenlivraisonid' => $panier->moyenlivraisonid, 'moyenpaiementid' => $panier->moyenpaiementid  );
+            $totalTva = round(($totalTtc)/120*20,2);
+            $totalHT = round($totalTtc/1.2,2);
+            $data = array('fraisport' => $fraisport->prix, 'totalHT' => $totalHT, 'totalTtc'=> $totalTtc, 'totalTva'=>$totalTva, 'sousTotalTcc'=>$sousTotalTcc,'panierid' => $panier->idpanier, 'moyenlivraisonid' => $panier->moyenlivraisonid, 'moyenpaiementid' => $panier->moyenpaiementid  );
             if(isset($userinfo) && !is_null($userinfo) && !empty($userinfo)){
 
                 return view("panier", compact('lignespanier','data', 'moyenlivraisons','moyenpaiements','userinfo'));
@@ -145,7 +145,7 @@ class PanierController extends Controller {
 
      function calculTotalPanier($idpanier){
         $tableauTotalPanier = array();
-
+         $tableauTotalPanier['totalHT']=0;
          $tableauTotalPanier['sousTotalTcc'] =0;
          $tableauTotalPanier['fraisport'] =0;
          $tableauTotalPanier['totalTtc']=0;
@@ -164,7 +164,9 @@ class PanierController extends Controller {
             ->where('moyenlivraisonid', $moyenlivraison->moyenlivraisonid)->first();
 
         $totalTtc = $sousTotalTcc + $fraisport->prix;
-        $totalTva = round(($totalTtc)/120*20);
+         $totalHT = round($totalTtc/1.2,2);
+        $totalTva = round(($totalTtc)/120*20,2);
+         $tableauTotalPanier['totalHT'] =$totalHT;
          $tableauTotalPanier['sousTotalTcc'] =$sousTotalTcc;
          $tableauTotalPanier['fraisport'] =$fraisport->prix;
          $tableauTotalPanier['totalTtc']=$totalTtc;
@@ -192,6 +194,7 @@ class PanierController extends Controller {
         return response()->json([
             'qte' => $article->qte,
             'prix' => $article->prix * $article->qte,
+            'totalHT' => $tableauTotalPanier['totalHT'],
             'sous_total_ttc' =>$tableauTotalPanier['sousTotalTcc'],
             'frais_port_ttc' => $tableauTotalPanier['fraisport'],
             'total_tva' => $tableauTotalPanier['totalTva'],
@@ -216,6 +219,7 @@ class PanierController extends Controller {
         return response()->json([
             'qte' => $article->qte,
             'prix' => $article->prix * $article->qte,
+            'totalHT' => $tableauTotalPanier['totalHT'],
             'sous_total_ttc' =>$tableauTotalPanier['sousTotalTcc'],
             'frais_port_ttc' => $tableauTotalPanier['fraisport'],
             'total_tva' => $tableauTotalPanier['totalTva'],
@@ -235,6 +239,7 @@ class PanierController extends Controller {
             //calcultotalpanier
             $tableauTotalPanier = self::calculTotalPanier($idpanier);
             return response()->json([
+                'totalHT' => $tableauTotalPanier['totalHT'],
                 'sous_total_ttc' =>$tableauTotalPanier['sousTotalTcc'],
                 'frais_port_ttc' => $tableauTotalPanier['fraisport'],
                 'total_tva' => $tableauTotalPanier['totalTva'],
@@ -293,9 +298,9 @@ class PanierController extends Controller {
 
 
                 $tableauTotalPanier  = self::calculTotalPanier($panierid);
-                $totalHT = $tableauTotalPanier['totalTtc'] - $tableauTotalPanier['totalTva'];
+
                 //on passe le panier en "done = 1 et on met à jour les données (ttc, ht, adresse facturation ...)
-                DB::table('panier')->where('idpanier', '=', $panierid)->update(['totalTTC' =>  $tableauTotalPanier['totalTtc'], 'totalHT' => $totalHT , 'totalTTC_sansfraisport' => $tableauTotalPanier['sousTotalTcc'], 'TVA' => $tableauTotalPanier['totalTva'] , 'fraisPort' =>$tableauTotalPanier['fraisport'], 'firstname' =>$Ffirstname , 'lastname' =>$Flastname, 'address' =>  $Faddress, 'postalCode' => $Fcp, 'city' => $Fville,'dateValidation' => time(),'num_tel' => $Ftel,'email' => $Fmail] );
+                DB::table('panier')->where('idpanier', '=', $panierid)->update(['totalTTC' =>  $tableauTotalPanier['totalTtc'], 'totalHT' => $tableauTotalPanier['totalHT'] , 'totalTTC_sansfraisport' => $tableauTotalPanier['sousTotalTcc'], 'TVA' => $tableauTotalPanier['totalTva'] , 'fraisPort' =>$tableauTotalPanier['fraisport'], 'firstname' =>$Ffirstname , 'lastname' =>$Flastname, 'address' =>  $Faddress, 'postalCode' => $Fcp, 'city' => $Fville,'dateValidation' => time(),'num_tel' => $Ftel,'email' => $Fmail] );
                 $panier = DB::table('panier')->where('idpanier', '=', $panierid)->first();
                 return view("paypal", compact ('panier'));
             }
@@ -355,7 +360,7 @@ class PanierController extends Controller {
         if (!auth()->guest()) {
 
             $commandes = DB::table('panier')->join('moyenpaiement', 'panier.moyenpaiementid', '=', 'moyenpaiement.moyenpaiementid')->join('moyenlivraison', 'panier.moyenlivraisonid', '=', 'moyenlivraison.moyenlivraisonid')->where('iduser', '=', auth::user()->iduser)->where('done','=','1')->select('dateValidation', 'moyenpaiement.libelle as moyenpaiement','moyenlivraison.libelle as moyenlivraison','totalTTC','idpanier')->get();
-
+            
             return view("commandes", compact ('commandes'));
         }
 

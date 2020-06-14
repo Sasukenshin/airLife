@@ -40,6 +40,7 @@ Route::post('/delete_capteur', 'CapteurController@delete_capteur');
 Route::get('/connexion', 'ConnexionController@formulaire')->name("connexion");
 
 Route::post('/connexion', 'ConnexionController@traitement');
+Route::post('/connexionPanier', 'ConnexionController@traitement2');
 
 Route::get('/deconnexion', 'ConnexionController@deconnexion');
 Route::post('/deconnexionPanier', 'ConnexionController@deconnexionPanier')->name("deconnexionPanier");
@@ -56,10 +57,12 @@ Route::post('/enregistrerCapteur', 'AjoutCapteurController@enregistrerCapteur');
 
 //Get
 Route::get('/profil', 'InscriptionController@getProfil');
+Route::get('/modificationProfil', 'InscriptionController@postModifierProfil');
+Route::get('/modificationPreference', 'InscriptionController@postModifierPreference');
 
 //Post
-Route::post('/postmodificationProfil', 'InscriptionController@postModifierProfil');
 Route::post('/modifierProfil', 'InscriptionController@modifierProfil');
+Route::post('/modifierPreference', 'InscriptionController@modifierPreference');
 
 //Getcontact
 Route::get('/contact', function () {
@@ -107,7 +110,7 @@ Route::get('/boutique', 'HomeController@getBoutique')->name("boutique");
 
 
 
-Route::get('/getCommandes', 'PanierController@getlescommandes')->name("commandes");
+Route::get('/Commandes', 'PanierController@getlescommandes')->name("commandes");
 
 
 Route::get('/pdf/{order}','PanierController@orderPdf')->name("downloadPDF");
