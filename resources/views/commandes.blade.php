@@ -43,7 +43,7 @@
                                         {{ $uneC->moyenpaiement }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $uneC->totalTTC }}
+                                        {{ $uneC->totalTTC }}€
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route('downloadPDF', ['ID' => $uneC->idpanier ] ) }}">Télécharger le pdf</a>
