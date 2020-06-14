@@ -27,6 +27,7 @@ class HomeController extends Controller
         
         $user_firstname = Auth::user()->firstname;
         $user_lastname = Auth::user()->lastname;
+        $pagination = Auth::user()->pagination;
         
         $datas = $this->model->getDatas();
         $sensors = $this->model->getSensors();
@@ -34,7 +35,7 @@ class HomeController extends Controller
         $datastypesensor = $this->model->getDatasTypeSensor();
 
         if(count($sensors) >0)
-            return view('accueil', ['datas' => $datas, 'sensors' => $sensors, 'datastype' => $datastype, 'datastypesensor' => $datastypesensor, 'user_firstname' => $user_firstname, 'user_lastname' => $user_lastname]);
+            return view('accueil', ['datas' => $datas, 'sensors' => $sensors, 'datastype' => $datastype, 'datastypesensor' => $datastypesensor, 'user_firstname' => $user_firstname, 'user_lastname' => $user_lastname, 'pagination' => $pagination]);
         else
             return view('home', compact('articles'));
 

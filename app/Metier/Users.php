@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable ;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 use DB;
 
@@ -44,7 +45,7 @@ class Users extends Model implements Authenticatable
 
     public function getClient($id) {
         $client = DB::table('users')
-            ->Select('FIRSTNAME', 'LASTNAME',  'EMAIL', 'ADDRESS', 'NUM_TEL', 'CITY', 'POSTALCODE')
+            ->Select('FIRSTNAME', 'LASTNAME',  'EMAIL', 'ADDRESS', 'NUM_TEL', 'CITY', 'POSTALCODE', 'PAGINATION')
             ->Where('IDUSER', '=', $id)
             ->first();
         return $client;
@@ -64,7 +65,10 @@ class Users extends Model implements Authenticatable
                 ->update(['FIRSTNAME' => $firstname, 'LASTNAME' => $lastname, 'password' => $password, 'EMAIL' => $mail, 'ADDRESS' => $adresse, 'NUM_TEL' => $numtel, 'POSTALCODE' => $postalCode, 'CITY' => $city]);
         }
     }
-
+    public function modificationPagination($pagination) {
+            DB::table('users')->where('IDUSER', Auth::user()->iduser)
+                ->update(['pagination' => $pagination]);
+    }
 
 
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use \App\Notifications\RegisteredUser;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\InscriptionMail;
+use App\Metier\CapteurModel;
 use Mail;
 
 class inscriptioncontroller extends controller
@@ -105,11 +106,7 @@ class inscriptioncontroller extends controller
 
         $unclient = new users();
         $unC = $unclient->getclient(auth::user()->iduser);
-
-        $erreurPassword="";
-        $erreurMail = "";
-        $erreurTelephone="";
-        return view('formmodifierprofil', compact('erreurPassword','erreurMail','erreurTelephone', 'unC'));
+        return view('formmodifierprofil', compact('unC'));
     }
 
     /* récupère en post les données du formulaire de modification d'un client
@@ -169,5 +166,72 @@ class inscriptioncontroller extends controller
         }
     }
 
+    /* créer l'appel de récupération des données d'un client
+     * et renvoie ces données au formulaire de modification 
+     * de préference d'un client.
+     */
 
+    public function postmodifierpreference() {
+        $unclient = new users();
+        $unC = $unclient->getclient(auth::user()->iduser);
+        $seuils = $this->getAllSeuilUser();
+        return view('formmodifierpreference', compact('seuils', 'unC'));
+    }
+
+    /* récupère en post les données du formulaire de modification d'un client
+     * et créer l'appel de la modification des préférence client
+     */
+
+    public function modifierpreference()
+    {
+        $model = new CapteurModel();
+        $pagination = Request::input('pagination');
+        $erreurPagination ="";
+        if($pagination > 99 || $pagination < 0) {
+            $erreurPagination = "La pagination doit être compris entre 0 et 99.";
+        }
+        $seuils = $this->getAllSeuilUser();
+        $warnings = [];
+        $i = 0;
+        foreach ($seuils as $key => $value) {
+            $seuil = Request::input('seuil'.$value->iddatatype);     
+            ${'seuil'.$value->iddatatype} = "";
+            $seuilCommun = $model->getCommonSeuilGaz($value->iddatatype);
+            if($seuil < $seuilCommun[0]->seuil-10) {
+                ${'seuil'.$value->iddatatype} = "Definir un seuil si bas pourrait provoqué un surplus de notification";
+            } else if ($seuil > $seuilCommun[0]->seuil+10) {
+                ${'seuil'.$value->iddatatype} = "Definir un seuil si haut pourrait etre inutile en cas de danger";
+            }
+            $warnings['seuil'.$value->iddatatype] = ${'seuil'.$value->iddatatype};
+            if($value->perso != 0){
+                $model->updateSeuilGaz($value->iddatatype, $seuil);
+            } else {
+                $model->setSeuilGaz($value->iddatatype, $seuil);
+                $seuils[$i]->perso = 1;
+            }
+            $seuils[$i]->seuil = $seuil;
+            $i++;
+        }
+        $unC = new Users();
+        $unC->modificationPagination($pagination);
+        $unC = new Users();
+        $unC = $unC->getclient(auth::user()->iduser);
+        return view('formModifierPreference', compact('warnings','unC', 'seuils'));
+
+    }
+
+    public function getAllSeuilUser(){
+        $unclient = new users();
+        $unC = $unclient->getclient(auth::user()->iduser);
+        $model = new CapteurModel();
+        $capteurs_brut = $model->getAllCapteurUser();
+        $gazs = [];
+
+        foreach ($capteurs_brut as  $valeur) {
+            if (!in_array($valeur->iddatatype, $gazs)) {
+                $gazs[] = $valeur->iddatatype;
+            }    
+        }
+        return $model->getAllSeuilUser($gazs);
+    }
 }

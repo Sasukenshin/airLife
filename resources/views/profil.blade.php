@@ -16,8 +16,6 @@
         <div class="row">
 
             <div class="col-xs-12 col-sm-12 col-md-12" >
-
-                {!! Form::open(['url' => '/modificationProfil']) !!}
                 <div class="container">
                     <div class="jumbotron">
                         <div class="row">
@@ -40,16 +38,13 @@
                                 </ul>
 
                                 <div class="panel-footer">
-
-
-                                    <button type="submit"data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editer profil</button>
+                                    <a href="{{url( '/modificationProfil') }}"data-original-title="Editer preference utilisateur" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fas fa-edit"> Editer profil</i></a>
+                                    <a href="{{url( '/modificationPreference') }}"data-original-title="Editer preference utilisateur" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fas fa-edit"> Editer preference utilisateur</i></a>
                                     <a href="{{url( '/deconnexion') }}"data-original-title="Se deconnecter" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="fas fa-power-off"> Se deconnecter</i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

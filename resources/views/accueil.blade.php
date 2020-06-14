@@ -8,7 +8,7 @@
     <script>
         $( document ).ready(function() {
             pageNumber=0;
-            nbrDataTab=2;
+            pagination=<?php echo json_encode($pagination) ;?>;
             datastypes = <?php echo json_encode($datastype) ;?>;
             datas = <?php echo json_encode($datas) ;?>;
             if(typeof datas !== 'undefined' && datas.length > 0) {
@@ -52,37 +52,33 @@
                 }
             }
             $( "#donnee_recente" ).on('click','#suivantPagination',function() {
-                if ((pageNumber+1)*nbrDataTab < datas.length) {
+                if ((pageNumber+1)*pagination < datas.length) {
                     $("#allData").empty();
                     pageNumber = pageNumber+1;
                     toAppend ="";
-                    for(i=0; i<nbrDataTab ; i++){
+                    for(i=0; i<pagination ; i++){
                         j=0;
                         toAppend = toAppend.concat("<tr>");
-                        for(var value in datas[nbrDataTab*pageNumber+i]) {
-                            if (nbrDataTab*pageNumber+i <= datas.length && j>0) {
+                        for(var value in datas[pagination*pageNumber+i]) {
+                            if (pagination*pageNumber+i <= datas.length && j>0) {
                                 toAppend = toAppend.concat("<td>");
-                                toAppend = toAppend.concat(datas[nbrDataTab*pageNumber+i][value])
+                                toAppend = toAppend.concat(datas[pagination*pageNumber+i][value])
                                 toAppend = toAppend.concat("</td>");
                             }
                             j=j+1;
                         }
                         toAppend = toAppend.concat("</tr>");
                     }
-                    if(datas.length-(pageNumber*nbrDataTab) <= nbrDataTab) {
+                    if(datas.length-(pageNumber*pagination) <= pagination) {
                         toAppend = toAppend.concat(`<tr>
                                                 <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
                                                 <td></td>
-                                                <td></td>
-                                                <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                 </tr>
                                                 `)
                     } else {
                         toAppend = toAppend.concat(`<tr>
                                                 <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
                                                 <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
-                                                <td></td>
-                                                <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                 </tr>
                                                 `)
                     }
@@ -95,13 +91,13 @@
                     $("#allData").empty();
                     pageNumber = pageNumber-1;
                     toAppend ="";
-                    for(i=0; i<nbrDataTab ; i++){
+                    for(i=0; i<pagination ; i++){
                         j=0;
                         toAppend = toAppend.concat("<tr>");
-                        for(var value in datas[nbrDataTab*pageNumber+i]) {
-                            if (nbrDataTab*pageNumber+i <= datas.length  && j>0) {
+                        for(var value in datas[pagination*pageNumber+i]) {
+                            if (pagination*pageNumber+i <= datas.length  && j>0) {
                                 toAppend = toAppend.concat("<td>");
-                                toAppend = toAppend.concat(datas[nbrDataTab*pageNumber+i][value])
+                                toAppend = toAppend.concat(datas[pagination*pageNumber+i][value])
                                 toAppend = toAppend.concat("</td>");
                             }
                             j=j+1;
@@ -112,17 +108,11 @@
                         toAppend = toAppend.concat(`<tr>
                                                     <td></td>
                                                     <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
-                                                    <td></td>
-                                                    <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
-                                                    </tr>
                                                     `)
                     } else {
                         toAppend = toAppend.concat(`<tr>
                                                 <td><a id="precedentPagination" class="btn btn-outline-light float-right"><</a></td>
                                                 <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
-                                                <td></td>
-                                                <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
-                                                </tr>
                                                 `)
                     }
                     $( "#allData").append(toAppend);
@@ -285,7 +275,6 @@
                     @endforeach
                     @php
                         $k=0;
-                        $nbrDataTab=2;
                     @endphp
                         </div>
                         <div class="row">
@@ -315,7 +304,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="allData">
-                                                        @for ($i = 0; $i < $nbrDataTab; $i++)
+                                                        @for ($i = 0; $i < $pagination; $i++)
                                                     <tr>
                                                             @php
                                                                 $k=0;
@@ -337,13 +326,11 @@
                                                     
                                                     <tr>
                                                         <td></td>
-                                                        @if($nbrDataTab<$k)
+                                                        @if($pagination<$k)
                                                         <td><a id="suivantPagination" class="btn btn-outline-light float-right">></a></td>
                                                         @else
                                                         <td></td>
                                                         @endif
-                                                        <td></td>
-                                                        <td><a href="#" class="btn btn-outline-light float-right">Voir Détails</a></td>
                                                     </tr>
                                                 </tbody>
                                                 @endisset
