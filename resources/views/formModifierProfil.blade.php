@@ -34,9 +34,9 @@
                                 @isset($erreurMail)
                                     <p class="text-danger">{!! $erreurMail !!}  </p>
                                 @endif
-                                <li> <label class="col-md-6 control-label"><i class= "fas fa-map-marker"> </i> Adresse  : </label><input type="text" style="width:180px;"value="{{$unC->ADDRESS}}" name="address" required=""></li>
-                                <li> <label class="col-md-6 control-label"><i class= "fas fa-map-marker"> </i> Code Postal  : </label><input type="text" style="width:180px;"value="{{$unC->POSTALCODE}}" name="postalCode" required=""></li>
-                                <li> <label class="col-md-6 control-label"><i class= "fas fa-map-marker"> </i> Ville  : </label><input type="text" style="width:180px;"value="{{$unC->CITY}}" name="city" required=""></li>
+                                <li> <label class="col-md-4 control-label"><i class= "fas fa-map-marker"> </i> Adresse  : </label><input type="text" style="width:150px;"value="{{$unC->ADDRESS}}" name="address" required=""></li>
+                                <li> <label class="col-md-4 control-label"><i class= "fas fa-map-marker"> </i> Code Postal  : </label><input type="text" style="width:150px;"value="{{$unC->POSTALCODE}}" name="postalCode" required=""></li>
+                                <li> <label class="col-md-4 control-label"><i class= "fas fa-map-marker"> </i> Ville  : </label><input type="text" style="width:150px;"value="{{$unC->CITY}}" name="city" required=""></li>
                             </ul>
 
                             <div class="panel-footer">
